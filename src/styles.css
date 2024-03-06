@@ -1,3 +1,32 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+    /* Tamaño de letra */
+    --parrafo: 16px;
+    --encabezado: 25px;
+    --subtitulo: 48.8px;
+    --titulo: 61px;
+
+    /* Colores */
+    --azul_calro: #00B5E2; 
+    --azul_obscuro: #003B5C;
+    --negro: #000000;
+    --blanco: #FFFFFF;
+    --blanco_t1: #c9c9c9;
+    --neutro: #C3CCCE;
+    --neutro_activo: #dbe8eb;
+    --boton_activo: #02A0C7; 
+}
+
+h1 {
+    font-size: var(--titulo); 
+}
+ 
+h2 {
+    font-size: var(--subtitulo); 
+}
+ 
+h5 {
+    font-size: var(--encabezado);
+}
