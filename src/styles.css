@@ -21,8 +21,9 @@ body {
     --azul_calro: #00B5E2; 
     --azul_obscuro: #003B5C;
     --negro: #000000;
+    --negro_translucido: #0505055e;
     --blanco: #FFFFFF;
-    --blanco_t1: #faf8f8;
+    --blanco_t1: hsl(0, 17%, 98%);
     --neutro: #f2f7f8;
     --neutro_activo: #dbe8eb;
     --boton_activo: #02A0C7; 
@@ -42,6 +43,9 @@ h5 {
     font-size: var(--encabezado);
 }
 
+.translucido {
+    color: var(--negro_translucido);
+}
 
 ::-webkit-scrollbar {
     width: 10px;

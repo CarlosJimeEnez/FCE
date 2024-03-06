@@ -43,9 +43,29 @@
         <h1>
             Licenciaturas
         </h1>
+        <h4 class="translucido">
+            Contamos con las carreras acordes a tus aptitudes
+        </h4>
     </div>
 </div> 
 
 <div *ngFor="let carrera of carreras">
     <app-carreras [carrera]="carrera"></app-carreras>
 </div>
+
+<div class="row google-map justify-content-center mt-5 pb-2">
+    <div class="col text-center">
+        <h1>
+            ¿Cómo llegar a la FCE?
+        </h1>
+        <h4>
+            No te pierdas, te estamos esperando
+        </h4>
+    </div>
+</div> 
+
+<!-- Google Maps -->
+<div >
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4486.140634508462!2d-98.2042948012168!3d19.002988481652498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfbf5f010d16ab%3A0xb50e01e698295034!2sFCE1!5e0!3m2!1ses-419!2smx!4v1709754828737!5m2!1ses-419!2smx" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    
+</div>
+  
