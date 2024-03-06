@@ -8,13 +8,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { TableroComponent } from './componentes/tablero/tablero.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { CarouselMisionVisionComponent } from './componentes/carousel-mision-vision/carousel-mision-vision.component';
+import { CarrerasComponent } from './componentes/carreras/carreras.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableroComponent,
     HeaderComponent,
-    CarouselMisionVisionComponent
+    CarouselMisionVisionComponent,
+    CarrerasComponent
   ],
   imports: [
     BrowserModule,

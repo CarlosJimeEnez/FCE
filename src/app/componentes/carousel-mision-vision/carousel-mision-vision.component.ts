@@ -6,8 +6,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./carousel-mision-vision.component.css'],
   animations: [
     trigger('deslizar', [
-      state('fuera', style({ transform: "translateX(-100%)"})),
-      state('dentro', style({transform: 'translateX(0%)'})),
+      state('fuera', style({opacity: 0,transform: "translateX(-100%)"})),
+      state('dentro', style({opacity: 1, transform: 'translateX(0%)'})),
       transition("fuera => dentro", [
         animate("0.5s ease-in")
       ]),

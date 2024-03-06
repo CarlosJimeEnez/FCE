@@ -5,7 +5,11 @@ html, body {
     overflow-x: hidden;
 }
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: var(--neutro);
+}
 :root {
     /* Tamaño de letra */
     --parrafo: 16px;
@@ -19,7 +23,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --negro: #000000;
     --blanco: #FFFFFF;
     --blanco_t1: #faf8f8;
-    --neutro: #C3CCCE;
+    --neutro: #f2f7f8;
     --neutro_activo: #dbe8eb;
     --boton_activo: #02A0C7; 
 }
