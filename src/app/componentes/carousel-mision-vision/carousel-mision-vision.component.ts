@@ -26,7 +26,10 @@ export class CarouselMisionVisionComponent implements OnInit {
   ngOnInit(): void {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        this.estadoAnimacion = entry.isIntersecting ? 'dentro' : 'fuera';
+        // this.estadoAnimacion = entry.isIntersecting ? 'dentro' : 'fuera';
+        if (entry.isIntersecting && this.estadoAnimacion !== 'dentro') {
+          this.estadoAnimacion = 'dentro';
+        }
       });
     }, { threshold: [0.5] }); // Puedes ajustar el umbral según tus necesidades
 
