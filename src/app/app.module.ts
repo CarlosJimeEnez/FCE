@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TableroComponent } from './componentes/tablero/tablero.component';
+import { HeaderComponent } from './componentes/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableroComponent
+    TableroComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

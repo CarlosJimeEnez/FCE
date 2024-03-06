@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: var(--azul_obscuro); /* Color de fondo basado en la imagen */
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    width: 78px;
+    height: 26px;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    margin-left: 5vh;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+    font-size: var(--parrafo);
+  }
+  
+  /* Ajuste opcional para mejorar la visibilidad y el espaciado */
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Dropdown */
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .dropdown-menu {
+    margin-right: 10vh;
+  }
