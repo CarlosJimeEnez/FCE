@@ -19,4 +19,5 @@
 .card-carreras:hover {
     border-radius: 20px;
     background-color: var(--neutro_activo);
+    transform: scale(1.01);
 }

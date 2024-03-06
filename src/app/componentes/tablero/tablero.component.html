@@ -39,7 +39,6 @@
 <app-carousel-mision-vision></app-carousel-mision-vision>
 
 <div class="row justify-content-center mb-3">
-    
     <div class="col text-center">
         <h1>
             Licenciaturas
@@ -47,4 +46,6 @@
     </div>
 </div> 
 
-<app-carreras></app-carreras>
+<div *ngFor="let carrera of carreras">
+    <app-carreras [carrera]="carrera"></app-carreras>
+</div>

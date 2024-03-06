@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent {
-
+  carreras = [
+    { nombre: "Electronica", descripcion: "descripcion" },
+    { nombre: "Mecatronica", descripcion: "descripcion" },
+    { nombre: "Energias Renovables", descripcion: "descripcion" },
+  ]
 }
