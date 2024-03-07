@@ -3,9 +3,8 @@
     min-width: 25vh;
     min-height: 50vh;
     color: var(--blanco_t1);
-    border-radius: 1%;
+    border-radius: 20px;
 }
-
 
 .box-center {
     display: flex;
@@ -25,4 +24,11 @@ li {
 
 .center_text {
     text-align: center;
+}
+
+
+@media (min-width: 2000px) {
+    .carousel {
+        min-height: 35vh;    
+    }
 }

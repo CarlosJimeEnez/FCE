@@ -49,11 +49,13 @@
     </div>
 </div> 
 
-<div *ngFor="let carrera of carreras">
-    <app-carreras [carrera]="carrera"></app-carreras>
+<div class="row">
+    <div class="col-12 col-md-6" *ngFor="let carrera of carreras">
+        <app-carreras [carrera]="carrera"></app-carreras>
+    </div>
 </div>
 
-<div class="row google-map justify-content-center mt-5 pb-2">
+<div class="row google-map justify-content-center mt-5 pb-2 pt-2">
     <div class="col text-center">
         <h2>
             ¿Cómo llegar a la FCE?
