@@ -63,3 +63,14 @@ h5 {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--azul_calro);
 }
+
+
+/* Media query para teléfonos */
+@media (max-width: 600px) {
+    :root {
+        --parrafo: 14px;      
+        --encabezado: 20px;   
+        --subtitulo: 24px;    
+        --titulo: 30px;       
+    }
+}
