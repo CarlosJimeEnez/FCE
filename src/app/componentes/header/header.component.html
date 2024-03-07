@@ -15,8 +15,8 @@
           <!-- Oferta academica -->
           <li class="nav-item">
             <div class="dropdown"
-              (mouseenter)="openOfertaAcademica = true"
-              (mouseleave)="openOfertaAcademica = false">
+              (mouseenter)="!isMobile && openOfertaAcademica = true"
+              (mouseleave)="!isMobile && openOfertaAcademica = false">
                 <button class="btn dropdown-toggle nav-link"
                     type="button"
                     data-bs-toggle="dropdown"
@@ -35,8 +35,8 @@
           <li class="nav-item">
             <!-- Academia -->
             <div class="dropdown"
-              (mouseenter)="openAcademia = true"
-              (mouseleave)="openAcademia = false">
+              (mouseenter)="!isMobile && openAcademia = true"
+              (mouseleave)="!isMobile && openAcademia = false">
                 <button class="btn dropdown-toggle nav-link"
                     type="button"
                     data-bs-toggle="dropdown"
@@ -56,8 +56,8 @@
           <li class="nav-item">
             <!-- Difusion -->
             <div class="dropup-center dropup"
-            (mouseenter)="openDifusion = true"
-            (mouseleave)="openDifusion = false">
+            (mouseenter)="!isMobile && openDifusion = true"
+            (mouseleave)="!isMobile && openDifusion = false">
               <button class="btn dropdown-toggle nav-link"
                   type="button"
                   data-bs-toggle="dropdown"
@@ -77,8 +77,8 @@
           <li class="nav-item">
             <!-- Nostros -->
             <div class="dropup-center dropup"
-            (mouseenter)="openNosotros = true"
-            (mouseleave)="openNosotros = false">
+            (mouseenter)="!isMobile && openNosotros = true"
+            (mouseleave)="!isMobile && openNosotros = false">
               <button class="btn dropdown-toggle nav-link"
                   type="button"
                   data-bs-toggle="dropdown"
