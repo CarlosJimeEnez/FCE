@@ -1,30 +1,27 @@
-.header {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    background-color: var(--azul_obscuro); /* Color de fondo basado en la imagen */
-    color: white;
-    padding: 10px 20px;
+  .navbar {
+    background-color: var(--azul_obscuro);
   }
-  
+
   .logo {
     width: 78px;
     height: 26px;
   }
-  
-  .navbar {
-    display: flex;
-    align-items: center;
-    margin-left: 5vh;
+
+  .menu {
+    color: var(--blanco);
   }
-  
+
+
+  .nav-item {
+    margin-left: 1em;
+  }
+
   .nav-link {
     text-decoration: none;
-    color: white;
-    margin: 0 10px;
     font-size: var(--parrafo);
+    color: var(--blanco);
   }
-  
+
   /* Ajuste opcional para mejorar la visibilidad y el espaciado */
   .nav-link:hover {
     text-decoration: underline;
@@ -35,6 +32,10 @@
     display: none;
   }
   
+  .logo {
+    margin-left: 1em;
+  }
+
   .dropdown-menu {
     margin-right: 10vh;
   }

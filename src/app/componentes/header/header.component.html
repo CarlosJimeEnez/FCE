@@ -1,82 +1,101 @@
-<div class="header">
-    <img class="logo" src="./../../../assets/images/footer_buap_logo.png" alt="">
-    <nav class="navbar">
-      <a href="http://academica.ece.buap.mx/" class="nav-link">Secretaría Académica</a>
-      
-        <!-- Oferta academica -->
-      <div class="dropdown"
-      (mouseenter)="openOfertaAcademica = true"
-      (mouseleave)="openOfertaAcademica = false">
-        <button class="btn dropdown-toggle nav-link"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-expanded]="openOfertaAcademica ? 'true' : 'false'"
-            aria-haspopup="true">
-          Oferta académica
-        </button>
-        <ul class="dropdown-menu" [class.show]="openOfertaAcademica" >
-          <li><a class="dropdown-item" href="#">Licenciaturas</a></li>
-          <li><a class="dropdown-item" href="#">Posgrados</a></li>
+<nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <div class="container-fluid">
+      <img class="logo" src="./../../../assets/images/footer_buap_logo.png" alt="">
+
+      <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <mat-icon class="menu" fontIcon="menu"></mat-icon>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="http://academica.ece.buap.mx/" class="nav-link">Secretaría Académica</a>
+          </li>
+          
+          <!-- Oferta academica -->
+          <li class="nav-item">
+            <div class="dropdown"
+              (mouseenter)="openOfertaAcademica = true"
+              (mouseleave)="openOfertaAcademica = false">
+                <button class="btn dropdown-toggle nav-link"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    [attr.aria-expanded]="openOfertaAcademica ? 'true' : 'false'"
+                    aria-haspopup="true">
+                  Oferta académica
+                </button>
+                <ul class="dropdown-menu" [class.show]="openOfertaAcademica" >
+                  <li><a class="dropdown-item" href="#">Licenciaturas</a></li>
+                  <li><a class="dropdown-item" href="#">Posgrados</a></li>
+                </ul>
+              </div>
+          </li>
+          
+          <li class="nav-item">
+            <!-- Academia -->
+            <div class="dropdown"
+              (mouseenter)="openAcademia = true"
+              (mouseleave)="openAcademia = false">
+                <button class="btn dropdown-toggle nav-link"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    [attr.aria-expanded]="openAcademia ? 'true' : 'false'"
+                    aria-haspopup="true">
+                  Academia
+                </button>
+                <ul class="dropdown-menu" [class.show]="openAcademia" >
+                  <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
+                  <li><a class="dropdown-item" href="#">Academias de Area</a></li>
+                  <li><a class="dropdown-item" href="#">IDT</a></li>
+                </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <!-- Difusion -->
+            <div class="dropup-center dropup"
+            (mouseenter)="openDifusion = true"
+            (mouseleave)="openDifusion = false">
+              <button class="btn dropdown-toggle nav-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [attr.aria-expanded]="openDifusion ? 'true' : 'false'"
+                  aria-haspopup="true">
+                Difusion
+              </button>
+
+              <ul class="dropdown-menu" [class.show]="openDifusion" >
+                <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
+              </ul>
+            </div>
+          </li> 
+          
+
+          <li class="nav-item">
+            <!-- Nostros -->
+            <div class="dropup-center dropup"
+            (mouseenter)="openNosotros = true"
+            (mouseleave)="openNosotros = false">
+              <button class="btn dropdown-toggle nav-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [attr.aria-expanded]="openNosotros ? 'true' : 'false'"
+                  aria-haspopup="true">
+                Nosotros
+              </button>
+
+              <ul class="dropdown-menu" [class.show]="openNosotros" >
+                  <li><a class="dropdown-item" href="#">Directorio</a></li>
+                  <li><a class="dropdown-item" href="#">Historia FCE</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
+        
       </div>
-
-      <!-- Academia -->
-      <div class="dropdown"
-      (mouseenter)="openAcademia = true"
-      (mouseleave)="openAcademia = false">
-        <button class="btn dropdown-toggle nav-link"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-expanded]="openAcademia ? 'true' : 'false'"
-            aria-haspopup="true">
-          Academia
-        </button>
-        <ul class="dropdown-menu" [class.show]="openAcademia" >
-          <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
-          <li><a class="dropdown-item" href="#">Academias de Area</a></li>
-          <li><a class="dropdown-item" href="#">IDT</a></li>
-        </ul>
-      </div>
-
-      <!-- <p class="nav-link">Documentación Oficial</p> -->
-
-      <!-- Difusion -->
-      <div class="dropup-center dropup"
-      (mouseenter)="openDifusion = true"
-      (mouseleave)="openDifusion = false">
-        <button class="btn dropdown-toggle nav-link"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-expanded]="openDifusion ? 'true' : 'false'"
-            aria-haspopup="true">
-          Difusion
-        </button>
-
-        <ul class="dropdown-menu" [class.show]="openDifusion" >
-          <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
-        </ul>
-      </div>
-     
-      <!-- Nostros -->
-      <div class="dropup-center dropup"
-      (mouseenter)="openNosotros = true"
-      (mouseleave)="openNosotros = false">
-        <button class="btn dropdown-toggle nav-link"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-expanded]="openNosotros ? 'true' : 'false'"
-            aria-haspopup="true">
-          Nosotros
-        </button>
-
-        <ul class="dropdown-menu" [class.show]="openNosotros" >
-            <li><a class="dropdown-item" href="#">Directorio</a></li>
-            <li><a class="dropdown-item" href="#">Historia FCE</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
