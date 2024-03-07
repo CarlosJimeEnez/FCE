@@ -9,6 +9,7 @@ import { TableroComponent } from './componentes/tablero/tablero.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { CarouselMisionVisionComponent } from './componentes/carousel-mision-vision/carousel-mision-vision.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CarrerasComponent } from './componentes/carreras/carreras.component';
     TableroComponent,
     HeaderComponent,
     CarouselMisionVisionComponent,
-    CarrerasComponent
+    CarrerasComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

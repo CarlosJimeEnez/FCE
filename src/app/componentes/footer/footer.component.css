@@ -1,0 +1,15 @@
+.footer1 {
+    background-color: var(--azul_obscuro);
+    color: var(--blanco);
+    padding-top: 1em;
+}
+
+.footer2 {
+    background-color: var(--azul_obscuro_t1);
+    color: var(--blanco);
+    padding-top: 1em;
+}
+
+ul, ol {
+    list-style-type: none;
+  }
