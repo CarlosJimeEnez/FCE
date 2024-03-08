@@ -94,11 +94,10 @@
                 <div class="carousel-item ">
                     <div class="row">
                         <div class="col mt-3 d-flex justify-content-center">
-                            <button [disabled]="!isButtonEnabled" (click)="expandArrow()" data-bs-toggle="modal" data-bs-target="#Humanos">
+                            <button [disabled]="!isButtonEnabled" (click)="expandArrow()" data-bs-toggle="modal" data-bs-target="#Estrategicos">
                                 <h1>Estratégicos</h1>
                             </button>
                             <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
-                        
                         </div>
                     </div>                  
                     <div class="row">
@@ -129,7 +128,6 @@
                         <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
                     </div>
                 </ng-template>
-
                 <ng-template #noButton>
                 </ng-template>
                 
