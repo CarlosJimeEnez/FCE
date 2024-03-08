@@ -80,10 +80,10 @@ h5 {
 /* Media query para teléfonos */
 @media (max-width: 600px) {
     :root {
-        --parrafo: 14px;      
-        --encabezado: 20px;   
-        --subtitulo: 24px;    
-        --titulo: 30px;       
+        --p: 14px;      
+        --h5: 20px;   
+        --h2: 24px;    
+        --h1: 30px;       
     }
 
     body {
