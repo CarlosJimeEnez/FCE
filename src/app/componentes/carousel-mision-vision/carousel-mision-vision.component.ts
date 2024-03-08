@@ -21,7 +21,8 @@ export class CarouselMisionVisionComponent implements OnInit {
   @ViewChild('miDiv') miDiv!: ElementRef;
   estadoAnimacion: string = 'fuera';
   isButtonEnabled: boolean = false;
-  mostrarEnTelefono = false;
+  mostrarEnTelefono: boolean = false;
+  isExpanded:boolean = false; 
 
   constructor(private el: ElementRef) {
     this.checkWindowSize();
@@ -30,6 +31,13 @@ export class CarouselMisionVisionComponent implements OnInit {
   // Verifica el tamaño al cargar
   checkWindowSize() {
     this.isButtonEnabled = window.innerWidth <= 768; // Habilita en teléfonos
+  }
+
+  expandArrow(){
+    this.isExpanded = true;
+  }
+  expandLess(){
+    this.isExpanded = false;
   }
 
   @HostListener('window:resize', ['$event'])
@@ -48,5 +56,22 @@ export class CarouselMisionVisionComponent implements OnInit {
     }, { threshold: [0.5] }); // Puedes ajustar el umbral según tus necesidades
 
     observer.observe(this.el.nativeElement);
+
+    const modalElement = this.el.nativeElement.querySelector("#Vision"); 
+    modalElement.addEventListener("hidden.bs.modal", () => {
+      this.expandLess(); 
+    })
+    const modalElementMision = this.el.nativeElement.querySelector("#Mision"); 
+    modalElementMision.addEventListener("hidden.bs.modal", () => {
+      this.expandLess(); 
+    })
+    const modalElementEstrategicos = this.el.nativeElement.querySelector("#Estrategicos"); 
+    modalElementEstrategicos.addEventListener("hidden.bs.modal", () => {
+      this.expandLess(); 
+    })
+    const modalElementHumanos = this.el.nativeElement.querySelector("#Humanos"); 
+    modalElementHumanos.addEventListener("hidden.bs.modal", () => {
+      this.expandLess(); 
+    })
   }
 }

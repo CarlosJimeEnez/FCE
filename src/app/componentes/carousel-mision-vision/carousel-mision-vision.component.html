@@ -14,10 +14,13 @@
                 <div class="carousel-item active">
                     <div class="row mt-3">
                         <div class="col d-flex justify-content-center">
-                            <button [disabled]="!isButtonEnabled"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button [disabled]="!isButtonEnabled" (click)="expandArrow()" data-bs-toggle="modal" data-bs-target="#Mision">
                                 <h1>Misión</h1>
                             </button>
-                            <mat-icon *ngIf="isButtonEnabled" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
+                            <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
+                            <ng-template #noExpand>
+                                <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
+                            </ng-template>
                         </div>
                     </div>
                     <div class="row">
@@ -36,11 +39,11 @@
                 <div class="carousel-item">
                     <div class="row mt-3">
                         <div class="col d-flex justify-content-center">
-                            <button [disabled]="!isButtonEnabled"  data-bs-toggle="modal" data-bs-target="#Vision">
+                            <button [disabled]="!isButtonEnabled" (click)="expandArrow()"  data-bs-toggle="modal" data-bs-target="#Vision">
                                 <h1>Visión</h1>
                             </button>
-                            <mat-icon *ngIf="isButtonEnabled; else expandArrow" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
-                            <ng-template #expandArrow>
+                            <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
+                            <ng-template #noExpand>
                                 <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
                             </ng-template>
                         </div>
@@ -62,10 +65,13 @@
                 <div class="carousel-item ">
                     <div class="row">
                         <div class="col mt-3 d-flex justify-content-center">
-                            <button [disabled]="!isButtonEnabled"  data-bs-toggle="modal" data-bs-target="#Humanos">
+                            <button [disabled]="!isButtonEnabled" (click)="expandArrow()" data-bs-toggle="modal" data-bs-target="#Humanos">
                                 <h1>Humanos</h1>
                             </button>
-                            <mat-icon *ngIf="isButtonEnabled" class="arrow mt-2" fontIcon="expand_more"></mat-icon>
+                            <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow mt-2" fontIcon="expand_more"></mat-icon>
+                            <ng-template #noExpand>
+                                <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
+                            </ng-template>
                         </div>
                     </div>                  
                     <div class="row">
@@ -95,10 +101,11 @@
                 <div class="carousel-item ">
                     <div class="row">
                         <div class="col mt-3 d-flex justify-content-center">
-                            <button [disabled]="!isButtonEnabled"  data-bs-toggle="modal" data-bs-target="#Humanos">
+                            <button [disabled]="!isButtonEnabled" (click)="expandArrow()" data-bs-toggle="modal" data-bs-target="#Humanos">
                                 <h1>Estratégicos</h1>
                             </button>
-                            <mat-icon *ngIf="isButtonEnabled" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
+                            <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
+                            
                         </div>
                     </div>                  
                     <div class="row">
@@ -140,12 +147,12 @@
 
 
   <!-- Mision Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="Mision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Misión</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" (click)="expandLess()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>
@@ -174,7 +181,6 @@
             que desarrollan y aplican los estudiantes y académicos con ética y espíritu de servicio.
           </p>
         </div>
-        
       </div>
     </div>
   </div>
@@ -205,7 +211,7 @@
     </div>
   </div>
 
-  <!-- Estrategicos Modal -->
+  <!-- Humanos Modal -->
   <div class="modal fade" id="Humanos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
