@@ -18,9 +18,6 @@
                                 <h1>Misión</h1>
                             </button>
                             <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
-                            <ng-template #noExpand>
-                                <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
-                            </ng-template>
                         </div>
                     </div>
                     <div class="row">
@@ -43,9 +40,7 @@
                                 <h1>Visión</h1>
                             </button>
                             <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
-                            <ng-template #noExpand>
-                                <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
-                            </ng-template>
+                            
                         </div>
                     </div>
                     <div class="row">
@@ -69,9 +64,7 @@
                                 <h1>Humanos</h1>
                             </button>
                             <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow mt-2" fontIcon="expand_more"></mat-icon>
-                            <ng-template #noExpand>
-                                <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
-                            </ng-template>
+                            
                         </div>
                     </div>                  
                     <div class="row">
@@ -105,7 +98,7 @@
                                 <h1>Estratégicos</h1>
                             </button>
                             <mat-icon *ngIf="isButtonEnabled && !isExpanded; else noExpand" class="arrow  mt-2" fontIcon="expand_more"></mat-icon>
-                            
+                        
                         </div>
                     </div>                  
                     <div class="row">
@@ -130,6 +123,16 @@
                         </div>
                     </div>  
                 </div>
+
+                <ng-template #noExpand>
+                    <div *ngIf="isButtonEnabled; else noButton">
+                        <mat-icon class="arrow  mt-2" fontIcon="expand_less"></mat-icon>                            
+                    </div>
+                </ng-template>
+
+                <ng-template #noButton>
+                </ng-template>
+                
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
