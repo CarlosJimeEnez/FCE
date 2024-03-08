@@ -12,10 +12,13 @@ body {
 }
 :root {
     /* Tamaño de letra */
-    --parrafo: 16px;
-    --encabezado: 25px;
-    --subtitulo: 48.8px;
-    --titulo: 61px;
+    --p: 1rem;
+    --h6: 1.25rem;
+    --h5: 1.563rem;
+    --h4: 1.953rem;
+    --h3: 1.563rem;
+    --h2: 3.052rem;
+    --h1: 3.815rem;
 
     /* Colores */
     --azul_calro: #00B5E2; 
@@ -33,16 +36,25 @@ body {
 }
 
 h1 {
-    font-size: var(--titulo); 
+    font-size: var(--h1); 
 }
  
 h2 {
-    font-size: var(--subtitulo); 
+    font-size: var(--h2); 
 }
- 
+
+h3 {
+    font-size: var(--h3);
+}
+
+h4 {
+    font-size: var(--h4);
+}
+
 h5 {
-    font-size: var(--encabezado);
+    font-size: var(--h5);
 }
+
 
 .translucido {
     color: var(--negro_translucido);

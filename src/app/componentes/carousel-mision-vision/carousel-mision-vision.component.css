@@ -1,7 +1,7 @@
 .carousel {
     background-color: var(--azul_calro);
     min-width: 25vh;
-    min-height: 50vh;
+    min-height: 45vh;
     color: var(--blanco_t1);
     border-radius: 20px;
 }
@@ -26,9 +26,28 @@ li {
     text-align: center;
 }
 
+button {
+    background-color: transparent;
+    color: var(--blanco_t1);
+    border-style: none;
+}
 
 @media (min-width: 2000px) {
     .carousel {
-        min-height: 35vh;    
+        min-height: 25vh;    
     }
+}
+
+@media (max-width: 600px) {
+    .carousel {
+        border-radius: 0px;
+        min-width: 25vh;
+        min-height: 15vh;
+    }
+
+    .center_text_telefono {
+        text-align: center;
+    }
+
+    
 }

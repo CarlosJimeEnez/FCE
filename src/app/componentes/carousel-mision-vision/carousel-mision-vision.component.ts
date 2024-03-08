@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-carousel-mision-vision',
@@ -20,8 +20,22 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class CarouselMisionVisionComponent implements OnInit {
   @ViewChild('miDiv') miDiv!: ElementRef;
   estadoAnimacion: string = 'fuera';
+  isButtonEnabled: boolean = false;
+  mostrarEnTelefono = false;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) {
+    this.checkWindowSize();
+  }
+
+  // Verifica el tamaño al cargar
+  checkWindowSize() {
+    this.isButtonEnabled = window.innerWidth <= 768; // Habilita en teléfonos
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    this.isButtonEnabled = event.target.innerWidth <= 768; // Ajusta según tu punto de quiebre
+  }
 
   ngOnInit(): void {
     const observer = new IntersectionObserver(entries => {
