@@ -40,17 +40,17 @@
 
 <div class="row justify-content-center mb-3">
     <div class="col text-center">
-        <h1>
+        <h2>
             Licenciaturas
-        </h1>
-        <h4 class="translucido">
+        </h2>
+        <h5 class="translucido">
             Contamos con las carreras acordes a tus aptitudes
-        </h4>
+        </h5>
     </div>
 </div> 
 
 <div class="row">
-    <div class="col-12 col-md-6" *ngFor="let carrera of carreras">
+    <div class="col-12 col-md-6" *ngFor="let carrera of carreras" >
         <app-carreras [carrera]="carrera"></app-carreras>
     </div>
 </div>
