@@ -32,9 +32,10 @@ button {
     border-style: none;
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1900px) {
     .carousel {
-        min-height: 25vh;    
+        min-height: 25vh;
+        
     }
 }
 
