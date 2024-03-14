@@ -10,13 +10,15 @@ export class HeaderComponent {
   openOfertaAcademica = false; 
   openDifusion  = false;
   openNosotros = false;
-
   isMobile = window.innerWidth < 768; 
+
+  // Header visible
+  lastScrollTop:number = 0;
+  headerVisible: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     this.isMobile = window.innerWidth < 768;
   }
-  
   
 }

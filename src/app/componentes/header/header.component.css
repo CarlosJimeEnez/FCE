@@ -18,7 +18,10 @@
 
   .nav-link {
     text-decoration: none;
-    font-size: var(--parrafo);
+    font-size: var(--p);
+    font-family: "Source Sans Pro Regular", sans-serif;
+    font-weight: normal;
+    font-style: normal;
     color: var(--blanco);
   }
 
@@ -39,3 +42,5 @@
   .dropdown-menu {
     margin-right: 10vh;
   }
+
+  

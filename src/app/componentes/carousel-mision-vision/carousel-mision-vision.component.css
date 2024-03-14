@@ -34,8 +34,7 @@ button {
 
 @media (min-width: 1900px) {
     .carousel {
-        min-height: 25vh;
-        
+        min-height: 30vh;
     }
 }
 
