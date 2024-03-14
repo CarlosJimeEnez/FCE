@@ -8,7 +8,7 @@ import { Carrera } from '../interfaces/carrera';
 })
 export class CarrerasServicesService {
   myAppUrl: string = environment.endpoint
-  myApiUrl: string = "api/Carreras"
+  myApiUrl: string = "api/Carrerras"
   myApiWelcome: string = "api/welcome"
 
   constructor(private http: HttpClient) {}
