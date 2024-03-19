@@ -8,7 +8,7 @@ import { Carrera } from '../interfaces/carrera';
 })
 export class CarrerasServicesService {
   myAppUrl: string = environment.endpoint
-  myApiUrl: string = "api/Carrerras"
+  myApiUrl: string = "api/Carrerras/"
   myApiWelcome: string = "api/welcome"
 
   constructor(private http: HttpClient) {}
@@ -20,4 +20,10 @@ export class CarrerasServicesService {
   getCarreras(): Observable<Carrera[]> {
     return this.http.get<Carrera[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }
+
+  getCarrera(id: number): Observable<Carrera> {
+    return this.http.get<Carrera>(`${this.myAppUrl}${this.myApiUrl}${id}`)
+  }
+
+
 }

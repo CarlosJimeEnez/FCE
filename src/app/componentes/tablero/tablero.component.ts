@@ -1,6 +1,8 @@
 import { fromEvent, Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
+import { Carrera } from 'src/app/interfaces/carrera';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tablero',
@@ -9,25 +11,28 @@ import { CarrerasServicesService } from 'src/app/services/carreras-services.serv
 })
 
 export class TableroComponent implements OnInit, OnDestroy {
-
-  constructor(private _carrerasService: CarrerasServicesService) {}
+  carreras: Carrera[] = [];
+  carrerasNoCargadas: boolean = true;
+  // Servicios con guion bajo
+  constructor(private _carrerasService: CarrerasServicesService, private _router: Router) {}
   
-  // Carreras
-  carreras = [
-    { nombre: "Electronica", descripcion: "descripcion" },
-    { nombre: "Mecatronica", descripcion: "descripcion" },
-    { nombre: "Energias Renovables", descripcion: "descripcion" },
-  ]
 
   ngOnInit(): void{
-    this._carrerasService.getCarreras().subscribe(data => {
-      console.log(data); 
-    }, error => {
-      console.log('Error al obtener carreras: ', error);
-    })    
+    this.getCarreras();    
   }
   
   ngOnDestroy(): void {
   }
 
+  getCarreras() {
+    this._carrerasService.getCarreras().subscribe(data => {
+      console.log(data);
+      this.carrerasNoCargadas = false
+      this.carreras = data
+    }, error => this.carrerasNoCargadas = true);
+  }
+
+  verCarrera(id: number): void {
+    this._router.navigate([`verCarrera/${id}`]);
+  }
 }

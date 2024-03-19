@@ -1,7 +1,7 @@
 .carousel {
     background-color: var(--azul_calro);
     min-width: 25vh;
-    min-height: 45vh;
+    min-height: 25vh;
     color: var(--blanco_t1);
     border-radius: 20px;
 }
