@@ -54,20 +54,18 @@
     height: 200px; 
     background-size: cover;
     background-position: center;
-    border-radius: 1.5%;
 }
 
 .image-holder {
     padding: 0%;
 }
 
-.card-carreras {
-    margin-left: 2em;
-    margin-right: 2em;
+.card {
+    margin-left: 5vh;
+    padding: 0%;
 }
 
-.card-carreras:hover {
-    border-radius: 20px;
+.card:hover {
     background-color: var(--neutro_activo);
     transform: scale(1.01);
 }

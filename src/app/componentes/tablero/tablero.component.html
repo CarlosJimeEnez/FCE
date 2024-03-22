@@ -1,5 +1,4 @@
-
-<div class="dashboard-background mb-5">
+<div class="dashboard-background mb-5" #navbar>
     <div class="row">
         <div class="col">
             <mat-icon class="arrow arrow_left" fontIcon="arrow_right"></mat-icon>
@@ -14,7 +13,7 @@
         </div>
         <div class="row mb-3">
             <div class="col texto_centrado">
-                <h3>Vive la experiencia</h3>
+                <h4>Vive la experiencia</h4>
             </div>
         </div>
         <div class="row">
@@ -50,32 +49,21 @@
 </div> 
 
 <div class="row">
+    <!-- Loading -->
     <div *ngIf="carrerasNoCargadas" class="d-flex justify-content-center">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-
-    <div class="col-12 col-md-6" *ngFor="let carrera of carreras" >
-        <div (click)="verCarrera(carrera.id!)" class="card-carreras mt-3">
-            <div class="row">
-                <div class="col-12 col-md-4">
-                    <div class="image-cover"></div>
-                </div>
-                <div class="col nombre">
-                    <h4>
-                        {{carrera.carreraNombre}}
-                    </h4>
-                    
-                    <div class="row">
-                        <div class="col">
-                            <p>{{carrera.descripcion}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>        
+    
+    <div class="card" (click)="verCarrera(carrera.id!)" *ngFor="let carrera of carreras" style="width: 18rem;">
+        <img src="../../../assets/images/Fce_fondo.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{carrera.carreraNombre}}</h5>
+            <p class="card-text">{{carrera.descripcion}}</p>
+        </div>
     </div>
+
 </div>
 
 <div class="row google-map justify-content-center mt-5 pb-2 pt-2">

@@ -142,8 +142,11 @@ li {
 /* Media query para teléfonos */
 @media (max-width: 600px) {
     :root {
-        --p: 14px;      
-        --h5: 20px;   
+        --p: 14px;  
+        --h6: 15px;     
+        --h5: 17px; 
+        --h4: 18px;   
+        --h3: 20px; 
         --h2: 24px;    
         --h1: 30px;       
     }
