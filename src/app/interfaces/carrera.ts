@@ -28,3 +28,21 @@ export interface Documentos {
     rutaArchivo: string;
     fechaSubidade: number;
 }
+
+export interface AtributosEducacionales {
+    id?: number;
+    carreraId: number;
+    descripcion: string;
+}
+
+export interface ObjetivosEducacionales {
+    id?: number;
+    carreraId: number;
+    descripcion: string;
+}
+
+export interface CompetenciasEspecificas {
+    id?: number;
+    carreraId: number;
+    descripcion: string;
+}

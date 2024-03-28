@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../enviroments/enviroments';
-import { Carrera, Documentos, Profesor } from '../interfaces/carrera';
+import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from '../interfaces/carrera';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +14,8 @@ export class CarrerasServicesService {
   myApiDocumentosUrl: string = "documentos/"
   myApiDocumentoPorCarreraUrl: string = "porCarrera/carreraId"
   myApiCarreraIdAtributosEgreso: string = "carreraId/atributosEgreso/"
-
+  myApiCarreraObjetivosEducacionales: string = "carreraId/objetivosEducacionales/"
+  myApiCompetenciaEspecificas: string = "carreraId/competenciasEspecificas/"
   constructor(private http: HttpClient) {}
 
   getCarreras(): Observable<Carrera[]> {
@@ -31,9 +32,17 @@ export class CarrerasServicesService {
     return this.http.get<Profesor>(`${this.myAppUrl}${this.myApiUrl}${this.myApiProfesorUrl}id`, {params})
   }
 
-  getAtributosEgresoByCarreraId(carreraId: number):Observable<any> {
+  getAtributosEgresoByCarreraId(carreraId: number):Observable<AtributosEducacionales[]> {
     console.log("Carrera Id: " + carreraId)
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl}${this.myApiCarreraIdAtributosEgreso}${carreraId}`) 
+    return this.http.get<AtributosEducacionales[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiCarreraIdAtributosEgreso}${carreraId}`) 
+  }
+
+  getObjetivosEducacionalesByCarreraId(carreraId: number): Observable<ObjetivosEducacionales[]> {
+    return this.http.get<ObjetivosEducacionales[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiCarreraObjetivosEducacionales}${carreraId}`)
+  }
+
+  getCompetenciasEspecificasByCarreraId(carreraId: number): Observable<CompetenciasEspecificas[]>{
+    return this.http.get<CompetenciasEspecificas[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiCompetenciaEspecificas}${carreraId}`) 
   }
 
   getDocumentos(): Observable<Documentos[]> {

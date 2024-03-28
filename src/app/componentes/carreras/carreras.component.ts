@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Carrera, Documentos, Profesor } from 'src/app/interfaces/carrera';
+import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,18 +15,22 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   profesor!: Profesor;
   documentos: Documentos[] = [];
   documentosNoCargados: boolean = true;
-
+  atributosEducacionales!: AtributosEducacionales[];
+  objetivosEducacionales!: ObjetivosEducacionales[]; 
+  competenciasEspecificas!: CompetenciasEspecificas[];
+  
   constructor(private _carreraService: CarrerasServicesService,
     private _route: ActivatedRoute,  private _router: Router){
       this.id = +this._route.snapshot.paramMap.get('id')!;
   }
-
 
   ngOnInit() {
     console.log("Id:" + this.id);    
     this.getCarrera()
     this.getDocumentos();
     this.getAtributosdeEgresoByCarreraId(this.id);
+    this.getObjetivosEducacionalesByCarreraId(this.id);
+    this.getCompetenciasEspecificasByCarreraId(this.id); 
   }
   
   ngAfterViewInit(): void {
@@ -64,9 +68,22 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
 
   getAtributosdeEgresoByCarreraId(carreraId: number){
     this._carreraService.getAtributosEgresoByCarreraId(carreraId).subscribe(data => {
-      console.log(data);
+      this.atributosEducacionales = data
     })
   }  
+
+  getObjetivosEducacionalesByCarreraId(carreraId: number){
+    this._carreraService.getObjetivosEducacionalesByCarreraId(carreraId).subscribe(data => {
+      this.objetivosEducacionales = data
+    })
+  }
+
+  getCompetenciasEspecificasByCarreraId(carreraId: number){
+    this._carreraService.getCompetenciasEspecificasByCarreraId(carreraId).subscribe(data => {
+      this.competenciasEspecificas = data 
+      console.log(this.competenciasEspecificas)
+    });
+  }
 
   verDocumento(id: number) {
     this._router.navigate([`verMapa/${id}`]);
