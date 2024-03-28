@@ -1,6 +1,188 @@
-<div class="contenedor row justify-content-center">
-    <div class="col-4 ">
-      
-    </div>
+<div class="dashboard-background mb-5" id="section1">
+  <div class="row">
+  </div>
+
+  <div *ngIf="carrera != null" class="carreras-centered">
+      <div class="row">
+          <div class="col">
+              <h1>{{carrera.carreraNombre}}</h1>
+          </div>
+      </div>
+      <div class="row mb-3">
+          <div class="col texto_centrado">
+              <h4>Vive la experiencia</h4>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col">
+              <div class="d-flex justify-content-evenly">
+                  <button type="button" class="btn btn-primary btn-lg">Comenzar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
   </div>
   
+</div>
+
+<div *ngIf="carrera != null" class="container my-5" >
+  <div class="row">
+    <!-- Misión -->
+    <div class="col-md-6 d-flex mb-3">
+      <div class="card flex-fill">
+        <div class="card-body text-center">
+          <i class="fas fa-rocket fa-3x mb-3"></i> <!-- Asegúrate de incluir FontAwesome para este ícono -->
+          <h3 class="card-title">MISIÓN</h3>
+          <p class="card-text">{{carrera.mision}}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Visión -->
+    <div class="col-md-6 d-flex mb-3">
+      <div class="card flex-fill">
+        <div class="card-body text-center">
+          <i class="fas fa-eye fa-3x mb-3"></i> <!-- Asegúrate de incluir FontAwesome para este ícono -->
+          <h3 class="card-title">VISIÓN</h3>
+          <p class="card-text">{{carrera.vision}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="carrera != null" class="container-fluid text-center contenedor-con-fondo">
+  <div class="row justify-content-center">
+    <div class="col-10 mt-4">
+      <h1>Objetivos</h1>
+      <h5 class="mt-3">General</h5>
+      <p>
+        {{carrera.objetivos}}
+      </p>
+    </div>
+  </div>
+</div>
+
+  <!-- Accordion -->
+  <div class="container mt-5">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            Competencias específicas
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+          <div class="accordion-body">
+            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            ATRIBUTOS DE EGRESO Y OBJETIVOS EDUCACIONALES
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            Accordion Item #3
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+<div class="container text-center mt-5 ">
+  <div class="row justify-content-center">
+    <div class="col-10 ">
+      <h2>PERFIL DE INGRESO Y EGRESO</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 mb-3">
+      <div class="card ingr-egr ">
+        <i class="fas fa-user fa-2x mt-3 "></i> 
+        <div class="card-body">
+          <h5 class="card-title">Perfil de ingreso</h5>
+          <p class="card-text">El aspirante a ingresar al Plan de Estudios de la Licenciatura en Mectrónica, deberá tener los siguientes atributos</p>
+        </div>
+      </div>
+    
+    </div>
+    <div class="col-md-6 mb-3">
+      
+      <div class="card ingr-egr ">
+        <i class="fas fa-user-graduate fa-2x mt-3"></i> 
+        <div class="card-body">
+          <h5 class="card-title">Perfil de egreso</h5>
+          <p class="card-text">El egresado contará con los siguientes conocimientos, habilidades, actitudes y valores</p>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+
+  <!-- Asignaturas  -->
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col">
+        <h2>PLAN DE ESTUDIOS</h2>
+      </div>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="spinner-border" *ngIf="documentosNoCargados" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+      <!-- Catalogo de asignaturas -->
+      <div class="col-md-3 mb-3" *ngFor="let documento of documentos">
+        <div class="card ingr-egr" (click)="verDocumento(documento.documentoID!)">
+          <i class="fa-regular fa-file-pdf fa-2x mt-3"></i>
+          <div class="card-body">
+            <h5 class="card-title">{{documento.nombreArchivo}}</h5>
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Contacto -->
+<div *ngIf="profesor != null" class="container-fluid text-center contenedor-con-fondo mt-5">
+  <div class="row justify-content-center">
+    <div class="col-10 mt-4">
+      <h3>Contacto</h3>
+      <h5>{{profesor.nombre}}</h5>
+      <h5>Coordinador de la carrera</h5>
+      <h5>
+        <span><i class="fa-solid fa-location-pin"></i></span>
+        {{profesor.edificio}}
+      </h5>
+      <h5>Horario de atención: Lunes a Viernes, de 11:00am a 13:00pm</h5>
+      <br>
+      <h5>Ext: {{profesor.telefono}}</h5>
+      <h5>Email: {{profesor.correo}}</h5>
+      <br>
+    </div>
+  </div>
+</div>

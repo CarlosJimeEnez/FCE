@@ -15,14 +15,13 @@ export class TableroComponent implements OnInit, OnDestroy, AfterViewInit {
   carrerasNoCargadas: boolean = true;
   // Servicios con guion bajo
   constructor(private _carrerasService: CarrerasServicesService, private _router: Router) {}
-  @ViewChild("navbar") navbar!: ElementRef;
   
   ngOnInit(): void{
     this.getCarreras();   
   }
   
   ngAfterViewInit(): void {
-    this.desplazarAlInicio()
+    
   }
 
   ngOnDestroy(): void {
@@ -37,11 +36,7 @@ export class TableroComponent implements OnInit, OnDestroy, AfterViewInit {
     }, error => this.carrerasNoCargadas = true);
   }
 
-  desplazarAlInicio(): void {
-    this.navbar.nativeElement.scrollTop = 0;
-  }
-
   verCarrera(id: number): void {
-    this._router.navigate([`verCarrera/${id}`]);
+    this._router.navigate([`verCarrera/${id}`], {fragment: 'section1'});
   }
 }

@@ -12,6 +12,7 @@ import { HeaderComponent } from './componentes/header/header.component';
 import { CarouselMisionVisionComponent } from './componentes/carousel-mision-vision/carousel-mision-vision.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { MapasComponent } from './componentes/mapas/mapas.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './componentes/footer/footer.component';
     HeaderComponent,
     CarouselMisionVisionComponent,
     CarrerasComponent,
-    FooterComponent
+    FooterComponent,
+    MapasComponent
   ],
   imports: [
     BrowserModule,
