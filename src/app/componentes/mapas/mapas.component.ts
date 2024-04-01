@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
 import { Documentos } from 'src/app/interfaces/carrera';
+import { environment } from 'src/app/enviroments/enviroments';
 
 @Component({
   selector: 'app-mapas',
@@ -10,22 +11,25 @@ import { Documentos } from 'src/app/interfaces/carrera';
   styleUrls: ['./mapas.component.css']
 })
 export class MapasComponent implements OnInit, AfterViewInit  {
-  constructor(private _route: ActivatedRoute, private _carreraService: CarrerasServicesService, private _sanitizer: DomSanitizer){}
+  constructor(private _route: ActivatedRoute, private _carreraService: CarrerasServicesService, private _sanitizer: DomSanitizer){
+  }
+  
   urlSegura!: any;
   id!: number;
   documento!: Documentos;
   documentoNoCargado: boolean = true;
+  
 
   ngOnInit() {
     this._route.params.subscribe(params => {
       this.id = +params['id'];
     });
-
+    this.abrirPdf(this.id);
     this.getDocuemntoPdf(this.id);
   }
 
   ngAfterViewInit(): void {
-    this.getDocumento(this.id);      
+    this.getDocumento(this.id);    
   }
 
   getDocuemntoPdf(id: number){
@@ -41,8 +45,17 @@ export class MapasComponent implements OnInit, AfterViewInit  {
   getDocumento(id: number){
     this._carreraService.getDocumento(id).subscribe(res => {
       this.documento = res
+      
       console.log(this.documento);
     },
     err => console.log(err));
+  }
+
+  abrirPdf(id: number) {
+    const myAppUrl: string = environment.endpoint
+    const myApiUrl: string = "api/Carrerras/"
+    const myApiDocumentosPdfUrl: string = "documentosPDF/"
+
+    window.open(`${myAppUrl}${myApiUrl}${myApiDocumentosPdfUrl}${id}`)
   }
 }

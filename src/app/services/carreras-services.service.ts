@@ -49,14 +49,13 @@ export class CarrerasServicesService {
     return this.http.get<Documentos[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}`)
   }
 
-  getDocumentoPDF(id: number): Observable<any> {
-    const params = new HttpParams().set('id', id);
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}id`, {responseType: "blob", params})
+  getDocumentoPDF(id: number): Observable<Blob> {
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`, {responseType: "blob"})
   }
 
   getDocumento(id: number): Observable<Documentos> {
     const params = new HttpParams().set('id', id);
-    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}id`, {params})
+    return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}id`, {params})
   }
 
   getDocumentosByCarreraId(carreraId: number): Observable<Documentos[]> {

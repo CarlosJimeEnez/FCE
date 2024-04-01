@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +14,22 @@ export class HeaderComponent {
   openNosotros = false;
   isMobile = window.innerWidth < 768; 
 
+  constructor(private _router: Router, private _scrollService: ScrollService) {}
+
   // Header visible
   lastScrollTop:number = 0;
   headerVisible: boolean = false;
+  fragment: string = "licenciaturas"
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     this.isMobile = window.innerWidth < 768;
   }
+  
+  public triggerScrollToFragment(fragment: string) {
+    this._scrollService.scrollToFragment(fragment);
+    this._router.navigate(['/'])
+  }
+
   
 }

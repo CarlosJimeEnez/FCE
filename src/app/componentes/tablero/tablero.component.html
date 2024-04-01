@@ -1,3 +1,10 @@
+<!-- Loading -->
+<div *ngIf="carrerasNoCargadas">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
 <div class="dashboard-background mb-5" id="navbar">
     <div class="row">
         <div class="col">
@@ -37,7 +44,7 @@
 
 <app-carousel-mision-vision></app-carousel-mision-vision>
 
-<div class="row justify-content-center mb-3">
+<div class="row justify-content-center mb-3" id="licenciaturas">
     <div class="col text-center">
         <h2>
             Licenciaturas
@@ -48,23 +55,22 @@
     </div>
 </div> 
 
-<div class="row justify-content-center">
-    <!-- Loading -->
-    <div *ngIf="carrerasNoCargadas">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-12 col-sm-6 col-md-3 mt-3 " *ngFor="let carrera of carreras">
+            <div class="card" (click)="verCarrera(carrera.id!)">
+                <img src="../../../assets/images/Fce_fondo.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{carrera.carreraNombre}}</h5>
+                    <p class="card-text">{{carrera.descripcion}}</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </div> 
     
-    <div class="card mt-3" (click)="verCarrera(carrera.id!)" *ngFor="let carrera of carreras" style="width: 18rem;">
-        <img src="../../../assets/images/Fce_fondo.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{carrera.carreraNombre}}</h5>
-            <p class="card-text">{{carrera.descripcion}}</p>
-        </div>
-    </div>
-
 </div>
+
+
 
 <div class="row google-map justify-content-center mt-5 pb-2 pt-2">
     <div class="col text-center">

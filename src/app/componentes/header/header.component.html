@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg " data-bs-theme="dark" [class.header-visible]="headerVisible">
     <div class="container-fluid">
-      <img class="logo" src="./../../../assets/images/footer_buap_logo.png" alt="">
+      <img class="logo" src="./../../../assets/images/footer_buap_logo.png" alt="" routerLink="/">
 
       <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <!-- <span class="navbar-toggler-icon"></span> -->
@@ -26,7 +26,7 @@
                   Oferta académica
                 </button>
                 <ul class="dropdown-menu" [class.show]="openOfertaAcademica" >
-                  <li><a class="dropdown-item" href="#">Licenciaturas</a></li>
+                  <li><a class="dropdown-item" (click)="triggerScrollToFragment(fragment)" >Licenciaturas</a></li>
                   <li><a class="dropdown-item" href="#">Posgrados</a></li>
                 </ul>
               </div>

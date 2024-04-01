@@ -20,7 +20,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   competenciasEspecificas!: CompetenciasEspecificas[];
   
   constructor(private _carreraService: CarrerasServicesService,
-    private _route: ActivatedRoute,  private _router: Router){
+    private _route: ActivatedRoute,  private _router: Router,){
       this.id = +this._route.snapshot.paramMap.get('id')!;
   }
 
