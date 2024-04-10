@@ -6,7 +6,7 @@ import { CarrerasServicesService } from 'src/app/services/carreras-services.serv
 import { PostCarrerasService } from 'src/app/services/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto } from 'src/app/interfaces/Dto';
+import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/delete-carreras.service';
   
 @Component({
@@ -19,13 +19,30 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   id!: number;
   carreraNombre!: string;  
   atributosEducacionales: AtributosEducacionales[] = [];
+  objetivosEducacionales: ObjetivosEducacionalesDto[] = [];
+  competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
+
   dataSource = new MatTableDataSource(this.atributosEducacionales)
+  dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales)
+  dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
+  
   displayedColumns: string[] = ["atributos", "Acciones"]; 
+  
+  // DTO
+
   atributoNuevo: AtributosEducacionales = {
     descripcion: "",
     carreraId: this.id
   }
-  // DTO
+  objetivoEducacionalNuevo: ObjetivosEducacionalesDto = {
+    descripcion: "",
+    carreraId: this.id
+  }
+  competenciasNuevo: CompetenciasEspecificasDto = {
+    descripcion: "",
+    carreraId: this.id
+  }
+
   carreraNombreDto!: CarreranombreDto
   carreraMisionVis!: CarreraMisionDto
   carreraObjetivo!: CarreraObjetivosDto
@@ -88,38 +105,92 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<AtributosEducacionales>;
   
   ngOnInit(): void {
+    this.objetivoEducacionalNuevo.carreraId = this.id;
+    this.atributoNuevo.carreraId = this.id;
+    this.competenciasNuevo.carreraId = this.id;
     this.carreraNombre = this._route.snapshot.queryParamMap.get('carreraNombre')!;
-    this.getAtributosdeEgresoByCarreraId(this.id);
+    
     this.getAtributos(this.id);
+    this.getObjetivosEducacionalesByCarreraId(this.id);
+    this.getCompetenciasEspecificasByCarreraId(this.id);
   }
 
   ngAfterViewInit(): void{}
 
-  getAtributos(id: number):void{
-    this._carreraService.getAtributosEgresoByCarreraId(id).subscribe(data => {
+  getAtributos(carreraId: number):void{
+    this._carreraService.getAtributosEgresoByCarreraId(carreraId).subscribe(data => {
       console.log(data);
       this.atributosEducacionales = data
       this.dataSource = new MatTableDataSource(this.atributosEducacionales);
-
     }, error => console.log(error))
   }
 
+  getObjetivosEducacionalesByCarreraId(carreraId: number){
+    this._carreraService.getObjetivosEducacionalesByCarreraId(carreraId).subscribe(data => {
+      console.log(data);
+      this.objetivosEducacionales = data
+      this.dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales);
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  getCompetenciasEspecificasByCarreraId(carreraId: number){
+    this._carreraService.getCompetenciasEspecificasByCarreraId(carreraId).subscribe(data => {
+      console.log(data);
+      this.competenciasEspecíficas = data
+      this.dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas);
+    }, err => {
+      console.log(err);
+    })
+  }
 
   addData() {
     if(this.atributoNuevo.descripcion != ""){
-      const atributoNuevo: AtributosEducacionales = {
-        descripcion: this.atributoNuevo.descripcion,
-        carreraId: this.id
-      }    
-
-      this._carreraPostService.postAtributosEgreso(atributoNuevo).subscribe(data =>
+      this._carreraPostService.postAtributosEgreso(this.atributoNuevo).subscribe(data =>
         {
-          console.log(data);
           this.alerta("Petición Exitosa")
-          this.atributosEducacionales.push(atributoNuevo)
-          this.dataSource = new MatTableDataSource(this.atributosEducacionales)
+          this.getAtributos(this.id)
           this.table.renderRows();
+        }, 
+        err => {
+          console.log(err);
+          this.alerta("Error en la petición")
+        })
+    }
+    else
+    {
+      this.alerta("Lista vacia")
+    }
+  }
 
+  addObjetivoEduc(){
+    if(this.objetivoEducacionalNuevo.descripcion != "")
+    {
+      this._carreraPostService.postObjetivoEducacional(this.objetivoEducacionalNuevo).subscribe(data =>
+        {
+          console.log(data)
+          this.getObjetivosEducacionalesByCarreraId(this.id)
+          this.table.renderRows()
+        },
+        err =>
+        {
+          console.log(err)
+        })
+    }
+    else{
+      this.alerta("Lista vacia")
+    }
+  }
+
+  addCompetencias() {
+    if(this.competenciasNuevo.descripcion != ""){
+      this._carreraPostService.postCompetenciasEspecificas(this.competenciasNuevo).subscribe(data =>
+        {
+          console.log(data)
+          this.alerta("Petición Exitosa")
+          this.getCompetenciasEspecificasByCarreraId(this.id)
+          this.table.renderRows();
         }, 
         err => {
           console.log(err);
@@ -138,9 +209,7 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
       {
         console.log(data);
         this.alerta("Petición exitosa")
-        // this.atributosEducacionales.pop()
         this.getAtributos(this.id);
-        this.dataSource = new MatTableDataSource(this.atributosEducacionales)
         this.table.renderRows();
       }, error =>
       {
@@ -148,15 +217,37 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
         this.alerta("Error en la petición")        
       } 
     )
-    
   }
 
-  getAtributosdeEgresoByCarreraId(carreraId: number){
-    this._carreraService.getAtributosEgresoByCarreraId(carreraId).subscribe(data => {
-      this.atributosEducacionales = data
-      console.log(data);
-    })
-  }  
+  removeObjetivoEducacional(objetivo: ObjetivosEducacionalesDto){
+    this._carreraDeleteService.deleteObejtivoEducacionales(objetivo).subscribe(data =>
+      {
+        console.log(data);
+        this.alerta("Petición exitosa")
+        this.getObjetivosEducacionalesByCarreraId(this.id);
+        this.table.renderRows();
+      }, error =>
+      {
+        console.log(error)
+        this.alerta("Error en la petición")        
+      } 
+    )
+  }
+
+  removeCompetenciasEspecificas(competencia: CompetenciasEspecificasDto){
+    this._carreraDeleteService.deleteCompetenciaEspecifica(competencia).subscribe(data =>
+      {
+        console.log(data);
+        this.alerta("Petición exitosa")
+        this.getCompetenciasEspecificasByCarreraId(this.id);
+        this.table.renderRows();
+      }, error =>
+      {
+        console.log(error)
+        this.alerta("Error en la petición")        
+      } 
+    )
+  }
 
   cambiarNombre(carreraNombre: CarreranombreDto){
     if(carreraNombre.nombre != ""){
@@ -174,7 +265,7 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
       this.alerta("Nombre vacio")
     }
   }
-  
+
   cambiarMision(carrera: CarreraMisionDto){
     if(carrera.mision != "" && carrera.vision != ""){
       this._carreraPutService.putCarreraMision(carrera).subscribe(data => 

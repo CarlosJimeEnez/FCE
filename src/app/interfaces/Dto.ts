@@ -45,3 +45,17 @@ export interface AtributoEgresoDto
     carreraId: number;
     descripcion: string;
 }
+
+export interface ObjetivosEducacionalesDto
+{
+    id?: number;
+    carreraId: number;
+    descripcion: string;
+}
+
+export interface CompetenciasEspecificasDto
+{
+    id?: number;
+    carreraId: number;
+    descripcion: string;
+}

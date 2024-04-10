@@ -58,11 +58,6 @@ export class CarrerasServicesService {
     return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`)
   }
 
-  // getDocumento(id: number): Observable<Documentos> {
-  //   const params = new HttpParams().set('id', id);
-  //   return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}id`, {params})
-  // }
-
   getDocumentosByCarreraId(carreraId: number): Observable<Documentos[]> {
     const params = new HttpParams().set('careerId', carreraId);
     return this.http.get<Documentos[]>(`
