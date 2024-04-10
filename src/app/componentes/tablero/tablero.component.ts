@@ -1,5 +1,5 @@
 import { fromEvent, Subscription } from 'rxjs';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
 import { Carrera } from 'src/app/interfaces/carrera';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { ScrollService } from 'src/app/services/scroll.service';
   styleUrls: ['./tablero.component.css']
 })
 
-export class TableroComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TableroComponent implements OnInit, AfterViewInit {
   carreras: Carrera[] = [];
   carrerasNoCargadas: boolean = true;
   // Servicios con guion bajo
@@ -25,24 +25,21 @@ export class TableroComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void{
     this.getCarreras();   
   }
-  
+
   ngAfterViewInit(): void {
-    this._scrollService.trigerScrollTo$.subscribe((fragment: string | null) => {
-      if(fragment) {
-        setTimeout(() => this.desplazarAFragmento(fragment), 100)
+    this._route.fragment.subscribe((fragment: string | null) => {
+      if (fragment) {
+        setTimeout(() => this.desplazarAFragmento(fragment), 100);
       }
-    })
-    this._scrollService.triggerBackToMainMenu$.subscribe(() => {
-      
-    })
+    });
   }
 
-  ngOnDestroy(): void {
-  }
-
-  private desplazarAFragmento(fragment: string) {
-    const element = document.querySelector(`#${fragment}`);
-    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  private desplazarAFragmento(fragment: string): void {
+    const elemento = document.querySelector(`#${fragment}`);
+    if (elemento) {
+      elemento.scrollIntoView({ behavior: 'smooth', block: "center" });
+      console.log(elemento)
+    }
   }
 
   // Funciones

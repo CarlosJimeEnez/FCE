@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../enviroments/enviroments';
 import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from '../interfaces/carrera';
@@ -16,10 +16,15 @@ export class CarrerasServicesService {
   myApiCarreraIdAtributosEgreso: string = "carreraId/atributosEgreso/"
   myApiCarreraObjetivosEducacionales: string = "carreraId/objetivosEducacionales/"
   myApiCompetenciaEspecificas: string = "carreraId/competenciasEspecificas/"
+  
   constructor(private http: HttpClient) {}
 
   getCarreras(): Observable<Carrera[]> {
-    return this.http.get<Carrera[]>(`${this.myAppUrl}${this.myApiUrl}`)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('tokenJWT')}`
+    });
+
+    return this.http.get<Carrera[]>(`${this.myAppUrl}${this.myApiUrl}`, {headers})
   }
 
   getCarrera(id: number): Observable<Carrera> {
@@ -49,14 +54,14 @@ export class CarrerasServicesService {
     return this.http.get<Documentos[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}`)
   }
 
-  getDocumentoPDF(id: number): Observable<Blob> {
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`, {responseType: "blob"})
+  getDocumentoPDF(id: number): Observable<Documentos> {
+    return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`)
   }
 
-  getDocumento(id: number): Observable<Documentos> {
-    const params = new HttpParams().set('id', id);
-    return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}id`, {params})
-  }
+  // getDocumento(id: number): Observable<Documentos> {
+  //   const params = new HttpParams().set('id', id);
+  //   return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}id`, {params})
+  // }
 
   getDocumentosByCarreraId(carreraId: number): Observable<Documentos[]> {
     const params = new HttpParams().set('careerId', carreraId);

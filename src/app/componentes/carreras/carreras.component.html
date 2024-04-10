@@ -117,7 +117,7 @@
   <div class="row justify-content-center mt-3">
     <div class="col-md-6 mb-3">
       <div class="card ingr-egr ">
-        <i class="fas fa-user fa-2x mt-3 "></i> 
+        <i class="fas fa-user fa-3x mt-3 "></i> 
         <div class="card-body">
           <h5 class="card-title">Perfil de ingreso</h5>
           <p class="card-text">El aspirante a ingresar al Plan de Estudios de la Licenciatura en Mectrónica, deberá tener los siguientes atributos</p>
@@ -128,7 +128,7 @@
     <div class="col-md-6 mb-3">
       
       <div class="card ingr-egr ">
-        <i class="fas fa-user-graduate fa-2x mt-3"></i> 
+        <i class="fas fa-user-graduate fa-3x mt-3"></i> 
         <div class="card-body">
           <h5 class="card-title">Perfil de egreso</h5>
           <p class="card-text">El egresado contará con los siguientes conocimientos, habilidades, actitudes y valores</p>
@@ -140,7 +140,7 @@
 
 
   <!-- Asignaturas  -->
-  <div class="container-fluid mt-5">
+  <div class="container-fluid mt-5" id="planDeEstudios">
     <div class="row">
       <div class="col">
         <h2>PLAN DE ESTUDIOS</h2>
@@ -155,7 +155,7 @@
       <!-- Catalogo de asignaturas -->
       <div class="col-md-3 mb-3" *ngFor="let documento of documentos">
         <div class="card ingr-egr" (click)="verDocumento(documento.documentoID!)">
-          <i class="fa-regular fa-file-pdf fa-2x mt-3"></i>
+          <i class="fa-regular fa-file-pdf fa-3x mt-3"></i>
           <div class="card-body">
             <h5 class="card-title">{{documento.nombreArchivo}}</h5>
             <p class="card-text"></p>

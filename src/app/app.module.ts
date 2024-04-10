@@ -13,6 +13,20 @@ import { CarouselMisionVisionComponent } from './componentes/carousel-mision-vis
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { MapasComponent } from './componentes/mapas/mapas.component';
+import { AdminAuthComponent } from './componentes/admin-auth/admin-auth.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { LoginComponent } from './componentes/admin/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RedesSocialesComponent } from './componentes/redes-sociales/redes-sociales.component';
+import { TableroAdminComponent } from './componentes/admin/tablero-admin/tablero-admin.component';
+
+import {MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { EditCarrerasComponent } from './componentes/admin/edit-carreras/edit-carreras.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -22,14 +36,29 @@ import { MapasComponent } from './componentes/mapas/mapas.component';
     CarouselMisionVisionComponent,
     CarrerasComponent,
     FooterComponent,
-    MapasComponent
+    MapasComponent,
+    AdminAuthComponent,
+    LoginComponent,
+    RedesSocialesComponent,
+    TableroAdminComponent,
+    EditCarrerasComponent,
+    
   ],
   imports: [
+    MatSnackBarModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule, 
+    OAuthModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,15 +5,22 @@
     background-size: cover; /* Asegura que la imagen cubra toda la página */
     background-position: center; /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
-    height: 100vh;
     justify-content: space-between;
     height: 100vh;
     width: 100%;
 }
 
-/* Luego se movera a el componente */
-.carreras-centered {
-    color: aliceblue;
+.image{    
+    background-image: url("src\assets\images\TableroAnuncios\Licenciaturas.jpg");
+    background-size: cover; /* Asegura que la imagen cubra toda la página */
+    background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh;
+    width: 100%;
+}
+
+.tablero_anuncios {
+    color: var(--blanco);
 }
 
 .btn-primary {
@@ -50,10 +57,9 @@
 /* Carreras Card */
 .image-cover {
     background-image: url('../../../assets/images/Fce_fondo.jpg');
-    width: 100%; 
-    height: 200px; 
     background-size: cover;
-    background-position: center;
+    background-position: center; 
+    height: 100vh;
 }
 
 .image-holder {

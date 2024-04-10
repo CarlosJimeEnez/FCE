@@ -44,7 +44,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   private desplazarAFragmento(fragment: string): void {
     const elemento = document.querySelector(`#${fragment}`);
     if (elemento) {
-      elemento.scrollIntoView({ behavior: 'smooth' });
+      elemento.scrollIntoView({ behavior: 'smooth', block: "center" });
     }
   }
 
@@ -86,7 +86,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   }
 
   verDocumento(id: number) {
-    this._router.navigate([`verMapa/${id}`]);
+    this._router.navigate([`verMapa/${id}`], { queryParams: { carreraId: this.id}});
   }
 
   getDocumentos(){

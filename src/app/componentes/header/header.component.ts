@@ -14,7 +14,7 @@ export class HeaderComponent {
   openNosotros = false;
   isMobile = window.innerWidth < 768; 
 
-  constructor(private _router: Router, private _scrollService: ScrollService) {}
+  constructor(private _router: Router) {}
 
   // Header visible
   lastScrollTop:number = 0;
@@ -26,10 +26,14 @@ export class HeaderComponent {
     this.isMobile = window.innerWidth < 768;
   }
   
-  public triggerScrollToFragment(fragment: string) {
-    this._scrollService.scrollToFragment(fragment);
-    this._router.navigate(['/'])
+  desplazarAInicio() {
+    this._router.navigate([`/`], {fragment: 'inicio'});
   }
 
+  desplazarALicenciaturas(): void {
+    this._router.navigate([`/`], {fragment: 'licenciaturas'});
+    console.log('licenciaturas')
+
+  }
   
 }

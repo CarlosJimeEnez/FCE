@@ -1,0 +1,16 @@
+
+.Titular-dashboard {
+    margin-top: 10vh;
+}
+
+.navs {
+    padding: 1em;
+    border-radius: 1%;
+}
+.navs:hover {
+    background-color: var(--neutro_activo);
+}
+
+.edit {
+    color: var(--editar);
+}

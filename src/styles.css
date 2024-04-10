@@ -9,13 +9,21 @@ html, body {
 
 :root {
     /* Tamaño de letra */
-    --p: 16px;
+    /* --p: 16px;
     --h6: 20px;
     --h5: 25px;
     --h4: 31.25px;
     --h3: 39.06px;
     --h2: 48.83px;
-    --h1: 61.04px;
+    --h1: 61.04px; */
+
+    --p: 14px;  
+    --h6: 15px;     
+    --h5: 17px; 
+    --h4: 18px;   
+    --h3: 20px; 
+    --h2: 24px;    
+    --h1: 30px; 
 
     /* Colores */
     --azul_calro: #00B5E2; 
@@ -28,6 +36,16 @@ html, body {
     --neutro: #f2f7f8;
     --neutro_activo: #dbe8eb;
     --boton_activo: #02A0C7; 
+    --error: rgba(248, 117, 117, 0.596);
+    --delete: rgb(177, 17, 17);
+    --slidevar_background: #f2f7f8;
+    --editar: #0f90b1;
+}
+
+
+.border-colors {
+    border-style: solid;
+    border-color: var(--error);
 }
 
 /* Titulos */
@@ -72,6 +90,10 @@ li {
 
 .translucido {
     color: var(--negro_translucido);
+}
+
+.editar-dashboard {
+    height: 100vh;   
 }
 
 /* Gotham Black */
@@ -160,4 +182,8 @@ li {
         display: none;  /* Chrome, Safari, Opera */
     }
 
+}
+
+.delete-button {
+    color: var(--delete);
 }

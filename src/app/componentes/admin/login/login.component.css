@@ -1,0 +1,13 @@
+.login-style{
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    background-color: var(--error);
+}
+
+.predeterminado {
+    background-color: var(--neutro);
+}
