@@ -1,0 +1,81 @@
+
+<div class="container-fluid editar-dashboard" id="inicio">
+    <div class="row Titular-dashboard">
+        <div class="col-4">
+            <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <i class="fa-solid fa-angles-right fa-xl"></i>
+            </button>
+        </div>
+        <div class="col-4 text-center">
+            <h1>Editar</h1>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+            </mat-form-field>
+            <button mat-raised-button class="demo-button ms-3">
+                Añadir
+            </button>
+        </div>
+        <div class="col-4">
+            
+        </div>
+            
+        <div class="row">
+            <div class="col">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    
+                    <!-- Nombre Column -->
+                    <ng-container matColumnDef="Nombre">
+                        <th mat-header-cell *matHeaderCellDef> Nombre</th>
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>
+
+                    <!-- Cargo Column -->
+                    <ng-container matColumnDef="Cargo">
+                        <th mat-header-cell *matHeaderCellDef> Cargo</th>
+                        <td mat-cell *matCellDef="let element"> {{element.cargo}} </td>
+                    </ng-container>
+
+                    <!-- Edificio Column -->
+                    <ng-container matColumnDef="Edificio">
+                        <th mat-header-cell *matHeaderCellDef> Edificio </th>
+                        <td mat-cell *matCellDef="let element"> {{element.edificio}} </td>
+                    </ng-container>
+
+                    <!-- Cargo Column -->
+                    <ng-container matColumnDef="Horario">
+                        <th mat-header-cell *matHeaderCellDef> Horario </th>
+                        <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+                    </ng-container>
+
+                    <!-- Correo Column -->
+                    <ng-container matColumnDef="Correo">
+                        <th mat-header-cell *matHeaderCellDef> Correo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+                    </ng-container>
+                    
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Acciones">
+                        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <button (click)="editarProfesor(element.id, element.carreraNombre)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                                <mat-icon class="edit">edit</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-off-canvas></app-off-canvas>

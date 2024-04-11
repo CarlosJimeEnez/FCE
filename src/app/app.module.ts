@@ -27,6 +27,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { EditCarrerasComponent } from './componentes/admin/edit-carreras/edit-carreras.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
+import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     RedesSocialesComponent,
     TableroAdminComponent,
     EditCarrerasComponent,
+    TableroProfesoresComponent,
+    OffCanvasComponent,
     
   ],
   imports: [

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../enviroments/enviroments';
-import { AtributosEducacionales, Carrera } from '../interfaces/carrera';
+import { AtributosEducacionales, Carrera, Profesor } from '../interfaces/carrera';
 import { Observable } from 'rxjs';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto } from '../interfaces/Dto';
+import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CoordinadorDto } from '../interfaces/Dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class PutCarrerasServiceService {
   mapaTutorialURL: string = "carrerasMapaTutorial"
   listadoMateriasURL: string = "listadoDeMaterias"
   listadoDeMateriasOptativas: string = "listadoDeMateriasOptativas"
+  coordinadorUrl: string = "profesor/"
 
   constructor(private _http: HttpClient) { }
 
@@ -51,5 +52,9 @@ export class PutCarrerasServiceService {
 
   putAtributosEducacionales(atributo: AtributosEducacionales): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoDeMateriasOptativas}`, atributo)
+  }
+
+  putProfesor(coordinador: CoordinadorDto): Observable<any> {
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.coordinadorUrl}${coordinador.carreraId}`, coordinador)
   }
 }

@@ -6,8 +6,10 @@ import { CarrerasServicesService } from 'src/app/services/carreras-services.serv
 import { PostCarrerasService } from 'src/app/services/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
+import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/delete-carreras.service';
+import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
+import { Profesor } from 'src/app/interfaces/profesores';
   
 @Component({
   selector: 'app-edit-carreras',
@@ -50,7 +52,9 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   mapaTutorial!: CarreraMapaTutorialDto
   listadoMaterias!: CarreraListadoMateriasDto
   listadoMateriasOptativas!: CarreraListadoOpURLDto
-
+  profesores: Profesor[] = []
+  profesorSeleccionado: number | null = null;
+  coordinador!: CoordinadorDto
 
   constructor(private _carreraService: CarrerasServicesService,
     private _route: ActivatedRoute,
@@ -59,6 +63,7 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
     private _carreraDeleteService: DeleteCarrerasService,
     private _router: Router,
     private _snackBar: MatSnackBar,
+    private _profesoresService: GetProfesoresService
     )
     {
       this.id = +this._route.snapshot.paramMap.get('id')!;
@@ -113,9 +118,18 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
     this.getAtributos(this.id);
     this.getObjetivosEducacionalesByCarreraId(this.id);
     this.getCompetenciasEspecificasByCarreraId(this.id);
+    this.getProfesores()
   }
 
   ngAfterViewInit(): void{}
+
+  getProfesores() {
+    this._profesoresService.getProfesores().subscribe(profesores =>
+      {
+        console.log(profesores);
+        this.profesores = profesores;
+      })
+  }
 
   getAtributos(carreraId: number):void{
     this._carreraService.getAtributosEgresoByCarreraId(carreraId).subscribe(data => {
@@ -375,6 +389,29 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
       this.alerta("Objetivos vacio")
     }
   }
+
+  cambiarProfesor(){
+    if(this.profesores != null){
+      const profesor: Profesor = this.profesores[this.profesorSeleccionado!-1]
+      
+      this.coordinador = {
+        carreraId: this.id,
+        contactoId: profesor.profesoresId
+      }
+      console.log(this.coordinador)
+
+      this._carreraPutService.putProfesor(this.coordinador).subscribe(data =>
+        {
+          console.log(profesor);
+          this.alerta("Petición exitosa")
+        }, err => 
+        {
+          console.log(err);
+          this.alerta("Error en la petición")
+        });
+    }
+  }
+  
 
   alerta(message: string){
     this._snackBar.open(message, "Cerrar", {

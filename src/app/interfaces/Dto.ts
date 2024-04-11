@@ -59,3 +59,10 @@ export interface CompetenciasEspecificasDto
     carreraId: number;
     descripcion: string;
 }
+
+export interface CoordinadorDto
+{
+    id?: number;
+    carreraId: number;
+    contactoId?: number ;
+}

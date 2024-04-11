@@ -7,6 +7,7 @@ import { AdminAuthComponent } from './componentes/admin-auth/admin-auth.componen
 import { LoginComponent } from './componentes/admin/login/login.component';
 import { TableroAdminComponent } from './componentes/admin/tablero-admin/tablero-admin.component';
 import { EditCarrerasComponent } from './componentes/admin/edit-carreras/edit-carreras.component';
+import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
 
 const routes: Routes = [
   {path: '', component: TableroComponent, pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'verMapa/:id', component: MapasComponent},
   {path: 'admin/login', component: LoginComponent},
   {path: 'admin/inicio', component: TableroAdminComponent},
-  {path: 'admin/editar-carrera/:id', component: EditCarrerasComponent}
+  {path: 'admin/editar-carrera/:id', component: EditCarrerasComponent},
+  {path: "admin/tablero-profesores", component: TableroProfesoresComponent}
 ];
 
 @NgModule({
