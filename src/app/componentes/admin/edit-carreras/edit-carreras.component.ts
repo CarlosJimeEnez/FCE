@@ -2,12 +2,12 @@ import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtributosEducacionales } from 'src/app/interfaces/carrera';
-import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
-import { PostCarrerasService } from 'src/app/services/post-carreras.service';
-import { PutCarrerasServiceService } from 'src/app/services/put-carreras-service.service';
+import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
+import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
+import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
-import { DeleteCarrerasService } from 'src/app/services/delete-carreras.service';
+import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor } from 'src/app/interfaces/profesores';
   
@@ -412,7 +412,6 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
     }
   }
   
-
   alerta(message: string){
     this._snackBar.open(message, "Cerrar", {
       duration: 2000,
@@ -421,4 +420,7 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
     });
   }
 
+  nuevaCarrera(){
+    this._router.navigate(['nuevaCarrera']);
+  }
 }

@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Carrera } from 'src/app/interfaces/carrera';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
+import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 
 @Component({
   selector: 'app-tablero-admin',
@@ -43,5 +43,9 @@ export class TableroAdminComponent implements OnInit {
 
   editarCarrera(id: number, carreraNombre: string): void{
     this._router.navigate([`admin/editar-carrera/${id}`], { queryParams: { carreraNombre:  carreraNombre} })
+  }
+
+  nuevaCarrera(){
+    this._router.navigate(['admin/post-carrera']);
   }
 }

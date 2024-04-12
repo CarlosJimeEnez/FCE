@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../enviroments/enviroments';
-import { AtributosEducacionales, Carrera, Profesor } from '../interfaces/carrera';
+import { environment } from '../../enviroments/enviroments';
+import { AtributosEducacionales, Carrera, Profesor } from '../../interfaces/carrera';
 import { Observable } from 'rxjs';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CoordinadorDto } from '../interfaces/Dto';
+import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CoordinadorDto } from '../../interfaces/Dto';
 
 @Injectable({
   providedIn: 'root'

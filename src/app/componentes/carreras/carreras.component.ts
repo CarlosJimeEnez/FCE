@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from 'src/app/interfaces/carrera';
-import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
+import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 

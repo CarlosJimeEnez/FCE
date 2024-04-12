@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../enviroments/enviroments';
+import { environment } from '../../enviroments/enviroments';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AtributoEgresoDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from '../interfaces/Dto';
+import { AtributoEgresoDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
 
 @Injectable({
   providedIn: 'root'

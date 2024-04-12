@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CarrerasServicesService } from 'src/app/services/carreras-services.service';
+import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { Documentos } from 'src/app/interfaces/carrera';
 import { environment } from 'src/app/enviroments/enviroments';
 import { ScrollService } from 'src/app/services/scroll.service';

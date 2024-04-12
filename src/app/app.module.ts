@@ -18,7 +18,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginComponent } from './componentes/admin/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedesSocialesComponent } from './componentes/redes-sociales/redes-sociales.component';
-import { TableroAdminComponent } from './componentes/admin/tablero-admin/tablero-admin.component';
+import { TableroAdminComponent } from './componentes/admin/tableros/tablero-admin/tablero-admin.component';
 
 import {MatTableModule} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
 import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.component';
+import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.co
     EditCarrerasComponent,
     TableroProfesoresComponent,
     OffCanvasComponent,
+    PostCarrerasComponent,
     
   ],
   imports: [

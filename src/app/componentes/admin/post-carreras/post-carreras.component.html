@@ -1,7 +1,7 @@
 <div class="container mt-5 ">
     <div class="row">
         <div class="col mt-5 text-center">
-            <h2>Editando:</h2> <h1>{{carreraNombre}}</h1> 
+            <h2>Nueva Licenciatura</h2>  
         </div>
     </div>
     <div class="row">
@@ -11,14 +11,10 @@
                 <h3>Nombre Carrera</h3>
             </label>
             <textarea class="form-control" 
-            [(ngModel)]="carreraNombreDto.nombre"
+                [(ngModel)]="nuevaCarrera!.carreraNombre"
                 id="exampleFormControlTextarea1" rows="1"></textarea>
         </div>
-        <div class="row">
-            <div class="col-2 ">
-                <button (click)="cambiarNombre(carreraNombreDto)" mat-raised-button>Guardar</button>
-            </div>
-        </div>
+        
     </div>
     <mat-divider class="mt-3"></mat-divider>
 
@@ -28,7 +24,7 @@
             <label for="exampleFormControlTextarea1" class="form-label">
                 <h3>Misión</h3>
             </label>
-            <textarea [(ngModel)]="carreraMisionVis.mision" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea [(ngModel)]="nuevaCarrera!.mision" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         
     </div>
@@ -38,11 +34,9 @@
             <label for="exampleFormControlTextarea1" class="form-label">
                 <h3>Visión</h3>
             </label>
-            <textarea [(ngModel)]="carreraMisionVis.vision" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea [(ngModel)]="nuevaCarrera!.vision" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <div class="col">
-            <button (click)="cambiarMision(carreraMisionVis)" mat-raised-button>Guardar</button>
-        </div>
+        
     </div>
     <mat-divider class="mt-3"></mat-divider>
 
@@ -53,17 +47,27 @@
                 <h3>Objetivos</h3>
             </label>
             <textarea 
-            [(ngModel)]="carreraObjetivo.objetivos"
-            class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="col-12">
-            <button (click)="cambiarObjetivo(carreraObjetivo)" mat-raised-button>Guardar</button>
+            
+            class="form-control" [(ngModel)]="nuevaCarrera!.objetivos" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
     </div>
 
     <mat-divider class="mt-3"></mat-divider>
-    
-    <!-- Aatributos -->
+
+    <!-- Descripcion -->
+    <div class="row mt-3">
+        <div class="col-12 mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h3>Descripcion</h3>
+            </label>
+            <textarea 
+            class="form-control" [(ngModel)]="nuevaCarrera!.descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3"></mat-divider>
+
+    <!-- Atributos -->
     <div class="col text-center mt-3">
         <label for="exampleFormControlTextarea1" class="form-label">
             <h3> Atributos </h3>
@@ -76,42 +80,41 @@
             <label for="exampleFormControlTextarea1" class="form-label">
                 <h5><strong>Atributos de Egreso</strong></h5>
             </label>
+              
             <div class="demo-button-container ">
-                <button mat-raised-button (click)="addData()" class="demo-button me-3">
+                <button (click)="addAtributos()" mat-raised-button class="demo-button me-3">
                   Añadir
                 </button>
             </div>
-              
-              <div class="input-group mt-3">
-                <span class="input-group-text">Atributo: </span>
-                <textarea class="form-control" [(ngModel)]="atributoNuevo.descripcion" aria-label="With textarea"></textarea>
-              </div>
+            
+            <div class="input-group mt-3">
+            <span class="input-group-text">Atributo: </span>
+            <textarea [(ngModel)]="atributoNuevo.descripcion" class="form-control" aria-label="With textarea"></textarea>
+            </div>
 
-              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table mt-3">              
- 
-                <!-- Name Column -->
-                <ng-container matColumnDef="atributos">
-                  <th mat-header-cell *matHeaderCellDef>Descripción</th>
-                  <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
-                </ng-container>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table mt-3">              
 
-                <!-- Acciones Column -->
-                <ng-container matColumnDef="Acciones">
-                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                            <mat-icon class="edit">edit</mat-icon>
-                        </button>
-                        <button (click)="removeData(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                            <mat-icon  class="delete-button">remove</mat-icon>
-                        </button>
-                    </td>
-                  </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              
+            <ng-container matColumnDef="atributos">
+                <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                        <mat-icon class="edit">edit</mat-icon>
+                    </button>
+                    <button (click)="removeData(i)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                        <mat-icon class="delete-button">remove</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            
         </div>
     </div>
 
@@ -122,40 +125,38 @@
                 <h5><strong>Objetivos educacionales</strong></h5>
             </label>
             <div class="demo-button-container ">
-                <button mat-raised-button (click)="addObjetivoEduc()" class="demo-button me-3">
-                  Añadir
-                </button>
-              </div>
+                <button (click)="addObjetivos()" mat-raised-button class="demo-button me-3">
+                    Añadir
+                </button>    
+            </div>
               
-              <div class="input-group mt-3">
+            <div class="input-group mt-3">
                 <span class="input-group-text">Atributo: </span>
-                <textarea class="form-control" [(ngModel)]="objetivoEducacionalNuevo.descripcion" aria-label="With textarea"></textarea>
-              </div>
+                <textarea [(ngModel)]="objetivoEducacionalNuevo.descripcion" class="form-control"  aria-label="With textarea"></textarea>
+            </div>
 
-              <table mat-table [dataSource]="dataSourceObejtivosEduc" class="mat-elevation-z8 demo-table mt-3">              
- 
-                <!-- Name Column -->
+            <table mat-table [dataSource]="dataSourceObejtivosEduc" class="mat-elevation-z8 demo-table mt-3">              
+
                 <ng-container matColumnDef="atributos">
-                  <th mat-header-cell *matHeaderCellDef>Descripcion</th>
-                  <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
+                    <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                    <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
                 </ng-container>
 
-                <!-- Acciones Column -->
                 <ng-container matColumnDef="Acciones">
                     <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                    <td mat-cell *matCellDef="let element">
+                    <td mat-cell *matCellDef="let element, let i = index">
                         <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                             <mat-icon class="edit">edit</mat-icon>
                         </button>
-                        <button (click)="removeObjetivoEducacional(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                        <button (click)="removeObjetivos(i)"  mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                             <mat-icon  class="delete-button">remove</mat-icon>
                         </button>
                     </td>
-                  </ng-container>
-              
+                </ng-container>
+                
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table> 
+            </table> 
         </div>
     </div>
 
@@ -166,32 +167,30 @@
                 <h5><strong>Competencias específicas</strong></h5>
             </label>
             <div class="demo-button-container ">
-                <button mat-raised-button (click)="addCompetencias()" class="demo-button me-3">
-                  Añadir
-                </button>
-              </div>
+                <button (click)="addCompetencia()" mat-raised-button class="demo-button me-3">
+                    Añadir
+                </button>    
+            </div>
               
               <div class="input-group mt-3">
                 <span class="input-group-text">Atributo: </span>
-                <textarea class="form-control" [(ngModel)]="competenciasNuevo.descripcion" aria-label="With textarea"></textarea>
+                <textarea [(ngModel)]="competenciasNuevo.descripcion" class="form-control" aria-label="With textarea"></textarea>
               </div>
 
               <table mat-table [dataSource]="dataSourceCompetencias" class="mat-elevation-z8 demo-table mt-3">              
  
-                <!-- Name Column -->
                 <ng-container matColumnDef="atributos">
                   <th mat-header-cell *matHeaderCellDef>Descripcion</th>
                   <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
                 </ng-container>
 
-                <!-- Acciones Column -->
                 <ng-container matColumnDef="Acciones">
                     <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                    <td mat-cell *matCellDef="let element">
+                    <td mat-cell *matCellDef="let element, let i = index">
                         <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                             <mat-icon class="edit">edit</mat-icon>
                         </button>
-                        <button (click)="removeCompetenciasEspecificas(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                        <button (click)="removeCompetenciasEspecificas(i)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                             <mat-icon  class="delete-button">remove</mat-icon>
                         </button>
                     </td>
@@ -217,60 +216,50 @@
                 <label for="basic-url" class="form-label"><h5>Catálogo de Asignaturas</h5></label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)]="catalogosAsignaturasURL.catalogoAsignaturaUrl"
+                    <input 
                      type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
         </div>
-        <div class="col-12 mb-3 mt-3">
-            <button (click)="cambiarCatalogoAsigURL(catalogosAsignaturasURL)" mat-raised-button>Guardar</button>
-        </div>
-
+        
         <!-- Mapa tutorial -->
         <div class="row">
             <div class="col ">
                 <label for="basic-url" class="form-label mt-4"><h5>Mapa tutorial</h5></label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)]="mapaTutorial.mapaTutorialUrl" 
+                    <input  
                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
         </div>
-        <div class="col-12 mb-3 mt-3">
-            <button (click)="cambiarMapaTutorialURL(mapaTutorial)" mat-raised-button>Guardar</button>
-        </div>
+        
         <!-- List materias -->
         <div class="row">
             <div class="col ">
                 <label for="basic-url" class="form-label mt-4"><h5>Listado de materias</h5></label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)]="listadoMaterias.listadoMateriasUrl" 
+                    <input  
                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
         </div>
         
-        <div class="col-12 mb-3 mt-3">
-            <button (click)="cambiarListadoMateriasURL(listadoMaterias)" mat-raised-button>Guardar</button>
-        </div>
+        
         <!-- List de MOptativas -->
         <div class="row mb-3">
             <div class="col ">
                 <label for="basic-url" class="form-label mt-4"><h5>Listado de materias optativas</h5> </label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)] = "listadoMateriasOptativas.listadoMateriasOpURL" 
+                    <input 
                      type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-12 mb-3">
-        <button (click)="cambiarListadoMateriasOptativasURL(listadoMateriasOptativas)" mat-raised-button>Guardar</button>
-    </div>
 
     <mat-divider class="mt-3"></mat-divider>
     
@@ -286,22 +275,16 @@
             <h5>Profesores</h5>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            
-
-            <form (ngSubmit)="cambiarProfesor()">
-                <select class="form-select" id="inputGroupSelect01" [(ngModel)]="profesorSeleccionado" name="profesor">
-                  <!-- <option value="" disabled >Profesores ...</option> -->
-                  <option *ngFor="let profesor of profesores" [value]="profesor.profesoresId">{{ profesor.nombre }}</option>
-                </select>
-                <button class="mt-3 mb-3" type="submit" mat-raised-button >Guardar</button>
-              </form>
-        </div>
-    </div>
+    
 <!-- 
     <div class="col-12 mt-3 mb-3">
         <button (click)="cambiarProfesor()" mat-raised-button>Guardar</button>
     </div> -->
 
+</div>
+
+<div class="row">
+    <div class="col text-center">
+        <button (click)="postLicenciatura()" mat-raised-button>Guardar</button>
+    </div>
 </div>
