@@ -3,9 +3,9 @@ export interface Carrera {
     carreraNombre: string;
     mision: string;
     vision: string;
-    objetivos: string;
     descripcion: string;
     coordinadorID: number;
+    objetivos: string;
 }
 
 export interface Profesor {

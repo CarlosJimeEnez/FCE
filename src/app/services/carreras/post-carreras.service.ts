@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/enviroments';
-import { AtributoEgresoDto, CarreraCatAsignaturasDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
+import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
 import { Carrera, CompetenciasEspecificas } from '../../interfaces/carrera';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class PostCarrerasService {
   myMapaTutorialUrl: string = "mapaTutorial"
   myListadoMateriasURL: string = "listadoMaterias"
   myListadoMateriasOptativasURL: string = "listadoMateriasOp"
-
+  myCoordinadorUrl: string = "coordinador"
   nuevaLicenciaturaUrl: string = "licenciatura"
 
   constructor(private _http: HttpClient) { }
@@ -31,11 +31,11 @@ export class PostCarrerasService {
   }
 
   postAtributosEgresos(atributo: AtributoEgresoDto[]): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresoUrl}`, atributo)
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresosUrl}`, atributo)
   }
 
   postObjetivoEducacional(objetivo: ObjetivosEducacionalesDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalUrl}`, objetivo)
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalesUrl}`, objetivo)
   }
 
   postObjetivosEducacionales(objetivo: ObjetivosEducacionalesDto[]): Observable<any>{
@@ -50,22 +50,25 @@ export class PostCarrerasService {
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCompetenciaEspecificassUrl}`, competencia)
   }
 
-  // Plan de estudios DOC: 
+  // Plan de estudios Documentos: 
   postCatalogoAsignatura(catalogosAsignatura: CarreraCatAsignaturasDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCatalogosAsignaturasURL}`, catalogosAsignatura)
   }
-  postMapaTutorial(catalogosAsignatura: CarreraCatAsignaturasDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCatalogosAsignaturasURL}`, catalogosAsignatura)
+  
+  postMapaTutorial(mapaTutorial: CarreraMapaTutorialDto): Observable<any>{
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myMapaTutorialUrl}`, mapaTutorial)
   }
-  postListadoMaterias(catalogosAsignatura: CarreraCatAsignaturasDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCatalogosAsignaturasURL}`, catalogosAsignatura)
+  
+  postListadoMaterias(listado: CarreraListadoMateriasDto): Observable<any>{
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myListadoMateriasURL}`, listado)
   }
-  postListadoMateriasOp(catalogosAsignatura: CarreraCatAsignaturasDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCatalogosAsignaturasURL}`, catalogosAsignatura)
+  
+  postListadoMateriasOp(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any>{
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myListadoMateriasOptativasURL}`, listadoMateriasOp)
   }
 
   // Post TODO 
-  postLicenciatura(licenciatura: Carrera): Observable<any>{
+  postLicenciatura(licenciatura: CarreraDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.nuevaLicenciaturaUrl}`, licenciatura)
   }
 }

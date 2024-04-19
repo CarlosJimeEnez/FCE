@@ -66,3 +66,14 @@ export interface CoordinadorDto
     carreraId: number;
     contactoId?: number ;
 }
+
+export interface CarreraDto 
+{   
+    id?: number;
+    carreraNombre: string;
+    mision: string;
+    vision: string;
+    objetivos: string;
+    coordinadorID: number | null;
+    descripcion: string;
+}

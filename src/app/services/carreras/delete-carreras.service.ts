@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroments';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AtributoEgresoDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
+import { AtributoEgresoDto, CarreraDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DeleteCarrerasService {
   myAtributosEgresoUrl: string = "atributoEgreso/"
   myObjetivoEducacionalUrl: string = "objetivoEducacional/"
   myCompetenciaEspecificaUrl: string = "competenciaEspecifica/"
-
+  myCarreraUrl: string = "carrera/"
   constructor(private _http: HttpClient) { }
   
   // http://localhost:5000/api/CarreraControllerDelete/atributoEgreso/27
@@ -30,4 +30,7 @@ export class DeleteCarrerasService {
     return this._http.delete<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCompetenciaEspecificaUrl}${competencia.id}`)
   }
   
+  deleteCarrera(carrera: CarreraDto): Observable<any>{
+    return this._http.delete<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCarreraUrl}${carrera.id}`)
+  }
 }

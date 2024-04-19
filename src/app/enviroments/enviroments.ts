@@ -1,6 +1,6 @@
 export const environment = {
     production: false, 
-    endpoint: "http://172.31.73.2:5000/",
+    endpoint: "http://192.168.0.121:5000/",
     
     adminPassword: "adminFce839", 
     // oauth2. google
