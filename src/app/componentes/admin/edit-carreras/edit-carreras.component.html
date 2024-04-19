@@ -288,15 +288,13 @@
     </div>
     <div class="row">
         <div class="col">
-            
-
             <form (ngSubmit)="cambiarProfesor()">
                 <select class="form-select" id="inputGroupSelect01" [(ngModel)]="profesorSeleccionado" name="profesor">
                   <!-- <option value="" disabled >Profesores ...</option> -->
                   <option *ngFor="let profesor of profesores" [value]="profesor.profesoresId">{{ profesor.nombre }}</option>
                 </select>
                 <button class="mt-3 mb-3" type="submit" mat-raised-button >Guardar</button>
-              </form>
+            </form>
         </div>
     </div>
 <!-- 

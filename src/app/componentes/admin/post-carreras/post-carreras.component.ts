@@ -1,12 +1,12 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AtributosEducacionales, Carrera } from 'src/app/interfaces/carrera';
+import { Carrera } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
+import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor } from 'src/app/interfaces/profesores';
@@ -20,17 +20,19 @@ export class PostCarrerasComponent implements OnInit {
   id!: number;
   nuevaCarrera!: Carrera;
 
-  atributosEducacionales: AtributosEducacionales[] = [];
+  atributosEducacionales: AtributoEgresoDto[] = [];
   objetivosEducacionales: ObjetivosEducacionalesDto[] = [];
   competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
-
   dataSource = new MatTableDataSource(this.atributosEducacionales)
   dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales)
   dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
   displayedColumns: string[] = ["atributos", "Acciones"]; 
   
+  profesores: Profesor[] = []
+  profesorSeleccionado: number | null = null;
+
   //Dto
-  atributoNuevo: AtributosEducacionales = {
+  atributoNuevo: AtributoEgresoDto = {
     descripcion: "",
     carreraId: this.id
   }
@@ -42,6 +44,29 @@ export class PostCarrerasComponent implements OnInit {
     descripcion: "",
     carreraId: this.id
   }
+  // Documentos
+  catalogosAsignaturasURL: CarreraCatAsignaturasDto = {
+    carreraId: this.id,
+    catalogoAsignaturaUrl: "",
+  }
+  mapaTutorial: CarreraMapaTutorialDto = {
+    carreraId: this.id,
+    mapaTutorialUrl: "",
+  }
+  listadoMaterias: CarreraListadoMateriasDto = {
+    carreraId: this.id,
+    listadoMateriasUrl: "",
+  }
+  listadoMateriasOptativas: CarreraListadoOpURLDto = {
+    carreraId: this.id,
+    listadoMateriasOpURL: "",
+  }
+
+  coordinador: CoordinadorDto = {
+    carreraId: this.id,
+    contactoId: 0
+  }
+
 
   constructor(private _carreraService: CarrerasServicesService,
     private _route: ActivatedRoute,
@@ -64,19 +89,74 @@ export class PostCarrerasComponent implements OnInit {
       }
     }
   
-    @ViewChild(MatTable) table!: MatTable<AtributosEducacionales>;
+    @ViewChild(MatTable) table!: MatTable<AtributoEgresoDto>;
     ngOnInit(): void {
       this.objetivoEducacionalNuevo.carreraId = this.id;
       this.atributoNuevo.carreraId = this.id;
       this.competenciasNuevo.carreraId = this.id;
+      this.getProfesores();
     }
 
     postLicenciatura(){
       console.log(this.nuevaCarrera)
+      if(
+        this.nuevaCarrera.carreraNombre != "" &&
+        this.nuevaCarrera.mision != "" &&
+        this.nuevaCarrera.vision != "" &&
+        this.nuevaCarrera.objetivos != "" &&
+        this.nuevaCarrera.descripcion != "" &&
+        this.nuevaCarrera.coordinadorID != 0)
+        {
+          this._carreraPostService.postLicenciatura(this.nuevaCarrera).subscribe(data =>
+          {
+            console.log(data)
+            if(this.atributosEducacionales != null &&
+              this.competenciasEspecíficas != null &&
+              this.competenciasEspecíficas != null 
+            )
+              {
+                this._carreraPostService.postAtributosEgresos(this.atributosEducacionales).subscribe(data => 
+                {
+                  console.log(data)
+                }, err => 
+                {
+                  console.log(err)
+                  console.log("error rn atributos educacionales")
+                });
+
+                this._carreraPostService.postObjetivosEducacionales(this.objetivosEducacionales).subscribe(data => 
+                  {
+                    console.log(data)
+                  }, err => 
+                  {
+                    console.log(err)
+                  })
+
+              this._carreraPostService.postCompetenciasEspecificass(this.competenciasEspecíficas).subscribe(data =>
+                {
+                  console.log(data)
+                }, err => 
+                  {
+                    console.log(err)
+                    console.log("Competencias especificas")
+                  })
+
+              
+              } 
+          }, err => console.log(err))
+        }
+    }
+
+    getProfesores(){
+      this._profesoresService.getProfesores().subscribe(profesores =>
+        {
+          console.log(profesores);
+          this.profesores = profesores;
+        })
     }
 
     addAtributos(){
-      const atributoNuevo: AtributosEducacionales = {
+      const atributoNuevo: AtributoEgresoDto = {
         carreraId: this.id,
         descripcion: this.atributoNuevo.descripcion
       } 
@@ -122,4 +202,15 @@ export class PostCarrerasComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.atributosEducacionales)
       this.table.renderRows();
     }
+
+    cambiarProfesor(){
+      if(this.profesores != null){
+        const profesor: Profesor = this.profesores[this.profesorSeleccionado!-1]
+        this.coordinador = {
+          carreraId: this.id,
+          contactoId: profesor.profesoresId
+        }
+        console.log(this.coordinador)
+    }
+  }
 }

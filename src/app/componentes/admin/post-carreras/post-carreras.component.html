@@ -203,6 +203,7 @@
     </div>
 
     <mat-divider class="mt-3"></mat-divider>
+
     <!-- Plan de estudios -->
     <div class="row mt-3">
         <div class="col text-center">
@@ -210,14 +211,16 @@
                 <h3>Plan de estudios</h3>
             </label>
         </div>
+
         <!-- Catalogo de asig -->
         <div class="row">
             <div class="col ">
                 <label for="basic-url" class="form-label"><h5>Catálogo de Asignaturas</h5></label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input 
-                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                    <input
+                    [(ngModel)]="catalogosAsignaturasURL.catalogoAsignaturaUrl" 
+                    type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
         </div>
@@ -229,6 +232,7 @@
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
                     <input  
+                    [(ngModel)]="mapaTutorial.mapaTutorialUrl"
                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
@@ -241,6 +245,7 @@
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
                     <input  
+                    [(ngModel)]="listadoMaterias.listadoMateriasUrl"
                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
@@ -254,7 +259,8 @@
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">https://</span>
                     <input 
-                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                    [(ngModel)]="listadoMateriasOptativas.listadoMateriasOpURL"
+                    type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
                 </div>
             </div>
         </div>
@@ -273,18 +279,18 @@
     <div class="row mb-2">
         <div class="col">
             <h5>Profesores</h5>
+            <form (ngSubmit)="cambiarProfesor()">
+                <select class="form-select" id="inputGroupSelect01" [(ngModel)]="profesorSeleccionado" name="profesor">
+                  <!-- <option value="" disabled >Profesores ...</option> -->
+                  <option *ngFor="let profesor of profesores" [value]="profesor.profesoresId">{{ profesor.nombre }}</option>
+                </select>
+            </form>
         </div>
     </div>
-    
-<!-- 
-    <div class="col-12 mt-3 mb-3">
-        <button (click)="cambiarProfesor()" mat-raised-button>Guardar</button>
-    </div> -->
-
 </div>
 
 <div class="row">
-    <div class="col text-center">
+    <div class="col text-center mt-3 mb-3">
         <button (click)="postLicenciatura()" mat-raised-button>Guardar</button>
     </div>
 </div>
