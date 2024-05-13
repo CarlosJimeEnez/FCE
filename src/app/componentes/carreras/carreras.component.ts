@@ -2,6 +2,8 @@ import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef } from '
 import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 
 
 @Component({
@@ -12,17 +14,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CarrerasComponent implements OnInit, AfterViewInit {
   id: number;
   carrera!: Carrera;
-  profesor!: Profesor;
+  profesores: Profesor[] = [];
   documentos: Documentos[] = [];
   documentosNoCargados: boolean = true;
   atributosEducacionales!: AtributosEducacionales[];
   objetivosEducacionales!: ObjetivosEducacionales[]; 
   competenciasEspecificas!: CompetenciasEspecificas[];
   
-  constructor(private _carreraService: CarrerasServicesService,
-    private _route: ActivatedRoute,  private _router: Router,){
+  dataSource = new MatTableDataSource(this.profesores)
+  @ViewChild(MatTable) table!: MatTable<Profesor>;
+
+  constructor(
+    private _carreraService: CarrerasServicesService,
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _profesoresService: GetProfesoresService){
       this.id = +this._route.snapshot.paramMap.get('id')!;
   }
+
+  displayedColumns: string[] = ["Nombre"]; 
 
   ngOnInit() {
     console.log("Id:" + this.id);    
@@ -31,8 +41,9 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
     this.getAtributosdeEgresoByCarreraId(this.id);
     this.getObjetivosEducacionalesByCarreraId(this.id);
     this.getCompetenciasEspecificasByCarreraId(this.id); 
+    this.getProfesores();
   }
-  
+
   ngAfterViewInit(): void {
     this._route.fragment.subscribe((fragment: string | null) => {
       if (fragment) {
@@ -52,18 +63,10 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
     this._carreraService.getCarrera(this.id).subscribe(data => {
       this.carrera = data;
       const carreraId = this.carrera.coordinadorID
-      this._carreraService.getProfesor(carreraId).subscribe(data => {
-      this.profesor = data    
-      console.log(this.profesor);
-    });
+    //   this._carreraService.getProfesor(carreraId).subscribe(data => {    
+    //   console.log(this.profesores);
+    // });
     }, error => console.log(error));
-  }
-
-  getCoordinador(id: number) {
-    this._carreraService.getProfesor(id).subscribe(data => {
-      this.profesor = data    
-      console.log("Coordinador" + this.profesor);
-    });
   }
 
   getAtributosdeEgresoByCarreraId(carreraId: number){
@@ -95,5 +98,23 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
       this.documentos = res
       this.documentosNoCargados = false;
     }, err => console.log(err));
+  }
+
+  getProfesores():void {
+    this._profesoresService.getProfesorPorCarreraId(this.id).subscribe({
+      next: (data: any) => {
+        console.log(data)
+        this.profesores = data
+        this.dataSource = new MatTableDataSource(this.profesores)
+
+      },
+      error: (err: any) => {
+        console.log(err)
+        
+      },
+      complete: ()=> {
+        console.log("Profesores cargados complete");
+      }
+    });
   }
 }

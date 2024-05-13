@@ -27,8 +27,11 @@ html, body {
 
     /* Colores */
     --azul_calro: #00B5E2; 
+    --azul-claro-t1: #40c7e9; 
+    --azul-claro-t2: #03b1ddda; 
     --azul_obscuro: #003B5C;
     --azul_obscuro_t1: #012438;
+    --azul_obscuro_t2: #0124389d;
     --negro: #000000;
     --negro_translucido: #0505055e;
     --blanco: #FFFFFF;

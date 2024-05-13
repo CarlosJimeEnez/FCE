@@ -25,38 +25,88 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
+</div>
 
 <app-carousel-mision-vision></app-carousel-mision-vision>
 
-<div class="row justify-content-center mb-3" >
-    <div class="col text-center">
-        <h2>
-            Licenciaturas
-        </h2>
-        <h5 class="translucido">
-            Contamos con las carreras acordes a tus aptitudes
-        </h5>
-    </div>
-</div> 
-
-<div class="container-fluid" id="licenciaturas">
-    <div class="row ">
-        <div class="col-12 col-sm-6 col-md-3 mt-3 " *ngFor="let carrera of carreras">
-            <div class="card" (click)="verCarrera(carrera.id!)">
-                <img src="../../../assets/images/Fce_fondo.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{carrera.carreraNombre}}</h5>
-                    <p class="card-text">{{carrera.descripcion}}</p>
+<div class="container-fluid " id="licenciaturas">
+    <!-- Licenciaturas -->
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-md-3 mt-3" >
+            <div class="card">
+                <div class="card-custom">
+                    <img src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
+                    <div class="col dropup">
+                        <ul class="mt-4">
+                            <li *ngFor="let carrera of carreras">
+                                <div class="row">
+                                    <h6 (click)="verCarrera(carrera.id!)">{{carrera.carreraNombre}}</h6> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                <div class="card-body">     
+                    <h2 class="card-title">Licenciaturas</h2>
+                        <p class="card-text">
+                        Contamos con las carreras acordes a tus aptitudes
+                    </p>              
+                </div>
+            </div>            
         </div>
-    </div> 
-    
+
+        <!-- Estudiantes -->    
+        <div class="col-12 col-md-3 mt-3 " >
+            <div class="card ">
+                <div class="card-custom">
+                    <img src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
+                    <div class="col dropup">
+                        <ul>
+                            <li *ngFor="let carrera of carreras">
+                                <div class="row">
+                                    <h6 (click)="verCarrera(carrera.id!)">{{carrera.carreraNombre}}</h6> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">     
+                    <h2 class="card-title">Estudiantes</h2>
+                        <p class="card-text">
+                        Contamos con los siguintes servicios
+                    </p>              
+                </div>
+            </div>            
+        </div>
+
+        <!-- otra Card -->    
+        <div class="col-12 col-md-3 mt-3 " >
+            <div class="card ">
+                <div class="card-custom">
+                    <img src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
+                    <div class="col dropup">
+                        <ul>
+                            <li *ngFor="let carrera of carreras">
+                                <div class="row">
+                                    <h6 (click)="verCarrera(carrera.id!)">{{carrera.carreraNombre}}</h6> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">     
+                    <h2 class="card-title">Estudiantes</h2>
+                        <p class="card-text">
+                        Contamos con los siguintes servicios
+                    </p>              
+                </div>
+            </div>            
+        </div>
+    </div>    
 </div>
 
 
-
+<!-- Google Maps -->
 <div class="row google-map justify-content-center mt-5 pb-2 pt-2">
     <div class="col text-center">
         <h2>

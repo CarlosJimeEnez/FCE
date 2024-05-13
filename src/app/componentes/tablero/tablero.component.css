@@ -66,15 +66,68 @@
     padding: 0%;
 }
 
-.card {
-    padding: 0%;
+.card-custom{
+    position: relative;
 }
 
+.card {
+    padding: 0%;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    transition: filter 0.5s ease-in-out;
+}
+
+
+.card-body {
+    color: var(--blanco);
+    background-color: var(--azul_calro);
+}
 .card:hover {
     background-color: var(--neutro_activo);
     transform: scale(1.01);
 }
 
+.dropup{
+    position: absolute;
+    top: 100%;
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    color: var(--blanco);
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    background-color:  var(--azul_obscuro_t2);
+}
+
+.card:hover .dropup{
+    visibility: visible;
+    top: 0;
+    opacity: 1;
+    
+}
+
+ul {
+    list-style: disc outside none;
+    cursor: pointer;
+    margin: 2 0 0 0;
+}
+
+ul li:hover {
+    color: var(--azul-claro-t1); /* Cambia esto por el color que prefieras */
+}
+
+.card:hover .card-image{
+    filter: blur(4px);
+    filter: opacity(70%);
+}
 
 @media (max-width: 600px) {
     .nombre{
