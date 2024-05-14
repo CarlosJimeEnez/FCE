@@ -35,7 +35,6 @@ Antes de comenzar, asegúrate de tener los siguientes requisitos instalados:
 7. Subir la rama al repositorio remoto: 
     ```bash 
     git push origin nombre-de-la-rama
-
 ## Uso 
     Para iniciar un servidor en desarrollo, ejecuta: 
     ```bash    
