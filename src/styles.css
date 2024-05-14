@@ -17,27 +17,38 @@ html, body {
     --h2: 48.83px;
     --h1: 61.04px; */
 
+    --small: 11.67px; 
     --p: 14px;  
-    --h6: 15px;     
-    --h5: 17px; 
-    --h4: 18px;   
-    --h3: 20px; 
-    --h2: 24px;    
-    --h1: 30px; 
+    --h5:20.16px;   
+    /* --h4: 18px; */
+    --h3: 29.03px; 
+    --h2: 34.84px;    
+    --h1: 41.8px; 
 
     /* Colores */
-    --azul_calro: #00B5E2; 
-    --azul-claro-t1: #40c7e9; 
-    --azul-claro-t2: #03b1ddda; 
+    /* Primarios: */
     --azul_obscuro: #003B5C;
     --azul_obscuro_t1: #012438;
     --azul_obscuro_t2: #0124389d;
+
+    /* Secundarios */
+    --azul_calro: #00B5E2; 
+    --azul-claro-t1: #00b5e2d2; 
+    --azul-claro-t2: #03b1ddda;
+
+    /* Shades */
     --negro: #000000;
     --negro_translucido: #0505055e;
     --blanco: #FFFFFF;
     --blanco_t1: hsl(0, 17%, 98%);
-    --neutro: #f2f7f8;
-    --neutro_activo: #dbe8eb;
+
+    /* Neutro */
+    --gris: #7B8F96;
+    --gris-t1: #C1CACD;
+    --gris-t2: #bdc7cb2f;
+    --gris-t3: #d3dadc3a;
+
+    /* ?? */
     --boton_activo: #02A0C7; 
     --error: rgba(248, 117, 117, 0.596);
     --delete: rgb(177, 17, 17);
@@ -68,7 +79,7 @@ h2 {
 /* Encabezado */
 h3 {
     font-size: var(--h3);
-    font-family: "Source Sans Pro Blacks", sans-serif;
+    font-family: "Gotham Narrow", sans-serif;
 }
 
 h4 {
@@ -168,13 +179,13 @@ li {
 /* Media query para teléfonos */
 @media (max-width: 600px) {
     :root {
+        --small: 11.67px; 
         --p: 14px;  
-        --h6: 15px;     
-        --h5: 17px; 
-        --h4: 18px;   
-        --h3: 20px; 
-        --h2: 24px;    
-        --h1: 30px;       
+        --h5:20.16px;   
+        /* --h4: 18px; */
+        --h3: 29.03px; 
+        --h2: 34.84px;    
+        --h1: 41.8px;     
     }
 
     body {
