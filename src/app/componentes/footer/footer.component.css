@@ -1,6 +1,23 @@
-.footer1 {
+.footer-color {
     background-color: var(--azul_obscuro);
-    color: var(--neutro);
+    color: var(--blanco);
+}
+
+.card-footer{
+    text-align: start;
+    display: flex;
+    justify-content: center;
+}
+.card-footer .buap-logo{
+    width: 141px;
+    height: 41.29px;
+    object-fit: contain;
+}
+
+.card-footer .fce-image {
+    width: 54px;
+    height: 71px;
+    object-fit: contain;
 }
 
 .footer2 {
@@ -9,6 +26,18 @@
     padding-top: 1em;
 }
 
+.social-icons {
+    background-color: var(--negro);
+    text-align: center;
+}
+
+.social-icon img{
+    width: 30px;
+    height: 30px;
+    object-fit: contain; 
+}
+
 ul, ol {
     list-style-type: none;
+    padding: 0%;
   }
