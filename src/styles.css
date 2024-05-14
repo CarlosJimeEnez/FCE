@@ -36,11 +36,12 @@ html, body {
     --azul-claro-t1: #00b5e2d2; 
     --azul-claro-t2: #03b1ddda;
 
-    /* Shades */
+    /* Sombras */
     --negro: #000000;
     --negro_translucido: #0505055e;
     --blanco: #FFFFFF;
     --blanco_t1: hsl(0, 17%, 98%);
+    --Sombra: #100E0E;
 
     /* Neutro */
     --gris: #7B8F96;
