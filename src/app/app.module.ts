@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { TableroComponent } from './componentes/tablero/tablero.component';
 import { HeaderComponent } from './componentes/header/header.component';
-import { CarouselMisionVisionComponent } from './componentes/carousel-mision-vision/carousel-mision-vision.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { MapasComponent } from './componentes/mapas/mapas.component';
@@ -36,7 +35,6 @@ import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-ca
     AppComponent,
     TableroComponent,
     HeaderComponent,
-    CarouselMisionVisionComponent,
     CarrerasComponent,
     FooterComponent,
     MapasComponent,
