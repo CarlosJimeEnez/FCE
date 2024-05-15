@@ -7,6 +7,7 @@
     text-align: center;
 }
 
+/* Tablero de anuncios*/
 .image{    
     width: 100%;
     height: 100%;
@@ -15,16 +16,18 @@
     top: 0;
     left: 0;
 }
-
 .image-placeholder{
     position: relative;
     width: 100%;
-    height: 25vh;
+    height: 100vh;
     overflow: hidden;
 }
 
-.tablero_anuncios {
-    color: var(--blanco);
+.shadow-box {
+    background-color: var(--gris-t4);
+    padding: 20px;
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: var(--gris-t4)
 }
 
 .btn-primary {
@@ -138,5 +141,13 @@ ul li:hover {
         margin-top: 1em;
         margin-left: 1em;
     }
+    .image-placeholder{
+        position: relative;
+        width: 100%;
+        height: 25vh;
+        overflow: hidden;
+    }
+
+
 
 }
