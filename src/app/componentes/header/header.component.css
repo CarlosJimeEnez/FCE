@@ -44,4 +44,14 @@
     margin-right: 10vh;
   }
 
+  .social-icons {
+    background-color: var(--Sombra);
+    text-align: center;
+}
+
+.social-icon img{
+    width: 30px;
+    height: 30px;
+    object-fit: contain; 
+}
   
