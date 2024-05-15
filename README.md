@@ -37,7 +37,7 @@ Antes de comenzar, asegúrate de tener los siguientes requisitos instalados:
     git push origin nombre-de-la-rama
 ## Uso 
     Para iniciar un servidor en desarrollo, ejecuta: 
-    ```bash    
+    ```bash 
     ng serve
 Luego, abre http://localhost:4200 en tu navegador para ver la aplicación.
 
