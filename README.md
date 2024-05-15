@@ -2,43 +2,26 @@
 
 Este proyecto fue generado por [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
 
-## Requisitos
-Antes de comenzar, asegúrate de tener los siguientes requisitos instalados:
+## Development server
 
-- [Node.js](https://nodejs.org/) (versión 12.x o superior)
-- [npm](https://www.npmjs.com/) (versión 6.x o superior)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Instalación
+## Code scaffolding
 
-1. Clona el repositorio en tu máquina local: 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-    ```bash
-   git clone https://github.com/tu-usuario/nombre-del-proyecto.git
-   cd nombre-del-proyecto
+## Build
 
-2. Instala Angular CLI globalmente si aun no lo tienes: 
-    ```bash    
-    npm install -g @angular/cli
-    
-3. Instala las dependencias del proyecto: 
-    ```bash    
-    npm install
-4. Crea una nueva rama: 
-    ```bash    
-    git checkout -b nombre-de-la-rama
-5. Trabajar en la nueva rama:
-    Ahora puede empezar a hacer cambios en el código. Todos los cambios se guardarán en esta nueva rama.
-6. Agregar y confirmar los cambios: 
-    ```bash    
-    git add .
-    git commit -m "Descripción de los cambios realizados"
-7. Subir la rama al repositorio remoto: 
-    ```bash 
-    git push origin nombre-de-la-rama
-## Uso 
-    Para iniciar un servidor en desarrollo, ejecuta: 
-    ```bash 
-    ng serve
-Luego, abre http://localhost:4200 en tu navegador para ver la aplicación.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Running unit tests
 
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

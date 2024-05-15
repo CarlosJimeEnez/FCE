@@ -1,0 +1,55 @@
+  .navbar {
+    background-color: var(--azul_obscuro);
+  }
+  .logo {
+    width: 78px;
+    height: 26px;
+    cursor: pointer;
+  }
+
+  .menu {
+    color: var(--blanco);
+  }
+
+  .nav-item {
+    margin-left: 1em;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    font-size: var(--p);
+    font-family: "Source Sans Pro Regular", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: var(--blanco);
+  }
+
+  /* Ajuste opcional para mejorar la visibilidad y el espaciado */
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Dropdown */
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .logo {
+    margin-left: 1em;
+  }
+
+  .dropdown-menu {
+    margin-right: 10vh;
+  }
+
+  .social-icons {
+    background-color: var(--Sombra);
+    text-align: center;
+}
+
+.social-icon img{
+    width: 30px;
+    height: 30px;
+    object-fit: contain; 
+}
+  

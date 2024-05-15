@@ -1,0 +1,153 @@
+.titulo-card{
+    display: flex;
+    justify-content: center;
+    background-color: var(--gris-t2);
+    border-left: 4px solid var(--azul_calro);
+    border-right: 4px solid var(--azul_calro);
+    text-align: center;
+}
+
+/* Tablero de anuncios*/
+.image{    
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.image-placeholder{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.shadow-box {
+    background-color: var(--gris-t4);
+    padding: 20px;
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: var(--gris-t4)
+}
+
+.btn-primary {
+    background-color: var(--azul_calro);
+    border-color: transparent;
+}
+
+.arrow {
+    font-size: 60px;
+    color: var(--neutro);
+    cursor: pointer;
+    width: 60px; 
+    height: 60px;
+}
+
+.arrow_left {
+    transform: rotate(180deg);
+}
+
+.arrow:hover {
+    color: var(--neutro_activo);
+}
+
+.texto_centrado {
+    text-align: center;
+}
+
+.google-map {
+    background-color: var(--azul_obscuro);
+    color: var(--blanco);
+  }
+
+
+/* Carreras Card */
+.image-cover {
+    background-image: url('../../../assets/images/Fce_fondo.jpg');
+    background-size: cover;
+    background-position: center; 
+    height: 100vh;
+}
+
+.image-holder {
+    padding: 0%;
+}
+
+.card-custom{
+    position: relative;
+}
+
+.card {
+    padding: 0%;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    transition: filter 0.5s ease-in-out;
+}
+
+
+.card-body {
+    color: var(--blanco);
+    background-color: var(--azul_calro);
+}
+.card:hover {
+    background-color: var(--neutro_activo);
+    transform: scale(1.01);
+}
+
+.dropup{
+    position: absolute;
+    top: 30%;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+    color: var(--blanco);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    background-color:  var(--azul_obscuro_t2);
+}
+
+.card:hover .dropup{
+    visibility: visible;
+    top: 0;
+    opacity: 1;
+    z-index: 100;
+}
+
+ul {
+    list-style: disc outside none;
+    cursor: pointer;
+    margin: 2 0 0 0;
+}
+
+ul li:hover {
+    color: var(--azul-claro-t1); /* Cambia esto por el color que prefieras */
+}
+
+.card:hover .card-image{
+    filter: blur(4px);
+    filter: opacity(70%);
+}
+
+@media (max-width: 600px) {
+    .nombre{
+        margin-top: 1em;
+        margin-left: 1em;
+    }
+    .image-placeholder{
+        position: relative;
+        width: 100%;
+        height: 25vh;
+        overflow: hidden;
+    }
+
+
+
+}

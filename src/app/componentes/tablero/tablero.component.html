@@ -1,0 +1,89 @@
+<!-- Loading -->
+<!-- <div *ngIf="carrerasNoCargadas">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-2 p-2 titulo-card">
+            <h5 class="mb-0">Facultad de Ciencias de la Electrónica</h5>
+        </div>
+    </div>
+</div>
+
+<div id="carouselExampleIndicators" class="mt-2 carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active image-placeholder">
+        <img src="../../../assets/images/TableroAnuncios/Licenciaturas.jpg" class="image" alt="...">
+      </div>
+      <div class="carousel-item image-placeholder">
+        <img src="../../../assets/images/electronica.jpg" class="image" alt="...">
+      </div>
+      
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="container-fluid shadow-box mt-4" id="licenciaturas">
+    <!-- Licenciaturas -->
+    <div class="row">
+        <div class="col texto_centrado">
+            <h3>Nuestros servicios educativos</h3>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-md-3 mt-3" >
+            <div class="card">
+                <div class="card-custom">
+                    <img src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
+                    <div class="col dropup">
+                        <ul class="mt-4">
+                            <li *ngFor="let carrera of carreras">
+                                <div class="row">
+                                    <h6 (click)="verCarrera(carrera.id!)">{{carrera.carreraNombre}}</h6> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">     
+                    <h5 class="card-title"> <strong>Licenciaturas</strong> </h5>
+                        <p class="card-text">
+                        Contamos con las carreras acordes a tus aptitudes
+                    </p>              
+                </div>
+            </div>            
+        </div>
+    </div>    
+</div>
+
+
+<!-- Google Maps -->
+<div class="row google-map justify-content-center mt-5 pb-2 pt-2">
+    <div class="col-12 text-center">
+        <h2>
+            ¿Cómo llegar a la FCE?
+        </h2>
+        <h5>
+            No te pierdas, te estamos esperando
+        </h5>
+    </div>
+</div> 
+
+<!-- Google Maps -->
+<div >
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4486.140634508462!2d-98.2042948012168!3d19.002988481652498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfbf5f010d16ab%3A0xb50e01e698295034!2sFCE1!5e0!3m2!1ses-419!2smx!4v1709754828737!5m2!1ses-419!2smx" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    
+</div>

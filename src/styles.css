@@ -1,4 +1,213 @@
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    margin: 0;
+    background-color: var(--neutro);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+:root {
+    /* Tamaño de letra */
+    /* --p: 16px;
+    --h6: 20px;
+    --h5: 25px;
+    --h4: 31.25px;
+    --h3: 39.06px;
+    --h2: 48.83px;
+    --h1: 61.04px; */
+
+    --small: 11.67px; 
+    --p: 14px;  
+    --h5:20.2px;   
+    /* --h4: 18px; */
+    --h3: 29.03px; 
+    --h2: 34.84px;    
+    --h1: 41.8px; 
+
+    /* Colores */
+    /* Primarios: */
+    --azul_obscuro: #003B5C;
+    --azul_obscuro_t1: #012438;
+    --azul_obscuro_t2: #0124389d;
+
+    /* Secundarios */
+    --azul_calro: #00B5E2; 
+    --azul-claro-t1: #00b5e2d2; 
+    --azul-claro-t2: #03b1ddda;
+
+    /* Sombras */
+    --negro: #000000;
+    --negro_translucido: #0505055e;
+    --blanco: #FFFFFF;
+    --blanco_t1: hsl(0, 17%, 98%);
+    --Sombra: #100E0E;
+    
+
+    /* Neutro */
+    --gris: #7B8F96;
+    --gris-t1: #C1CACD;
+    --gris-t2: #bdc7cb2f;
+    --gris-t3: #d3dadc3a;
+    --gris-t4: #F2F5F7;
+
+    /* ?? */
+    --boton_activo: #02A0C7; 
+    --error: rgba(248, 117, 117, 0.596);
+    --delete: rgb(177, 17, 17);
+    --slidevar_background: #f2f7f8;
+    --editar: #0f90b1;
+    --done: #0ba524; 
+}
+
+
+.border-colors {
+    border-style: solid;
+    border-color: var(--error);
+}
+
+/* Titulos */
+h1 {
+    font-size: var(--h1);
+    /* font-family: Roboto, "Helvetica Neue", sans-serif;  */
+    font-family: 'Gotham Black', sans-serif; 
+}
+
+/* Subtitulos */
+h2 {
+    font-size: var(--h2); 
+    font-family: "Gotham Book", sans-serif;
+}
+
+/* Encabezado */
+h3 {
+    font-size: var(--h3);
+    font-family: "Gotham Narrow", sans-serif;
+}
+
+h4 {
+    font-size: var(--h4);
+    font-family: "Source Sans Pro SemiBold", sans-serif;
+}
+
+h5 {
+    font-size: var(--h5);
+    font-family: "Source Sans Pro SemiBold", sans-serif;
+}
+
+/* Texto */
+p {
+    font-size: var(--p);
+    font-family: "Source Sans Pro Regular", sans-serif;
+}
+
+li {
+    font-size: var(--p);
+    font-family: "Source Sans Pro Regular", sans-serif;
+}
+
+.translucido {
+    color: var(--negro_translucido);
+}
+
+
+/* Gotham Black */
+@font-face {
+    font-family: "Gotham Black";
+    src: url("assets/gotham/gotham/GOTHAM-BLACK.TTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Gotham Book */
+@font-face {
+    font-family: "Gotham Book";
+    src: url("assets/gotham/gotham/GothamNarrow-Book.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Source Sans Pro Black */
+@font-face {
+    font-family: "Source Sans Pro Blacks";
+    src: url("assets/SourceSans_Pro/SourceSansPro/SourceSansPro-Black.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Source Sans Pro Regular */
+@font-face {
+    font-family: "Source Sans Pro Regular";
+    src: url("assets/SourceSans_Pro/SourceSansPro/SourceSansPro-Regular.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Source Sans Pro Italic */
+@font-face {
+    font-family: "Source Sans Pro Semibold Italic";
+    src: url("assets/SourceSans_Pro/SourceSansPro/SourceSansPro-SemiboldIt.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Source Sans Pro light */
+@font-face {
+    font-family: "Source Sans Pro Light";
+    src: url("assets/SourceSans_Pro/SourceSansPro/SourceSansPro-Light.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* o el color del fondo de tu página */
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neutro); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--azul_calro);
+}
+
+main {
+    margin-top: 65px; /* Debe ser igual a la altura del header */
+  }
+
+
+.editar-dashboard {
+    height: 100vh;   
+   }
+
+/* Media query para teléfonos */
+@media (max-width: 600px) {
+    :root {
+        --small: 11.67px; 
+        --p: 14px;  
+        --h5:20.16px;   
+        /* --h4: 18px; */
+        --h3: 29.03px; 
+        --h2: 34.84px;    
+        --h1: 41.8px;     
+    }
+
+    body {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    body::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari, Opera */
+    }
+
+}
+
+.delete-button {
+    color: var(--delete);
+}

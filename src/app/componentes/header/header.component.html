@@ -1,0 +1,136 @@
+<nav class="navbar fixed-top navbar-expand-lg " data-bs-theme="dark" [class.header-visible]="headerVisible">
+    <div class="container-fluid">
+      <img class="logo" src="./../../../assets/images/footer_buap_logo.png" alt="" (click)="desplazarAInicio()">
+
+      <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <mat-icon class="menu" fontIcon="menu"></mat-icon>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="http://academica.ece.buap.mx/" class="nav-link">Secretaría Académica</a>
+          </li>
+          
+          <!-- Oferta academica -->
+          <li class="nav-item">
+            <div class="dropdown"
+              (mouseenter)="!isMobile && openOfertaAcademica = true"
+              (mouseleave)="!isMobile && openOfertaAcademica = false">
+                <button class="btn dropdown-toggle nav-link"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    [attr.aria-expanded]="openOfertaAcademica ? 'true' : 'false'"
+                    aria-haspopup="true">
+                  Oferta académica
+                </button>
+                <ul class="dropdown-menu" [class.show]="openOfertaAcademica" >
+                  <li><a class="dropdown-item" (click)="desplazarALicenciaturas()">Licenciaturas</a></li>
+                  <li><a class="dropdown-item" href="#">Posgrados</a></li>
+                </ul>
+              </div>
+          </li>
+          
+          <li class="nav-item">
+            <!-- Academia -->
+            <div class="dropdown"
+              (mouseenter)="!isMobile && openAcademia = true"
+              (mouseleave)="!isMobile && openAcademia = false">
+                <button class="btn dropdown-toggle nav-link"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    [attr.aria-expanded]="openAcademia ? 'true' : 'false'"
+                    aria-haspopup="true">
+                  Academia
+                </button>
+                <ul class="dropdown-menu" [class.show]="openAcademia" >
+                  <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
+                  <li><a class="dropdown-item" href="#">Academias de Area</a></li>
+                  <li><a class="dropdown-item" href="#">IDT</a></li>
+                </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <!-- Difusion -->
+            <div class="dropup-center dropup"
+            (mouseenter)="!isMobile && openDifusion = true"
+            (mouseleave)="!isMobile && openDifusion = false">
+              <button class="btn dropdown-toggle nav-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [attr.aria-expanded]="openDifusion ? 'true' : 'false'"
+                  aria-haspopup="true">
+                Difusion
+              </button>
+
+              <ul class="dropdown-menu" [class.show]="openDifusion" >
+                <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
+              </ul>
+            </div>
+          </li> 
+          
+
+          <li class="nav-item">
+            <!-- Nostros -->
+            <div class="dropup-center dropup"
+            (mouseenter)="!isMobile && openNosotros = true"
+            (mouseleave)="!isMobile && openNosotros = false">
+              <button class="btn dropdown-toggle nav-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [attr.aria-expanded]="openNosotros ? 'true' : 'false'"
+                  aria-haspopup="true">
+                Nosotros
+              </button>
+
+              <ul class="dropdown-menu" [class.show]="openNosotros" >
+                  <li><a class="dropdown-item" href="#">Directorio</a></li>
+                  <li><a class="dropdown-item" href="#">Historia FCE</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        
+        <!-- Redes Sociales -->
+        <a href="#" style="display: none;"><img src="https://www.buap.mx/sites/all/themes/nuevo_sitio/img/ingles2.png"></a>
+        <ul class="nav justify-content-end d-none d-lg-flex">
+          <li class="nav-item">
+            <a href="https://twitter.com/buapoficial" target="_blank" rel="noopener" class="social-icon">
+              <img alt="" src="https://www.buap.mx//sites/all/themes/nuevo_sitio/img/twitter.png">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.facebook.com/BUAPoficial" target="_blank" rel="noopener" class="social-icon">
+              <img alt="" src="https://www.buap.mx//sites/all/themes/nuevo_sitio/img/facebook.png">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://instagram.com/buapoficial/" target="_blank" rel="noopener" class="social-icon">
+              <img alt="" src="https://www.buap.mx//sites/all/themes/nuevo_sitio/img/instagram.png">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.youtube.com/user/ibuap" target="_blank" rel="noopener" class="social-icon">
+              <img alt="" src="https://www.buap.mx//sites/all/themes/nuevo_sitio/img/youtube.png">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="http://www.correo.buap.mx" target="_blank" rel="noopener" class="social-icon">
+              <img alt="" src="https://www.buap.mx//sites/all/themes/nuevo_sitio/img/boton_correo_buap.png">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="http://www.contraloriasocial.buap.mx/" target="_blank" rel="noopener" class="social-icon">
+              <img alt="" src="https://www.buap.mx/sites/all/themes/nuevo_sitio/img/logo_contraloria_social_2023_vf.png">
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>

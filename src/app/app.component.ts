@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy} from '@angular/core';
+import { GoogleAuthService } from './services/google-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FCE';
+  
+  constructor(){}
+
+  ngOnInit(): void {
+    
+  }
 }
