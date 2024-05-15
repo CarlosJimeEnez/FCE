@@ -25,8 +25,10 @@ Antes de comenzar, asegúrate de tener los siguientes requisitos instalados:
     npm install
 
 ## Uso 
-    Para iniciar un servidor en desarrollo, ejecuta: 
-    ```bash    
+
+Para iniciar un servidor en desarrollo, ejecuta: 
+        
     ng serve
+
 Luego, abre http://localhost:4200 en tu navegador para ver la aplicación.
 
