@@ -1,3 +1,10 @@
+.titulo-card{
+    display: flex;
+    justify-content: center;
+    background-color: var(--gris-t2);
+    border-left: 4px solid var(--azul_calro);
+    border-right: 4px solid var(--azul_calro);
+}
 
 .image{    
     background-image: url("src\assets\images\TableroAnuncios\Licenciaturas.jpg");

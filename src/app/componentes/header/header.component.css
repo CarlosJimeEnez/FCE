@@ -1,5 +1,6 @@
   .navbar {
     background-color: var(--azul_obscuro);
+    height: 60px;
   }
 
   .logo {

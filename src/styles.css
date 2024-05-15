@@ -19,7 +19,7 @@ html, body {
 
     --small: 11.67px; 
     --p: 14px;  
-    --h5:20.16px;   
+    --h5:20.2px;   
     /* --h4: 18px; */
     --h3: 29.03px; 
     --h2: 34.84px;    
@@ -42,6 +42,7 @@ html, body {
     --blanco: #FFFFFF;
     --blanco_t1: hsl(0, 17%, 98%);
     --Sombra: #100E0E;
+    
 
     /* Neutro */
     --gris: #7B8F96;
@@ -85,12 +86,12 @@ h3 {
 
 h4 {
     font-size: var(--h4);
-    font-family: "Source Sans Pro Regular", sans-serif;
+    font-family: "Source Sans Pro SemiBold", sans-serif;
 }
 
 h5 {
     font-size: var(--h5);
-    font-family: "Source Sans Pro Regular", sans-serif;
+    font-family: "Source Sans Pro SemiBold", sans-serif;
 }
 
 /* Texto */
@@ -108,9 +109,6 @@ li {
     color: var(--negro_translucido);
 }
 
-.editar-dashboard {
-    height: 100vh;   
-}
 
 /* Gotham Black */
 @font-face {
@@ -176,6 +174,15 @@ li {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--azul_calro);
 }
+
+main {
+    margin-top: 65px; /* Debe ser igual a la altura del header */
+  }
+
+
+.editar-dashboard {
+    height: 100vh;   
+   }
 
 /* Media query para teléfonos */
 @media (max-width: 600px) {
