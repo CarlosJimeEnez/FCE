@@ -118,6 +118,7 @@
     visibility: visible;
     top: 0;
     opacity: 1;
+    z-index: 1;
 }
 
 ul {
