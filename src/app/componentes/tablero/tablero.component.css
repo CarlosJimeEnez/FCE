@@ -76,7 +76,6 @@
 .card-custom{
     position: relative;
 }
-
 .card {
     padding: 0%;
     border: none;
@@ -87,12 +86,13 @@
     width: 100%;
     height: auto;
     transition: filter 0.5s ease-in-out;
+    z-index: -2;
 }
-
 
 .card-body {
     color: var(--blanco);
     background-color: var(--azul_calro);
+    z-index: 0;
 }
 .card:hover {
     background-color: var(--neutro_activo);
@@ -101,9 +101,7 @@
 
 .dropup{
     position: absolute;
-    top: 30%;
-    transition: all 0.3s ease-in-out;
-    z-index: -1;
+    background-color:  var(--azul_obscuro_t2);
     visibility: hidden;
     opacity: 0;
     color: var(--blanco);
@@ -111,14 +109,15 @@
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    background-color:  var(--azul_obscuro_t2);
+    top: 30%;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
 }
 
 .card:hover .dropup{
     visibility: visible;
     top: 0;
     opacity: 1;
-    z-index: 100;
 }
 
 ul {
