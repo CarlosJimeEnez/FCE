@@ -77,3 +77,10 @@ export interface CarreraDto
     coordinadorID: number | null;
     descripcion: string;
 }
+
+export interface AdsDto
+{
+    id?: number;
+    nombreArchivo: string;
+    rutaImagen: string;
+}

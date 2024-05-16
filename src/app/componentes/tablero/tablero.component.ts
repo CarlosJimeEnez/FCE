@@ -4,6 +4,7 @@ import { CarrerasServicesService } from 'src/app/services/carreras/carreras-serv
 import { Carrera } from 'src/app/interfaces/carrera';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScrollService } from 'src/app/services/scroll.service';
+import { AdsService } from 'src/app/services/ads/ads.service';
 
 @Component({
   selector: 'app-tablero',
@@ -18,11 +19,14 @@ export class TableroComponent implements OnInit, AfterViewInit {
   constructor
   (
     private _carrerasService: CarrerasServicesService, private _router: Router,
+    private _adsService: AdsService,
     private _route: ActivatedRoute,
     private _scrollService: ScrollService
+    
   ){}
   
   ngOnInit(): void{
+    this.getAds();
     this.getCarreras();   
   }
 
@@ -43,6 +47,21 @@ export class TableroComponent implements OnInit, AfterViewInit {
   }
 
   // Funciones
+  getAds(){
+    console.log("Getting ads...");
+    this._adsService.getAds().subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: error => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log("Ads cargadas completamente");
+      }
+    })
+  }
+
   getCarreras() {
     this._carrerasService.getCarreras().subscribe(data => {
       console.log(data);
