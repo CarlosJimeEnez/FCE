@@ -80,6 +80,8 @@
     padding: 0%;
     border: none;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .card-image {
@@ -105,11 +107,10 @@
     visibility: hidden;
     opacity: 0;
     color: var(--blanco);
-    overflow-y: hidden;
-    overflow-x: hidden;
+    
     height: 100%;
     width: 100%;
-    top: 30%;
+    top: 100%;
     transition: all 0.3s ease-in-out;
     z-index: -1;
 }
