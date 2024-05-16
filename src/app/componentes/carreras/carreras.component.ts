@@ -32,7 +32,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
       this.id = +this._route.snapshot.paramMap.get('id')!;
   }
 
-  displayedColumns: string[] = ["Nombre"]; 
+  displayedColumns: string[] = ["Nombre", "Correo", "Edificio", "Horario"]; 
 
   ngOnInit() {
     console.log("Id:" + this.id);    
