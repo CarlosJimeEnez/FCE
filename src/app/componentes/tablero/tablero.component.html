@@ -13,20 +13,25 @@
     </div>
 </div>
 
-<div id="carouselExampleIndicators" class="mt-2 carousel slide">
+<div *ngIf="!adNoCargadas" id="carouselExampleIndicators" class="mt-2 carousel slide">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button *ngFor="let ad of Ads; let i = index" type="button" 
+            [attr.data-bs-target]="'#carouselExampleIndicators'" 
+            [attr.data-bs-slide-to]="i" 
+            [class.active]="i === 0" 
+            [attr.aria-current]="i === 0 ? 'true' : null" 
+            [attr.aria-label]="'Slide ' + (i + 1)">        
+        </button>
+
+      <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> -->
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active image-placeholder">
-        <img src="../../../assets/images/TableroAnuncios/Licenciaturas.jpg" class="image" alt="...">
-      </div>
-      <div class="carousel-item image-placeholder">
-        <img src="../../../assets/images/electronica.jpg" class="image" alt="...">
-      </div>
-      
+        <div  *ngFor="let ad of Ads; let i = index" class="carousel-item image-placeholder" [class.active]="i === 0">
+            <img (click)="verLink(ad.ad.link)" [src]="ad.safeUrl" class="image">
+        </div>
     </div>
+
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>

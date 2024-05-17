@@ -83,4 +83,5 @@ export interface AdsDto
     id?: number;
     nombreArchivo: string;
     rutaImagen: string;
+    link: string;
 }

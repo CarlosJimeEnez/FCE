@@ -5,6 +5,8 @@ import { Carrera } from 'src/app/interfaces/carrera';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { AdsService } from 'src/app/services/ads/ads.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AdsDto } from 'src/app/interfaces/Dto';
 
 @Component({
   selector: 'app-tablero',
@@ -15,12 +17,16 @@ import { AdsService } from 'src/app/services/ads/ads.service';
 export class TableroComponent implements OnInit, AfterViewInit {
   carreras: Carrera[] = [];
   carrerasNoCargadas: boolean = true;
+  urlSegura!: SafeResourceUrl;
+  Ads: {ad: AdsDto, safeUrl: SafeResourceUrl}[] = []; 
+  adNoCargadas: boolean = true;
   // Servicios con guion bajo
   constructor
   (
     private _carrerasService: CarrerasServicesService, private _router: Router,
     private _adsService: AdsService,
     private _route: ActivatedRoute,
+    private _sanitizer: DomSanitizer,
     private _scrollService: ScrollService
     
   ){}
@@ -50,16 +56,29 @@ export class TableroComponent implements OnInit, AfterViewInit {
   getAds(){
     console.log("Getting ads...");
     this._adsService.getAds().subscribe({
-      next: data => {
+      next: (data: AdsDto[]) => {
         console.log(data);
+        this.Ads = data.map(ad => ({
+          ad,
+          safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.rutaImagen)  
+        }));
+        
+        this.adNoCargadas = false;
+        console.log(`Ad No Cargadas: ${this.adNoCargadas}`);
+        console.log(this.Ads)
       },
       error: error => {
-        console.log(error);
+        console.log("Error al cargar Ads: ", error);
       },
       complete: () => {
         console.log("Ads cargadas completamente");
       }
     })
+  }
+
+  verLink(url: string):void{
+    console.log("url: ", url);
+    window.location.href = url;
   }
 
   getCarreras() {
