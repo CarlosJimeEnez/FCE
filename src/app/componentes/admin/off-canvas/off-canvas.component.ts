@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,15 +10,17 @@ import { Router } from '@angular/router';
 export class OffCanvasComponent {
   constructor(private _router: Router){}
 
+
+
   verProfesores(): void{
-    this._router.navigate([`admin/tablero-profesores`])
+    this._router.navigate([`admin/tablero-profesores`], {queryParams: {nombre: "Profesores"}})
   }
 
   verLicenciaturas(): void{
-    this._router.navigate([`admin/inicio`])
+    this._router.navigate([`admin/inicio`], {queryParams: {nombre: "Licenciaturas"}})
   }
 
   verTableroAnuncios(): void{
-    this._router.navigate([`admin/anuncios`])
+    this._router.navigate([`admin/anuncios`], {queryParams: {nombre: "Anuncios"}})
   }
 }
