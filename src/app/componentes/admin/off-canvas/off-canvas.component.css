@@ -10,3 +10,7 @@
 .edit {
     color: var(--editar);
 }
+
+.navs {
+    cursor: pointer;
+}

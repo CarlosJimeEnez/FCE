@@ -16,4 +16,8 @@ export class OffCanvasComponent {
   verLicenciaturas(): void{
     this._router.navigate([`admin/inicio`])
   }
+
+  verTableroAnuncios(): void{
+    this._router.navigate([`admin/anuncios`])
+  }
 }

@@ -29,6 +29,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
 import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.component';
 import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
+import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-ca
     TableroProfesoresComponent,
     OffCanvasComponent,
     PostCarrerasComponent,
+    AdsComponent,
     
   ],
   imports: [
