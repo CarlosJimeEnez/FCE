@@ -4,7 +4,8 @@
     border-radius: 1%;
 }
 .navs:hover {
-    background-color: var(--neutro_activo);
+    background-color: var(--gris-t2);
+    border-radius: 5px;
 }
 
 .edit {
