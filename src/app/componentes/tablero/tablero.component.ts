@@ -28,7 +28,6 @@ export class TableroComponent implements OnInit, AfterViewInit {
     private _route: ActivatedRoute,
     private _sanitizer: DomSanitizer,
     private _scrollService: ScrollService
-    
   ){}
   
   ngOnInit(): void{

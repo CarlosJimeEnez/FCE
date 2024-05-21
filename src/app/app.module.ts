@@ -30,6 +30,7 @@ import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero
 import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.component';
 import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
+import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit-ads.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
     OffCanvasComponent,
     PostCarrerasComponent,
     AdsComponent,
+    EditAdsComponent,
     
   ],
   imports: [
