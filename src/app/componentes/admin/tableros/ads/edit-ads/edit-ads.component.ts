@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdsDto } from 'src/app/interfaces/Dto';
 
 @Component({
   selector: 'app-edit-ads',
@@ -7,6 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./edit-ads.component.css']
 })
 export class EditAdsComponent {
+  id!: number;
+  adNombre!: string;
+  ad!: AdsDto
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router
