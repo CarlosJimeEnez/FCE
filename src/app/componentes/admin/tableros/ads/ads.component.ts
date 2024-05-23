@@ -44,7 +44,7 @@ export class AdsComponent implements OnInit {
 
         this.Ads = data.map(ad => ({
           ad,
-          safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.rutaImagen)
+          safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.url)
         }))
 
         this.dataSource = new MatTableDataSource(this.Ads)
@@ -60,7 +60,7 @@ export class AdsComponent implements OnInit {
   }
 
   editarAds(id: number, nombre: string): void{
-    this._router.navigate([`admin/editar-ads/${id}`], { queryParams: { nombre: nombre} })
+    this._router.navigate([`admin/editar-ads/${id}`], { queryParams: {id: id, nombre: nombre} })
   }
 
   nuevoAds(){

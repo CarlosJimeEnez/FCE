@@ -82,6 +82,13 @@ export interface AdsDto
 {
     id?: number;
     nombreArchivo: string;
-    rutaImagen: string;
+    url: string;
+    link: string;
+}
+
+export interface AdsEditDto
+{
+    id? : number;
+    nombreArchivo: string;
     link: string;
 }
