@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="col-4 text-center">
-            <h1>Editar</h1>
+            <h3>Licenciaturas</h3>
         </div>
         <div class="col-4">
         </div>
@@ -17,9 +17,6 @@
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
             </mat-form-field>
-            <button mat-raised-button (click)="nuevaCarrera()" class="demo-button ms-3">
-                Añadir
-            </button>
         </div>
         <div class="col-4">
             
@@ -53,6 +50,9 @@
             </div>
         </div>
     </div>
+    <button mat-raised-button (click)="nuevaCarrera()" class="demo-button mt-3">
+        <mat-icon class="icon-add">add</mat-icon>
+    </button>
 </div>
 
 
