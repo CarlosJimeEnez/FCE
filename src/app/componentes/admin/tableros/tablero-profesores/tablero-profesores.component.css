@@ -1,3 +1,7 @@
 .Titular-dashboard {
     margin-top: 10vh;
 }
+
+button mat-icon.add-icon {
+    margin: 0px;
+}
