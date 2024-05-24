@@ -31,6 +31,7 @@ import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.co
 import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
 import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit-ads.component';
+import { PostAdsComponent } from './componentes/admin/tableros/ads/post-ads/post-ads.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit
     PostCarrerasComponent,
     AdsComponent,
     EditAdsComponent,
+    PostAdsComponent,
     
   ],
   imports: [

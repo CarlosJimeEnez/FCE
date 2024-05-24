@@ -6,7 +6,7 @@
             </button>
         </div>
         <div class="col-6 text-center">
-            <h3>Editando: {{navNombre}}</h3>
+            <h3>{{navNombre}}</h3>
         </div>
         
     </div>
@@ -57,6 +57,14 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 justify-content-end mt-3">
+            <button (click)="postAd()" mat-raised-button>
+                <mat-icon  class="icon-add">add</mat-icon>
+            </button>
         </div>
     </div>
 </div>

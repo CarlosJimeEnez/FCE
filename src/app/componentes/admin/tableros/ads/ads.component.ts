@@ -74,4 +74,8 @@ export class AdsComponent implements OnInit {
       horizontalPosition: 'right'
     })
   };
+
+  postAd():void {
+    this._router.navigate([`admin/post-ads`])
+  }
 }

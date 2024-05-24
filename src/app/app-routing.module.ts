@@ -11,6 +11,7 @@ import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero
 import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
 import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit-ads.component';
+import { PostAdsComponent } from './componentes/admin/tableros/ads/post-ads/post-ads.component';
 
 const routes: Routes = [
   {path: '', component: TableroComponent, pathMatch: 'full'},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'admin/post-carrera', component: PostCarrerasComponent},
   {path: 'admin/anuncios', component: AdsComponent},
   {path: 'admin/editar-ads/:id', component: EditAdsComponent},
+  {path: 'admin/post-ads', component: PostAdsComponent},
 ];
 
 @NgModule({

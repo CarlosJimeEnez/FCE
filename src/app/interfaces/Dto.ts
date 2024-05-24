@@ -92,3 +92,10 @@ export interface AdsEditDto
     nombreArchivo: string;
     link: string;
 }
+
+export interface AdsDtoFile
+{
+    nombreArchivo: string;
+    link: string;
+    file: File; 
+}
