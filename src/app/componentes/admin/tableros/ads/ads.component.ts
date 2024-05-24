@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdsDto } from 'src/app/interfaces/Dto';
 import { AdsService } from 'src/app/services/ads/ads.service';
+import { DeleteAdsService } from 'src/app/services/ads/delete-ads.service';
 
 @Component({
   selector: 'app-ads',
@@ -25,6 +26,7 @@ export class AdsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _adService: AdsService,
     private _sanitizer: DomSanitizer,
+    private _deleteAd: DeleteAdsService
   ){
     this.navNombre = this._route.snapshot.queryParamMap.get('nombre')!;
   }
@@ -74,6 +76,24 @@ export class AdsComponent implements OnInit {
       horizontalPosition: 'right'
     })
   };
+
+  eliminarCarrera(id: number): void {
+    console.log(id);
+    this._deleteAd.deleteAd(id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (data: any) => {
+        console.log(data);
+        this.alerta("Error en la petición")
+      },
+      complete: () => {
+        console.log("Se eliminó de forma correcta")
+        this.alerta("Elemento eliminado")
+        this.getAds();
+      },
+    });
+  }
 
   postAd():void {
     this._router.navigate([`admin/post-ads`])
