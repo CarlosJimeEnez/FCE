@@ -62,6 +62,7 @@ export class PostAdsComponent implements OnInit  {
       complete: () => {
         console.log("Se creo un nuevo anuncio")
         this.alerta("Petición Exitosa")
+        this.back();
       }
     })
   }
