@@ -15,3 +15,8 @@
 .navs {
     cursor: pointer;
 }
+
+.active-link {
+    background-color: var(--gris-t2);
+    font-weight: bold;
+}
