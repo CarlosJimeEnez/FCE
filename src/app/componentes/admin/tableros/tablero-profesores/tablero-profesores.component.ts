@@ -38,7 +38,7 @@ export class TableroProfesoresComponent implements OnInit{
   }
 
   editarProfesor(id: number, profesor: string){
-    this._router.navigate([`admin/editar-carrera/${id}`], { queryParams: { profesor:  profesor} })
+    this._router.navigate([`admin/post-profesores/${id}`])
   }
 
   applyFilter(event: KeyboardEvent): void {

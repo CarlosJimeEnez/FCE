@@ -29,6 +29,7 @@ export class EditAdsComponent {
 
   ngOnInit():void {
     this.id = this._route.snapshot.queryParamMap.get('id');
+    
     this.ad.nombreArchivo = this._route.snapshot.queryParamMap.get('nombre')!;
     this.ad.id = +this.id!;
     this.editForm = this._fb.group({  

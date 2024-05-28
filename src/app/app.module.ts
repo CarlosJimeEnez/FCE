@@ -32,6 +32,7 @@ import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-ca
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
 import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit-ads.component';
 import { PostAdsComponent } from './componentes/admin/tableros/ads/post-ads/post-ads.component';
+import { PostProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/post-profesores/post-profesores.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { PostAdsComponent } from './componentes/admin/tableros/ads/post-ads/post
     AdsComponent,
     EditAdsComponent,
     PostAdsComponent,
+    PostProfesoresComponent,
     
   ],
   imports: [
