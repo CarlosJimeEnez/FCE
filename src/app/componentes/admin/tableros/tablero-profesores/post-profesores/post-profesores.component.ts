@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfesorDto } from 'src/app/interfaces/Dto';
 import { Profesor } from 'src/app/interfaces/carrera';
+import { PosttProfesoresService } from 'src/app/services/profesores/post-profesores.service';
 import { PutProfesoresService } from 'src/app/services/profesores/put-profesores.service';
 
 @Component({
@@ -22,13 +23,15 @@ export class PostProfesoresComponent implements OnInit {
     correo: '',
   };
   editForm!: FormGroup
+  postForm!: FormGroup
 
   constructor(
     private _snackBar: MatSnackBar,
     private _router: Router,
     private _route: ActivatedRoute,
     private _fb: FormBuilder,
-    private _editarProfesor: PutProfesoresService
+    private _editarProfesor: PutProfesoresService,
+    private _nuevoProfesor: PosttProfesoresService
   ){}
 
   ngOnInit() {
@@ -49,6 +52,15 @@ export class PostProfesoresComponent implements OnInit {
         })
       } else {
         this.isCreateMode = true;
+        
+        this.postForm = this._fb.group({
+          nombre: [this.profesor.nombre, Validators.required],
+          edificio: [this.profesor.edificio, Validators.required],
+          horario: [this.profesor.horario, Validators.required],
+          telefono: [this.profesor.telefono, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+          correo: [this.profesor.correo, [Validators.required, Validators.email]]
+        })
+
       }
     })
   }
@@ -83,6 +95,29 @@ export class PostProfesoresComponent implements OnInit {
       complete: () => {
         console.log("Profesor editado correctamente")
         this.alerta("Profesor editado correctamente")
+        this.back();
+      },
+    })    
+  }
+
+  onSubmitCreate():void{
+    this.profesor.nombre = this.postForm.get('nombre')?.value; 
+    this.profesor.edificio = this.postForm.get('edificio')?.value; 
+    this.profesor.horario = this.postForm.get('horario')?.value;
+    this.profesor.telefono = this.postForm.get('telefono')?.value;
+    this.profesor.correo = this.postForm.get('correo')?.value;
+    
+    this._nuevoProfesor.postProfesor(this.profesor).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (err: any) => {
+        console.log(err)
+        this.alerta("Error al eviar")
+      },
+      complete: () => {
+        console.log("Post correctamente")
+        this.alerta("Formulario enviado correctamente")
         this.back();
       },
     })    

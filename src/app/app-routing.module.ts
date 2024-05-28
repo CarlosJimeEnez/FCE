@@ -22,7 +22,10 @@ const routes: Routes = [
   {path: 'admin/inicio', component: TableroAdminComponent},
   {path: 'admin/editar-carrera/:id', component: EditCarrerasComponent},
   {path: "admin/tablero-profesores", component: TableroProfesoresComponent},
+
   {path: 'admin/post-profesores/:id', component: PostProfesoresComponent},
+  {path: 'admin/post-profesores', component: PostProfesoresComponent},
+
   {path: 'admin/post-carrera', component: PostCarrerasComponent},
   {path: 'admin/anuncios', component: AdsComponent},
   {path: 'admin/editar-ads/:id', component: EditAdsComponent},

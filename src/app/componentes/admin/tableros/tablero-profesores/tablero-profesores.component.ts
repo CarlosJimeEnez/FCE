@@ -41,6 +41,10 @@ export class TableroProfesoresComponent implements OnInit{
     this._router.navigate([`admin/post-profesores/${id}`])
   }
 
+  postProfesor(){
+    this._router.navigate([`admin/post-profesores/`])
+  }
+
   applyFilter(event: KeyboardEvent): void {
     const inputValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = inputValue.trim().toLowerCase();

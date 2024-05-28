@@ -1,10 +1,70 @@
 <div *ngIf="isCreateMode; else editMode">
-    <div class="container">
-        <div class="col">
-            <h1>
-                Post Mode
-            </h1>
+    <div class="fluid-container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 container-flex ">
+                <div>
+                    <button (click)="back()" color="primary" mat-button>
+                        <mat-icon class="arrow-button">arrow_back</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <h3>Nuevo Profesor</h3>
+                </div>
+                <span></span>
+            </div>
         </div>
+
+        <!-- Forms -->
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Nombre</h4>
+                <input [ngClass]="{'is-invalid': postForm.get('nombre')?.invalid && postForm.get('nombre')?.touched}" 
+                class="form-control" type="text" id="nombre" formControlName="nombre" placeholder="Nombre">
+            </div>
+        </div>
+   
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Edificio</h4>
+                <input [ngClass]="{'is-invalid': postForm.get('edificio')?.invalid && postForm.get('edificio')?.touched}" 
+                class="form-control" type="text" id="edificio" formControlName="edificio" placeholder="Edificio">
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Horario</h4>
+                <input [ngClass]="{'is-invalid': postForm.get('horario')?.invalid && postForm.get('horario')?.touched}" 
+                class="form-control" type="text" id="horario" formControlName="horario" placeholder="Horario">
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Teléfono</h4>
+                <input [ngClass]="{'is-invalid': postForm.get('telefono')?.invalid && postForm.get('telefono')?.touched}"
+                 class="form-control" type="text" id="telefono" formControlName="telefono" placeholder="Telefono">
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Correo</h4>
+                <input [ngClass]="{'is-invalid': postForm.get('correo')?.invalid && postForm.get('correo')?.touched}"
+                class="form-control" type="email" id="correo" formControlName="correo" placeholder="Correo">
+            </div>
+        </div>
+
+
+        <div class="row justify-content-end ">
+            <div class="col-12 d-flex justify-content-end mt-5 mb-5">
+                <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                <button type="submit" (click)="onSubmitCreate()" [disabled]="!postForm.valid" class="btn btn-success ms-3">Guardar</button>
+            </div>
+        </div>
+       
+    </form>
     </div>
 </div>
 
