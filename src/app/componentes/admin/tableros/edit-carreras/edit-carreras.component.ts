@@ -423,4 +423,9 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   nuevaCarrera(){
     this._router.navigate(['nuevaCarrera']);
   }
+
+  back(){
+    this._router.navigate(['admin/inicio']);
+  }
+
 }

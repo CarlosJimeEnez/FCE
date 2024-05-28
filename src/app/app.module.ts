@@ -23,7 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { EditCarrerasComponent } from './componentes/admin/edit-carreras/edit-carreras.component';
+import { EditCarrerasComponent } from './componentes/admin/tableros/edit-carreras/edit-carreras.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';

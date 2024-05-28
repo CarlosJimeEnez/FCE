@@ -6,7 +6,7 @@ import { MapasComponent } from './componentes/mapas/mapas.component';
 import { AdminAuthComponent } from './componentes/admin-auth/admin-auth.component';
 import { LoginComponent } from './componentes/admin/login/login.component';
 import { TableroAdminComponent } from './componentes/admin/tableros/tablero-admin/tablero-admin.component';
-import { EditCarrerasComponent } from './componentes/admin/edit-carreras/edit-carreras.component';
+import { EditCarrerasComponent } from './componentes/admin/tableros/edit-carreras/edit-carreras.component';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
 import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
