@@ -8,68 +8,54 @@
             </div>
             <div class="content-container">
                 <h2>Editando:</h2>
-                <h2><strong>{{carreraNombre}}</strong> </h2> 
+                <h2><strong>{{carrera.carreraNombre}}</strong> </h2> 
             </div>
             <span></span>
         </div>
     </div>
 
-    <div class="row">
-        <!-- Nombre carrera -->
-        <div class="col-12 mb-3 mt-5">
-            <label for="exampleFormControlTextarea1" class="form-label">
-                <h3>Nombre Carrera</h3>
-            </label>
-            <textarea class="form-control" 
-            [(ngModel)]="carreraNombreDto.nombre"
-                id="exampleFormControlTextarea1" rows="1"></textarea>
-        </div>
-        <div class="row">
-            <div class="col-2 ">
-                <button (click)="cambiarNombre(carreraNombreDto)" mat-raised-button>Guardar</button>
+    <!-- Forms -->
+    <form [formGroup]="nombreForm" (ngSubmit)="onSubmitNombreForm()">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Nombre</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('nombre')?.invalid && nombreForm.get('nombre')?.touched}" 
+                class="form-control" type="text" id="nombre" formControlName="nombre" placeholder="Nombre">
             </div>
         </div>
-    </div>
-    <mat-divider class="mt-3"></mat-divider>
+   
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Misión</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('mision')?.invalid && nombreForm.get('mision')?.touched}" 
+                class="form-control" type="text" id="mision" formControlName="mision" placeholder="Misión">
+            </div>
+        </div>
 
-    <!-- Mision -->
-    <div class="row mt-3">
-        <div class="col-12 mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
-                <h3>Misión</h3>
-            </label>
-            <textarea [(ngModel)]="carreraMisionVis.mision" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Visión</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('vision')?.invalid && nombreForm.get('vision')?.touched}"
+                 class="form-control" type="text" id="vision" formControlName="vision" placeholder="Vision">
+            </div>
         </div>
         
-    </div>
-    <!-- Vision -->
-    <div class="row">
-        <div class="col-12 mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
-                <h3>Visión</h3>
-            </label>
-            <textarea [(ngModel)]="carreraMisionVis.vision" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Objetivo</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('objetivo')?.invalid && nombreForm.get('objetivo')?.touched}"
+                 class="form-control" type="text" id="objetivo" formControlName="objetivo" placeholder="Objetivo">
+            </div>
         </div>
-        <div class="col">
-            <button (click)="cambiarMision(carreraMisionVis)" mat-raised-button>Guardar</button>
-        </div>
-    </div>
-    <mat-divider class="mt-3"></mat-divider>
 
-    <!-- Objetivos -->
-    <div class="row mt-3">
-        <div class="col-12 mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
-                <h3>Objetivos</h3>
-            </label>
-            <textarea 
-            [(ngModel)]="carreraObjetivo.objetivos"
-            class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <div class="row justify-content-end ">
+            <div class="col-12 d-flex justify-content-end mt-5 mb-5">
+                <!-- <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button> -->
+                <button type="submit" (click)="onSubmitNombreForm()" [disabled]="!nombreForm.valid" class="btn btn-success ms-3">Guardar</button>
+            </div>
         </div>
-        <div class="col-12">
-            <button (click)="cambiarObjetivo(carreraObjetivo)" mat-raised-button>Guardar</button>
-        </div>
-    </div>
+       
+    </form>
 
     <mat-divider class="mt-3"></mat-divider>
     

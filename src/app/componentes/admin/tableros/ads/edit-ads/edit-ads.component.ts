@@ -42,6 +42,7 @@ export class EditAdsComponent {
     this.ad.nombreArchivo = this.editForm.get('nombre')?.value; 
     this.ad.link = this.editForm.get('link')?.value;
     console.log(this.ad);
+    
     this._editAd.editAd(this.ad).subscribe({
       next: (data: any) => {
         console.log(data);

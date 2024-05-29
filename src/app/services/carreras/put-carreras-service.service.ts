@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroments';
-import { AtributosEducacionales, Carrera, Profesor } from '../../interfaces/carrera';
+import { AtributosEducacionales, Carrera, CarreraDto, Profesor } from '../../interfaces/carrera';
 import { Observable } from 'rxjs';
 import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CoordinadorDto } from '../../interfaces/Dto';
 
@@ -11,6 +11,9 @@ import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpUR
 export class PutCarrerasServiceService {
   myAppUrl: string = environment.endpoint
   myApiUrl: string = "api/CarrerasControllerPut/"
+
+  carreraMetadata: string = "editarMetadata/"
+
   carreraVisionMisionApi: string = "carreraMisonVision/"
   carreraNombreApi: string = "carreraNombre/"
   carreraObjetivo: string = "carreraObjetivo/"
@@ -21,6 +24,9 @@ export class PutCarrerasServiceService {
   coordinadorUrl: string = "profesor/"
 
   constructor(private _http: HttpClient) { }
+  putCarreraMetadata(carrera: CarreraDto): Observable<any> {
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraMetadata}${carrera.id}`, carrera)    
+  }
 
   putCarreraNombre(carreraNombre: CarreranombreDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraNombreApi}${carreraNombre.id}`, carreraNombre)

@@ -62,7 +62,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   getCarrera() {
     this._carreraService.getCarrera(this.id).subscribe(data => {
       this.carrera = data;
-      const carreraId = this.carrera.coordinadorID
+      // const carreraId = this.carrera.coordinadorID
     //   this._carreraService.getProfesor(carreraId).subscribe(data => {    
     //   console.log(this.profesores);
     // });

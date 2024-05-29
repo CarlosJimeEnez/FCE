@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AtributosEducacionales } from 'src/app/interfaces/carrera';
+import { AtributosEducacionales, CarreraDto } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
@@ -10,6 +10,7 @@ import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpUR
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor } from 'src/app/interfaces/profesores';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   
 @Component({
   selector: 'app-edit-carreras',
@@ -17,9 +18,8 @@ import { Profesor } from 'src/app/interfaces/profesores';
   styleUrls: ['./edit-carreras.component.css']
 })
 
-export class EditCarrerasComponent implements OnInit, AfterViewInit {
+export class EditCarrerasComponent implements OnInit {
   id!: number;
-  carreraNombre!: string;  
   atributosEducacionales: AtributosEducacionales[] = [];
   objetivosEducacionales: ObjetivosEducacionalesDto[] = [];
   competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
@@ -31,6 +31,12 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ["atributos", "Acciones"]; 
   
   // DTO
+  carrera: CarreraDto = {
+    carreraNombre: "", 
+    mision: "",
+    vision: "",
+    objetivos: "" 
+  }
 
   atributoNuevo: AtributosEducacionales = {
     descripcion: "",
@@ -45,9 +51,13 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
     carreraId: this.id
   }
 
+  nombreForm!: FormGroup
+
+  ////////////////////////////////
   carreraNombreDto!: CarreranombreDto
   carreraMisionVis!: CarreraMisionDto
   carreraObjetivo!: CarreraObjetivosDto
+  
   catalogosAsignaturasURL!: CarreraCatAsignaturasDto
   mapaTutorial!: CarreraMapaTutorialDto
   listadoMaterias!: CarreraListadoMateriasDto
@@ -57,6 +67,7 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   coordinador!: CoordinadorDto
 
   constructor(private _carreraService: CarrerasServicesService,
+    private _fb: FormBuilder, 
     private _route: ActivatedRoute,
     private _carreraPostService: PostCarrerasService,
     private _carreraPutService: PutCarrerasServiceService,
@@ -110,18 +121,44 @@ export class EditCarrerasComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<AtributosEducacionales>;
   
   ngOnInit(): void {
-    this.objetivoEducacionalNuevo.carreraId = this.id;
     this.atributoNuevo.carreraId = this.id;
     this.competenciasNuevo.carreraId = this.id;
-    this.carreraNombre = this._route.snapshot.queryParamMap.get('carreraNombre')!;
+
+    this.carrera.id = this.id;
+    this.carrera.carreraNombre = this._route.snapshot.queryParamMap.get('carreraNombre')!;
     
+    this.nombreForm = this._fb.group({
+      nombre: [this.carrera.carreraNombre, Validators.required],
+      mision: [this.carrera.mision, Validators.required],
+      vision: [this.carrera.vision, Validators.required],
+      objetivo: [this.carrera.objetivos, Validators.required],
+    })
+
     this.getAtributos(this.id);
     this.getObjetivosEducacionalesByCarreraId(this.id);
     this.getCompetenciasEspecificasByCarreraId(this.id);
     this.getProfesores()
   }
 
-  ngAfterViewInit(): void{}
+  onSubmitNombreForm(){
+    console.log("onSubmitNombreForm");
+    this.carrera.carreraNombre = this.nombreForm.get("nombre")?.value;
+    this.carrera.mision = this.nombreForm.get("mision")?.value;
+    this.carrera.vision = this.nombreForm.get("vision")?.value;
+    this.carrera.objetivos = this.nombreForm.get("objetivo")?.value;
+    this._carreraPutService.putCarreraMetadata(this.carrera).subscribe({
+      next: (data: any) => {},
+      error: (err: any) => {
+        console.log(err);
+        this.alerta("Error al editar")
+      },
+      complete: () => {
+        console.log("complete");
+        this.alerta("Editado correcatamente")
+      },
+    })
+
+  }
 
   getProfesores() {
     this._profesoresService.getProfesores().subscribe(profesores =>

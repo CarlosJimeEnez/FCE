@@ -3,8 +3,14 @@ export interface Carrera {
     carreraNombre: string;
     mision: string;
     vision: string;
-    descripcion: string;
-    coordinadorID: number;
+    objetivos: string;
+}
+
+export interface CarreraDto {
+    id?: number;
+    carreraNombre: string;
+    mision: string;
+    vision: string;
     objetivos: string;
 }
 
