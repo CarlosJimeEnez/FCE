@@ -200,73 +200,73 @@
     </div>
 
     <mat-divider class="mt-3"></mat-divider>
+
     <!-- Plan de estudios -->
-    <div class="row mt-3">
+    <div class="row mt-4">
         <div class="col text-center">
             <label for="exampleFormControlTextarea1" class="form-label">
                 <h3>Plan de estudios</h3>
             </label>
         </div>
-        <!-- Catalogo de asig -->
-        <div class="row">
-            <div class="col ">
-                <label for="basic-url" class="form-label"><h5>Catálogo de Asignaturas</h5></label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)]="catalogosAsignaturasURL.catalogoAsignaturaUrl"
-                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-                </div>
-            </div>
-        </div>
-        <div class="col-12 mb-3 mt-3">
-            <button (click)="cambiarCatalogoAsigURL(catalogosAsignaturasURL)" mat-raised-button>Guardar</button>
-        </div>
 
-        <!-- Mapa tutorial -->
-        <div class="row">
-            <div class="col ">
-                <label for="basic-url" class="form-label mt-4"><h5>Mapa tutorial</h5></label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)]="mapaTutorial.mapaTutorialUrl" 
-                    type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+        <form [formGroup]="pdfForm">
+            <!-- Catalogo Asignatura -->
+            <div class="row justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Catálogo de asignatura</h4>
+                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
                 </div>
             </div>
-        </div>
-        <div class="col-12 mb-3 mt-3">
-            <button (click)="cambiarMapaTutorialURL(mapaTutorial)" mat-raised-button>Guardar</button>
-        </div>
-        <!-- List materias -->
-        <div class="row">
-            <div class="col ">
-                <label for="basic-url" class="form-label mt-4"><h5>Listado de materias</h5></label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)]="listadoMaterias.listadoMateriasUrl" 
-                    type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            <div class="row justify-content-center">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
                 </div>
             </div>
-        </div>
-        
-        <div class="col-12 mb-3 mt-3">
-            <button (click)="cambiarListadoMateriasURL(listadoMaterias)" mat-raised-button>Guardar</button>
-        </div>
-        <!-- List de MOptativas -->
-        <div class="row mb-3">
-            <div class="col ">
-                <label for="basic-url" class="form-label mt-4"><h5>Listado de materias optativas</h5> </label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon3">https://</span>
-                    <input [(ngModel)] = "listadoMateriasOptativas.listadoMateriasOpURL" 
-                     type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-12 mb-3">
-        <button (click)="cambiarListadoMateriasOptativasURL(listadoMateriasOptativas)" mat-raised-button>Guardar</button>
-    </div>
+             <!-- Mapa Tutorial -->
+            <div class="row  justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Mapa tutorial</h4>
+                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                </div>
+            </div>
+
+             <!-- Listado de materias -->
+            <div class="row justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Listado materias</h4>
+                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                </div>
+            </div>
+
+            <!-- Listado de materias optativas -->
+            <div class="row justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Listado de materias optativas</h4>
+                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                </div>
+            </div>
+        </form>
+            
 
     <mat-divider class="mt-3"></mat-divider>
     

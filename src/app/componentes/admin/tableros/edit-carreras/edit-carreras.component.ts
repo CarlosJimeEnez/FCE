@@ -11,6 +11,7 @@ import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor } from 'src/app/interfaces/profesores';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocumentosDto } from 'src/app/interfaces/documento';
   
 @Component({
   selector: 'app-edit-carreras',
@@ -51,7 +52,9 @@ export class EditCarrerasComponent implements OnInit {
     carreraId: this.id
   }
 
+  // Forms
   nombreForm!: FormGroup
+  pdfForm!: FormGroup
 
   ////////////////////////////////
   carreraNombreDto!: CarreranombreDto
@@ -59,7 +62,12 @@ export class EditCarrerasComponent implements OnInit {
   carreraObjetivo!: CarreraObjetivosDto
   
   catalogosAsignaturasURL!: CarreraCatAsignaturasDto
-  mapaTutorial!: CarreraMapaTutorialDto
+
+  mapaTutorial: DocumentosDto = {
+    nombreArchivo: "",
+    file: null as any
+  }
+
   listadoMaterias!: CarreraListadoMateriasDto
   listadoMateriasOptativas!: CarreraListadoOpURLDto
   profesores: Profesor[] = []
@@ -102,11 +110,6 @@ export class EditCarrerasComponent implements OnInit {
         catalogoAsignaturaUrl: "",
       }
 
-      this.mapaTutorial = {
-        carreraId: this.id,
-        mapaTutorialUrl: "",
-      }
-
       this.listadoMaterias = {
         carreraId: this.id,
         listadoMateriasUrl: "",
@@ -134,6 +137,13 @@ export class EditCarrerasComponent implements OnInit {
       objetivo: [this.carrera.objetivos, Validators.required],
     })
 
+    this.pdfForm = this._fb.group({
+      catalogoAsignaturas: ["", Validators.required],
+      mapaTutorial: ["", Validators.required],
+      listadoMaterias: ["", Validators.required],
+      listadoMateriasOp: ["", Validators.required],
+    })
+
     this.getAtributos(this.id);
     this.getObjetivosEducacionalesByCarreraId(this.id);
     this.getCompetenciasEspecificasByCarreraId(this.id);
@@ -158,6 +168,13 @@ export class EditCarrerasComponent implements OnInit {
       },
     })
 
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.mapaTutorial.file = file;
+    }
   }
 
   getProfesores() {
