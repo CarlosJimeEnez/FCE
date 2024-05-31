@@ -14,7 +14,7 @@ export class PutCarrerasServiceService {
   myApiUrl: string = "api/CarrerasControllerPut/"
 
   carreraMetadata: string = "editarMetadata/"
-  catalogoAsignaturasUrl: string = "upload/"
+  uploadUrl: string = "upload/"
 
   carreraVisionMisionApi: string = "carreraMisonVision/"
   carreraNombreApi: string = "carreraNombre/"
@@ -31,7 +31,11 @@ export class PutCarrerasServiceService {
   }
 
   putCatalogosAsignaturas(catalogo: FormData, catalogoId: number): Observable<any> {
-    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.catalogoAsignaturasUrl}${catalogoId}`, catalogo)
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${catalogoId}`, catalogo)
+  }
+
+  putMapaTutorialAsignaturas(mapaTutorial: FormData, mapaId: number): Observable<any> {
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${mapaId}`, mapaTutorial)
   }
 
   putCarreraNombre(carreraNombre: CarreranombreDto): Observable<any> {

@@ -56,15 +56,24 @@ export class EditCarrerasComponent implements OnInit {
   nombreForm!: FormGroup
   pdfForm!: FormGroup
 
-  ////////////////////////////////
-  catalogosAsignaturasURL!: CarreraCatAsignaturasDto
+
+  ////////////////////////////////  
   catalogoAsignatura: DocumentosDto = {
     carreraId: 0, 
     nombreArchivo: "Catalogo Asignatura",
     file: null as any
   }
+  mapaTutorial: DocumentosDto = {
+    carreraId: 0, 
+    nombreArchivo: "Mapa Tutorial",
+    file: null as any
+  }
+  listadoMaterias: DocumentosDto = {
+    carreraId: 0, 
+    nombreArchivo: "Listado materias",
+    file: null as any
+  }
 
-  listadoMaterias!: CarreraListadoMateriasDto
   listadoMateriasOptativas!: CarreraListadoOpURLDto
   profesores: Profesor[] = []
   profesorSeleccionado: number | null = null;
@@ -82,24 +91,10 @@ export class EditCarrerasComponent implements OnInit {
     )
     {
       this.id = +this._route.snapshot.paramMap.get('id')!;
-
-      console.log(this.id);
-
-      this.catalogosAsignaturasURL = {
-        carreraId: this.id,
-        catalogoAsignaturaUrl: "",
-      }
-
-      this.listadoMaterias = {
-        carreraId: this.id,
-        listadoMateriasUrl: "",
-      }
-
       this.listadoMateriasOptativas = {
         carreraId: this.id,
         listadoMateriasOpURL: "",
       }
-
     }
   @ViewChild(MatTable) table!: MatTable<AtributosEducacionales>;
   
@@ -119,7 +114,7 @@ export class EditCarrerasComponent implements OnInit {
 
     this.pdfForm = this._fb.group({
       catalogoAsignaturas: [this.catalogoAsignatura.file, Validators.required],
-      mapaTutorial: ["", Validators.required],
+      mapaTutorial: [this.mapaTutorial.file, Validators.required],
       listadoMaterias: ["", Validators.required],
       listadoMateriasOp: ["", Validators.required],
     })
@@ -150,11 +145,17 @@ export class EditCarrerasComponent implements OnInit {
 
   }
 
-  onFileSelected(event: any): void {
+  onFileSelected(event: any, fieldType: string): void {
     const file: File = event.target.files[0];
-    if (file) {
-      this.catalogoAsignatura.file = file;
+
+    const actions: {[key: string]: () => void} = {
+      catalogoAsignaturas: () => {this.catalogoAsignatura.file = file}, 
+      mapaTutorial: () => {this.mapaTutorial.file = file}
     }
+    if(actions[fieldType]) {
+      actions[fieldType]()
+    }
+
   }
 
   isFieldValid(fieldName: string): boolean {
@@ -162,7 +163,7 @@ export class EditCarrerasComponent implements OnInit {
     return control && control.value !== null && control.value !== ""; 
   }
  
-  cambiarCatalogoAsigURL(){
+  cambiarCatalogoAsigUrl(){
     console.log("Cambiar Catalogo de Asignatura...") 
     const formData = new FormData(); 
     this.catalogoAsignatura.carreraId = this.id
@@ -176,7 +177,38 @@ export class EditCarrerasComponent implements OnInit {
         console.log(data);
       },
       error: (err: HttpErrorResponse) => {
-        this.alerta("Error al carga el documento");
+        this.alerta("Error al enviar el documento");
+        console.log(err.error);
+        if(err.error.errors){
+          for(const key in err.error.errors){
+            if (err.error.errors.hasOwnProperty(key)) {
+              console.error(`${key}: ${err.error.errors[key]}`);
+            }
+          }
+        }
+      },
+      complete: () => {
+        console.log("Complete put");
+        this.alerta("Documento cargado correctamente");
+      }
+    })
+  }
+
+  cambiarMapaTutorialUrl(){
+    console.log("Cambiar mapa Tutorial ...") 
+    const formData = new FormData(); 
+    this.mapaTutorial.carreraId = this.id
+
+    formData.append("carreraId", this.mapaTutorial.carreraId.toString()); 
+    formData.append("nombreArchivo", this.mapaTutorial.nombreArchivo); 
+    formData.append("file", this.mapaTutorial.file);
+
+    this._carreraPutService.putMapaTutorialAsignaturas(formData, this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.alerta("Error al enviar el documento");
         console.log(err.error);
         if(err.error.errors){
           for(const key in err.error.errors){
