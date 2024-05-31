@@ -38,6 +38,10 @@ export class PutCarrerasServiceService {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${mapaId}`, mapaTutorial)
   }
 
+  putListadoMaterias(listadoMaterias: FormData, Id: number): Observable<any> {
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${Id}`, listadoMaterias)
+  }
+
   putCarreraNombre(carreraNombre: CarreranombreDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraNombreApi}${carreraNombre.id}`, carreraNombre)
   }
@@ -50,17 +54,17 @@ export class PutCarrerasServiceService {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraObjetivo}${carreraObjetivo.id}`, carreraObjetivo) 
   }
 
-  putCarreraCatAsignaturas(catalogoAsignaturaURL: CarreraCatAsignaturasDto): Observable<any> {
-    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.catalogosAsignaturasURL}`, catalogoAsignaturaURL) 
-  }
+  // putCarreraCatAsignaturas(catalogoAsignaturaURL: CarreraCatAsignaturasDto): Observable<any> {
+  //   return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.catalogosAsignaturasURL}`, catalogoAsignaturaURL) 
+  // }
 
-  putMapaTutorial(mapaTutorial: CarreraMapaTutorialDto): Observable<any> {
-    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.mapaTutorialURL}`, mapaTutorial) 
-  }
+  // putMapaTutorial(mapaTutorial: CarreraMapaTutorialDto): Observable<any> {
+  //   return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.mapaTutorialURL}`, mapaTutorial) 
+  // }
 
-  putListadoMaterias(listadoMaterias: CarreraListadoMateriasDto): Observable<any> {
-    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoMateriasURL}`, listadoMaterias)
-  }
+  // putListadoMaterias(listadoMaterias: CarreraListadoMateriasDto): Observable<any> {
+  //   return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoMateriasURL}`, listadoMaterias)
+  // }
 
   putListadoMateriasOptativas(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoDeMateriasOptativas}`, listadoMateriasOp)

@@ -73,8 +73,12 @@ export class EditCarrerasComponent implements OnInit {
     nombreArchivo: "Listado materias",
     file: null as any
   }
+  listadoMateriasOptativas: DocumentosDto = {
+    carreraId: 0, 
+    nombreArchivo: "Listado de materias Optativa",
+    file: null as any
+  }
 
-  listadoMateriasOptativas!: CarreraListadoOpURLDto
   profesores: Profesor[] = []
   profesorSeleccionado: number | null = null;
   coordinador!: CoordinadorDto
@@ -91,11 +95,8 @@ export class EditCarrerasComponent implements OnInit {
     )
     {
       this.id = +this._route.snapshot.paramMap.get('id')!;
-      this.listadoMateriasOptativas = {
-        carreraId: this.id,
-        listadoMateriasOpURL: "",
-      }
     }
+
   @ViewChild(MatTable) table!: MatTable<AtributosEducacionales>;
   
   ngOnInit(): void {
@@ -115,8 +116,8 @@ export class EditCarrerasComponent implements OnInit {
     this.pdfForm = this._fb.group({
       catalogoAsignaturas: [this.catalogoAsignatura.file, Validators.required],
       mapaTutorial: [this.mapaTutorial.file, Validators.required],
-      listadoMaterias: ["", Validators.required],
-      listadoMateriasOp: ["", Validators.required],
+      listadoMaterias: [this.listadoMaterias.file, Validators.required],
+      listadoMateriasOp: [this.listadoMateriasOptativas.file, Validators.required],
     })
 
     this.getAtributos(this.id);
@@ -150,8 +151,11 @@ export class EditCarrerasComponent implements OnInit {
 
     const actions: {[key: string]: () => void} = {
       catalogoAsignaturas: () => {this.catalogoAsignatura.file = file}, 
-      mapaTutorial: () => {this.mapaTutorial.file = file}
+      mapaTutorial: () => {this.mapaTutorial.file = file},
+      listadoMaterias: () => {this.listadoMaterias.file = file},
+      listadoMateriasOp: () => {this.listadoMateriasOptativas.file = file}
     }
+
     if(actions[fieldType]) {
       actions[fieldType]()
     }
@@ -162,7 +166,7 @@ export class EditCarrerasComponent implements OnInit {
     const control = this.pdfForm.get(fieldName)!;
     return control && control.value !== null && control.value !== ""; 
   }
- 
+  
   cambiarCatalogoAsigUrl(){
     console.log("Cambiar Catalogo de Asignatura...") 
     const formData = new FormData(); 
@@ -204,6 +208,68 @@ export class EditCarrerasComponent implements OnInit {
     formData.append("file", this.mapaTutorial.file);
 
     this._carreraPutService.putMapaTutorialAsignaturas(formData, this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.alerta("Error al enviar el documento");
+        console.log(err.error);
+        if(err.error.errors){
+          for(const key in err.error.errors){
+            if (err.error.errors.hasOwnProperty(key)) {
+              console.error(`${key}: ${err.error.errors[key]}`);
+            }
+          }
+        }
+      },
+      complete: () => {
+        console.log("Complete put");
+        this.alerta("Documento cargado correctamente");
+      }
+    })
+  }
+
+  cambiarListadoMaterias(){
+    console.log("Cambiar Listado Materias ...") 
+    const formData = new FormData(); 
+    this.listadoMaterias.carreraId = this.id
+
+    formData.append("carreraId", this.listadoMaterias.carreraId.toString()); 
+    formData.append("nombreArchivo", this.listadoMaterias.nombreArchivo); 
+    formData.append("file", this.listadoMaterias.file);
+
+    this._carreraPutService.putListadoMaterias(formData, this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.alerta("Error al enviar el documento");
+        console.log(err.error);
+        if(err.error.errors){
+          for(const key in err.error.errors){
+            if (err.error.errors.hasOwnProperty(key)) {
+              console.error(`${key}: ${err.error.errors[key]}`);
+            }
+          }
+        }
+      },
+      complete: () => {
+        console.log("Complete put");
+        this.alerta("Documento cargado correctamente");
+      }
+    })
+  }
+
+  cambiarListadoMateriasOp(){
+    console.log("Cambiar Listado Materias ...") 
+    const formData = new FormData(); 
+    this.listadoMaterias.carreraId = this.id
+
+    formData.append("carreraId", this.listadoMaterias.carreraId.toString()); 
+    formData.append("nombreArchivo", this.listadoMaterias.nombreArchivo); 
+    formData.append("file", this.listadoMaterias.file);
+
+    this._carreraPutService.putListadoMaterias(formData, this.id).subscribe({
       next: (data: any) => {
         console.log(data);
       },
@@ -365,43 +431,43 @@ export class EditCarrerasComponent implements OnInit {
     )
   }
 
-  cambiarMapaTutorialURL(mapaTutorial: CarreraMapaTutorialDto){
-    console.log(mapaTutorial)
-    if(mapaTutorial.mapaTutorialUrl != ""){
-      this._carreraPutService.putMapaTutorial(mapaTutorial).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          console.log(err);
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Objetivos vacio")
-    }
-  }
+  // cambiarMapaTutorialURL(mapaTutorial: CarreraMapaTutorialDto){
+  //   console.log(mapaTutorial)
+  //   if(mapaTutorial.mapaTutorialUrl != ""){
+  //     this._carreraPutService.putMapaTutorial(mapaTutorial).subscribe(data => 
+  //       {
+  //         console.log(data);
+  //         this.alerta("Peticion Exitosa")
+  //       }, err => {
+  //         console.log(err);
+  //         this.alerta("Error peticion")
+  //       }
+  //     )
+  //   } 
+  //   else
+  //   {
+  //     this.alerta("Objetivos vacio")
+  //   }
+  // }
 
-  cambiarListadoMateriasURL(listadoMaterias: CarreraListadoMateriasDto){
-    console.log(listadoMaterias)
-    if(listadoMaterias.listadoMateriasUrl != ""){
-      this._carreraPutService.putListadoMaterias(listadoMaterias).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          console.log(err);
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Objetivos vacio")
-    }
-  }
+  // cambiarListadoMateriasURL(listadoMaterias: CarreraListadoMateriasDto){
+  //   console.log(listadoMaterias)
+  //   if(listadoMaterias.listadoMateriasUrl != ""){
+  //     this._carreraPutService.putListadoMaterias(listadoMaterias).subscribe(data => 
+  //       {
+  //         console.log(data);
+  //         this.alerta("Peticion Exitosa")
+  //       }, err => {
+  //         console.log(err);
+  //         this.alerta("Error peticion")
+  //       }
+  //     )
+  //   } 
+  //   else
+  //   {
+  //     this.alerta("Objetivos vacio")
+  //   }
+  // }
 
   cambiarListadoMateriasOptativasURL(listadoMateriasOptativas: CarreraListadoOpURLDto){
     console.log(listadoMateriasOptativas)
