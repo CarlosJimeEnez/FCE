@@ -214,13 +214,14 @@
             <div class="row justify-content-center">
                 <div class="col-6 mt-5">
                     <h4>Catálogo de asignatura</h4>
-                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                    <input [ngClass]="{'is-invalid': pdfForm.get('catalogoAsignaturas')?.invalid && pdfForm.get('catalogoAsignaturas')?.touched}" 
+                    class="form-control" (change)="onFileSelected($event)" type="file" id="catalogoAsignaturas" formControlName="catalogoAsignaturas" placeholder="Mapa Tutorial">
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-6 mt-2 d-flex justify-content-start">
                     <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
-                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                    <button type="submit" (click)="cambiarCatalogoAsigURL()" [disabled]="!isFieldValid('catalogoAsignaturas')" class="btn btn-success ms-3">Guardar</button>
                 </div>
             </div>
 
@@ -228,13 +229,14 @@
             <div class="row  justify-content-center">
                 <div class="col-6 mt-5">
                     <h4>Mapa tutorial</h4>
-                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                    <input [ngClass]="{'is-invalid': pdfForm.get('mapaTutorial')?.invalid && pdfForm.get('mapaTutorial')?.touched}" 
+                    class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
                 </div>
             </div>
             <div class="row justify-content-center ">
                 <div class="col-6 mt-2 d-flex justify-content-start">
                     <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
-                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                    <button type="submit"  [disabled]="!isFieldValid('mapaTutorial')" class="btn btn-success ms-3">Guardar</button>
                 </div>
             </div>
 
@@ -242,13 +244,14 @@
             <div class="row justify-content-center">
                 <div class="col-6 mt-5">
                     <h4>Listado materias</h4>
-                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                    <input [ngClass]="{'is-invalid': pdfForm.get('listadoMaterias')?.invalid && pdfForm.get('listadoMaterias')?.touched}" 
+                    class="form-control" (change)="onFileSelected($event)" type="file" id="listadoMaterias" formControlName="listadoMaterias" placeholder="Mapa Tutorial">
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-6 mt-2 d-flex justify-content-start">
                     <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
-                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                    <button type="submit"  [disabled]="!isFieldValid('listadoMaterias')" class="btn btn-success ms-3">Guardar</button>
                 </div>
             </div>
 
@@ -256,13 +259,14 @@
             <div class="row justify-content-center">
                 <div class="col-6 mt-5">
                     <h4>Listado de materias optativas</h4>
-                    <input class="form-control" (change)="onFileSelected($event)" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                    <input [ngClass]="{'is-invalid': pdfForm.get('listadoMateriasOp')?.invalid && pdfForm.get('listadoMateriasOp')?.touched}"
+                    class="form-control" (change)="onFileSelected($event)" type="file" id="listadoMateriasOp" formControlName="listadoMateriasOp" placeholder="Mapa Tutorial">
                 </div>
             </div>
             <div class="row justify-content-center ">
                 <div class="col-6 mt-2 d-flex justify-content-start">
                     <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
-                    <button type="submit"  [disabled]="!pdfForm.valid" class="btn btn-success ms-3">Guardar</button>
+                    <button type="submit"  [disabled]="!isFieldValid('listadoMateriasOp')" class="btn btn-success ms-3">Guardar</button>
                 </div>
             </div>
         </form>

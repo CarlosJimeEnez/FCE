@@ -6,12 +6,13 @@ import { CarrerasServicesService } from 'src/app/services/carreras/carreras-serv
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
+import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor } from 'src/app/interfaces/profesores';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentosDto } from 'src/app/interfaces/documento';
+import { HttpErrorResponse } from '@angular/common/http';
   
 @Component({
   selector: 'app-edit-carreras',
@@ -38,7 +39,6 @@ export class EditCarrerasComponent implements OnInit {
     vision: "",
     objetivos: "" 
   }
-
   atributoNuevo: AtributosEducacionales = {
     descripcion: "",
     carreraId: this.id
@@ -57,14 +57,10 @@ export class EditCarrerasComponent implements OnInit {
   pdfForm!: FormGroup
 
   ////////////////////////////////
-  carreraNombreDto!: CarreranombreDto
-  carreraMisionVis!: CarreraMisionDto
-  carreraObjetivo!: CarreraObjetivosDto
-  
   catalogosAsignaturasURL!: CarreraCatAsignaturasDto
-
-  mapaTutorial: DocumentosDto = {
-    nombreArchivo: "",
+  catalogoAsignatura: DocumentosDto = {
+    carreraId: 0, 
+    nombreArchivo: "Catalogo Asignatura",
     file: null as any
   }
 
@@ -88,22 +84,6 @@ export class EditCarrerasComponent implements OnInit {
       this.id = +this._route.snapshot.paramMap.get('id')!;
 
       console.log(this.id);
-
-      this.carreraNombreDto = {
-        id: this.id,
-        nombre: ""
-      }
-
-      this.carreraMisionVis = {
-        id: this.id,
-        mision: "",
-        vision: "",
-      }
-
-      this.carreraObjetivo = {
-        id: this.id,
-        objetivos: ""
-      }
 
       this.catalogosAsignaturasURL = {
         carreraId: this.id,
@@ -138,7 +118,7 @@ export class EditCarrerasComponent implements OnInit {
     })
 
     this.pdfForm = this._fb.group({
-      catalogoAsignaturas: ["", Validators.required],
+      catalogoAsignaturas: [this.catalogoAsignatura.file, Validators.required],
       mapaTutorial: ["", Validators.required],
       listadoMaterias: ["", Validators.required],
       listadoMateriasOp: ["", Validators.required],
@@ -173,8 +153,44 @@ export class EditCarrerasComponent implements OnInit {
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
-      this.mapaTutorial.file = file;
+      this.catalogoAsignatura.file = file;
     }
+  }
+
+  isFieldValid(fieldName: string): boolean {
+    const control = this.pdfForm.get(fieldName)!;
+    return control && control.value !== null && control.value !== ""; 
+  }
+ 
+  cambiarCatalogoAsigURL(){
+    console.log("Cambiar Catalogo de Asignatura...") 
+    const formData = new FormData(); 
+    this.catalogoAsignatura.carreraId = this.id
+
+    formData.append("carreraId", this.catalogoAsignatura.carreraId.toString()); 
+    formData.append("nombreArchivo", this.catalogoAsignatura.nombreArchivo); 
+    formData.append("file", this.catalogoAsignatura.file);
+
+    this._carreraPutService.putCatalogosAsignaturas(formData, this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.alerta("Error al carga el documento");
+        console.log(err.error);
+        if(err.error.errors){
+          for(const key in err.error.errors){
+            if (err.error.errors.hasOwnProperty(key)) {
+              console.error(`${key}: ${err.error.errors[key]}`);
+            }
+          }
+        }
+      },
+      complete: () => {
+        console.log("Complete put");
+        this.alerta("Documento cargado correctamente");
+      }
+    })
   }
 
   getProfesores() {
@@ -315,76 +331,6 @@ export class EditCarrerasComponent implements OnInit {
         this.alerta("Error en la petición")        
       } 
     )
-  }
-
-  cambiarNombre(carreraNombre: CarreranombreDto){
-    if(carreraNombre.nombre != ""){
-      this._carreraPutService.putCarreraNombre(carreraNombre).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Nombre vacio")
-    }
-  }
-
-  cambiarMision(carrera: CarreraMisionDto){
-    if(carrera.mision != "" && carrera.vision != ""){
-      this._carreraPutService.putCarreraMision(carrera).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Misión o visión vacio")
-    }
-  }
-
-  cambiarObjetivo(carrera: CarreraObjetivosDto){
-    if(carrera.objetivos != ""){
-      this._carreraPutService.putCarreraObjetivos(carrera).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Objetivos vacio")
-    }
-  }
-
-  cambiarCatalogoAsigURL(catalogoAsignaturaURL: CarreraCatAsignaturasDto){
-    console.log(catalogoAsignaturaURL)
-    if(catalogoAsignaturaURL.catalogoAsignaturaUrl != ""){
-      this._carreraPutService.putCarreraCatAsignaturas(catalogoAsignaturaURL).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          console.log(err);
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Objetivos vacio")
-    }
   }
 
   cambiarMapaTutorialURL(mapaTutorial: CarreraMapaTutorialDto){

@@ -1,5 +1,5 @@
 export interface DocumentosDto {
-    Id?: number;
+    carreraId?: number;
     nombreArchivo: string;
     file: File;
 }

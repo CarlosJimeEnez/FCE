@@ -4,6 +4,7 @@ import { environment } from '../../enviroments/enviroments';
 import { AtributosEducacionales, Carrera, CarreraDto, Profesor } from '../../interfaces/carrera';
 import { Observable } from 'rxjs';
 import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CoordinadorDto } from '../../interfaces/Dto';
+import { DocumentosDto } from 'src/app/interfaces/documento';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class PutCarrerasServiceService {
   myApiUrl: string = "api/CarrerasControllerPut/"
 
   carreraMetadata: string = "editarMetadata/"
+  catalogoAsignaturasUrl: string = "upload/"
 
   carreraVisionMisionApi: string = "carreraMisonVision/"
   carreraNombreApi: string = "carreraNombre/"
@@ -26,6 +28,10 @@ export class PutCarrerasServiceService {
   constructor(private _http: HttpClient) { }
   putCarreraMetadata(carrera: CarreraDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraMetadata}${carrera.id}`, carrera)    
+  }
+
+  putCatalogosAsignaturas(catalogo: FormData, catalogoId: number): Observable<any> {
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.catalogoAsignaturasUrl}${catalogoId}`, catalogo)
   }
 
   putCarreraNombre(carreraNombre: CarreranombreDto): Observable<any> {
