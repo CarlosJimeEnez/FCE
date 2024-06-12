@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Profesor } from 'src/app/interfaces/profesores';
+import { Profesor, ProfesorDTO } from 'src/app/interfaces/profesores';
 import { DeleteProfesoresService } from 'src/app/services/profesores/delete-profesores.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 
@@ -12,7 +12,7 @@ import { GetProfesoresService } from 'src/app/services/profesores/get-profesores
   styleUrls: ['./tablero-profesores.component.css']
 })
 export class TableroProfesoresComponent implements OnInit{
-  profesores: Profesor[] = [];
+  profesores: ProfesorDTO[] = [];
   dataSource = new MatTableDataSource(this.profesores)
 
   constructor(private _router: Router,

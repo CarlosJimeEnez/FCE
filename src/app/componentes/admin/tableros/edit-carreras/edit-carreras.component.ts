@@ -6,14 +6,14 @@ import { CarrerasServicesService } from 'src/app/services/carreras/carreras-serv
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
+import { CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
-import { Profesor } from 'src/app/interfaces/profesores';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentosDto } from 'src/app/interfaces/documento';
 import { HttpErrorResponse } from '@angular/common/http';
-  
+import { ProfesorDTO } from 'src/app/interfaces/profesores';
+
 @Component({
   selector: 'app-edit-carreras',
   templateUrl: './edit-carreras.component.html',
@@ -21,18 +21,21 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 
 export class EditCarrerasComponent implements OnInit {
+ 
   id!: number;
   atributosEducacionales: AtributosEducacionales[] = [];
   objetivosEducacionales: ObjetivosEducacionalesDto[] = [];
   competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
+  profesores: ProfesorDTO[] = [];
 
   dataSource = new MatTableDataSource(this.atributosEducacionales)
   dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales)
   dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
-  
+  dataSourceProfesores = new MatTableDataSource(this.profesores)
+
   displayedColumns: string[] = ["atributos", "Acciones"]; 
-  
-  // DTO
+  displayedColumnsProfesores: string[] = ["nombre", "rol", "acciones"]
+
   carrera: CarreraDto = {
     carreraNombre: "", 
     mision: "",
@@ -56,7 +59,6 @@ export class EditCarrerasComponent implements OnInit {
   nombreForm!: FormGroup
   pdfForm!: FormGroup
 
-
   ////////////////////////////////  
   catalogoAsignatura: DocumentosDto = {
     carreraId: 0, 
@@ -75,23 +77,22 @@ export class EditCarrerasComponent implements OnInit {
   }
   listadoMateriasOptativas: DocumentosDto = {
     carreraId: 0, 
-    nombreArchivo: "Listado de materias Optativa",
+    nombreArchivo: "Listado de materias Optativas",
     file: null as any
   }
 
-  profesores: Profesor[] = []
-  profesorSeleccionado: number | null = null;
-  coordinador!: CoordinadorDto
+  animal: string = "panda" 
 
-  constructor(private _carreraService: CarrerasServicesService,
+  constructor(
     private _fb: FormBuilder, 
+    private _carreraService: CarrerasServicesService,
     private _route: ActivatedRoute,
     private _carreraPostService: PostCarrerasService,
     private _carreraPutService: PutCarrerasServiceService,
     private _carreraDeleteService: DeleteCarrerasService,
     private _router: Router,
     private _snackBar: MatSnackBar,
-    private _profesoresService: GetProfesoresService
+    private _profesoresService: GetProfesoresService,
     )
     {
       this.id = +this._route.snapshot.paramMap.get('id')!;
@@ -100,6 +101,7 @@ export class EditCarrerasComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<AtributosEducacionales>;
   
   ngOnInit(): void {
+    
     this.atributoNuevo.carreraId = this.id;
     this.competenciasNuevo.carreraId = this.id;
 
@@ -123,7 +125,7 @@ export class EditCarrerasComponent implements OnInit {
     this.getAtributos(this.id);
     this.getObjetivosEducacionalesByCarreraId(this.id);
     this.getCompetenciasEspecificasByCarreraId(this.id);
-    this.getProfesores()
+    this.getProfesoresDeCarrera(this.id);
   }
 
   onSubmitNombreForm(){
@@ -263,11 +265,11 @@ export class EditCarrerasComponent implements OnInit {
   cambiarListadoMateriasOp(){
     console.log("Cambiar Listado Materias ...") 
     const formData = new FormData(); 
-    this.listadoMaterias.carreraId = this.id
+    this.listadoMateriasOptativas.carreraId = this.id
 
-    formData.append("carreraId", this.listadoMaterias.carreraId.toString()); 
-    formData.append("nombreArchivo", this.listadoMaterias.nombreArchivo); 
-    formData.append("file", this.listadoMaterias.file);
+    formData.append("carreraId", this.listadoMateriasOptativas.carreraId.toString()); 
+    formData.append("nombreArchivo", this.listadoMateriasOptativas.nombreArchivo); 
+    formData.append("file", this.listadoMateriasOptativas.file);
 
     this._carreraPutService.putListadoMaterias(formData, this.id).subscribe({
       next: (data: any) => {
@@ -291,20 +293,26 @@ export class EditCarrerasComponent implements OnInit {
     })
   }
 
-  getProfesores() {
-    this._profesoresService.getProfesores().subscribe(profesores =>
-      {
-        console.log(profesores);
-        this.profesores = profesores;
-      })
-  }
-
   getAtributos(carreraId: number):void{
     this._carreraService.getAtributosEgresoByCarreraId(carreraId).subscribe(data => {
       console.log(data);
       this.atributosEducacionales = data
       this.dataSource = new MatTableDataSource(this.atributosEducacionales);
     }, error => console.log(error))
+  }
+
+  getProfesoresDeCarrera(id: number){
+    this._profesoresService.getProfesorPorCarreraId(id).subscribe({
+      next: (data: ProfesorDTO[]) => {
+        this.profesores = data
+        console.log(this.profesores)
+        this.dataSourceProfesores = new MatTableDataSource(this.profesores)
+      },
+      error: (error: any) => console.log(error),
+      complete: () => {
+        console.log("Profesores por carrera cargado completamente");
+      }
+    })
   }
 
   getObjetivosEducacionalesByCarreraId(carreraId: number){
@@ -430,85 +438,6 @@ export class EditCarrerasComponent implements OnInit {
       } 
     )
   }
-
-  // cambiarMapaTutorialURL(mapaTutorial: CarreraMapaTutorialDto){
-  //   console.log(mapaTutorial)
-  //   if(mapaTutorial.mapaTutorialUrl != ""){
-  //     this._carreraPutService.putMapaTutorial(mapaTutorial).subscribe(data => 
-  //       {
-  //         console.log(data);
-  //         this.alerta("Peticion Exitosa")
-  //       }, err => {
-  //         console.log(err);
-  //         this.alerta("Error peticion")
-  //       }
-  //     )
-  //   } 
-  //   else
-  //   {
-  //     this.alerta("Objetivos vacio")
-  //   }
-  // }
-
-  // cambiarListadoMateriasURL(listadoMaterias: CarreraListadoMateriasDto){
-  //   console.log(listadoMaterias)
-  //   if(listadoMaterias.listadoMateriasUrl != ""){
-  //     this._carreraPutService.putListadoMaterias(listadoMaterias).subscribe(data => 
-  //       {
-  //         console.log(data);
-  //         this.alerta("Peticion Exitosa")
-  //       }, err => {
-  //         console.log(err);
-  //         this.alerta("Error peticion")
-  //       }
-  //     )
-  //   } 
-  //   else
-  //   {
-  //     this.alerta("Objetivos vacio")
-  //   }
-  // }
-
-  cambiarListadoMateriasOptativasURL(listadoMateriasOptativas: CarreraListadoOpURLDto){
-    console.log(listadoMateriasOptativas)
-    if(listadoMateriasOptativas.listadoMateriasOpURL != ""){
-      this._carreraPutService.putListadoMateriasOptativas(listadoMateriasOptativas).subscribe(data => 
-        {
-          console.log(data);
-          this.alerta("Peticion Exitosa")
-        }, err => {
-          console.log(err);
-          this.alerta("Error peticion")
-        }
-      )
-    } 
-    else
-    {
-      this.alerta("Objetivos vacio")
-    }
-  }
-
-  cambiarProfesor(){
-    if(this.profesores != null){
-      const profesor: Profesor = this.profesores[this.profesorSeleccionado!-1]
-      
-      this.coordinador = {
-        carreraId: this.id,
-        contactoId: profesor.profesoresId
-      }
-      console.log(this.coordinador)
-
-      this._carreraPutService.putProfesor(this.coordinador).subscribe(data =>
-        {
-          console.log(profesor);
-          this.alerta("Petición exitosa")
-        }, err => 
-        {
-          console.log(err);
-          this.alerta("Error en la petición")
-        });
-    }
-  }
   
   alerta(message: string){
     this._snackBar.open(message, "Cerrar", {
@@ -518,12 +447,19 @@ export class EditCarrerasComponent implements OnInit {
     });
   }
 
-  nuevaCarrera(){
-    this._router.navigate(['nuevaCarrera']);
+  editarRolProfesor(profesor: ProfesorDTO, index: number): void {
+    const profesorSelected = this.profesores[index]
+    console.log("ProfesorSelected: " + profesorSelected.profesorId)
+    console.log(profesorSelected) 
+
+    this._router.navigate(['admin/carrera/editarRolProfesor'], { queryParams: {profesor: JSON.stringify(profesorSelected), carreraId: JSON.stringify(this.id)}});
+  }
+
+  addProfesor():void{
+    this._router.navigate(['admin/add-profesor/carrera'], {queryParams: {carreraId: JSON.stringify(this.carrera.id)}});
   }
 
   back(){
     this._router.navigate(['admin/inicio']);
   }
-
 }

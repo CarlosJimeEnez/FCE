@@ -14,16 +14,6 @@ export interface CarreraDto {
     objetivos: string;
 }
 
-export interface Profesor {
-    id?: number;
-    nombre: string;
-    cargo: string;
-    edificio: string;
-    horario: string;
-    telefono: string;
-    correo: string;
-}
-
 export interface Documentos {
     documentoID?: number;
     carreraId: number;

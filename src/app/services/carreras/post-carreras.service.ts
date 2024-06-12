@@ -11,6 +11,9 @@ import { Carrera, CompetenciasEspecificas } from '../../interfaces/carrera';
 export class PostCarrerasService {
   myAppUrl: string = environment.endpoint
   myApiUrl: string = "api/CarrerrasControllerPost/"
+
+  myApiProfesoresCarreraUrl: string = "api/ProfesoresCarrerasPost/"
+
   myAtributosEgresoUrl: string = "atributosEgreso"
   myAtributosEgresosUrl: string = "atributosEgresos"
   myObjetivosEducacionalUrl: string = "objetivosEducacional"
@@ -66,9 +69,17 @@ export class PostCarrerasService {
   postListadoMateriasOp(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myListadoMateriasOptativasURL}`, listadoMateriasOp)
   }
-
-  // Post TODO 
+ 
   postLicenciatura(licenciatura: CarreraDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.nuevaLicenciaturaUrl}`, licenciatura)
+  }
+
+  postProfesoresCarreras(carreraId: number, profesoresIds: number[]): Observable<any> {
+    let params = new HttpParams(); 
+    profesoresIds.forEach(id => {
+      params = params.append("profesoresIds", id.toString()); 
+    })
+
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiProfesoresCarreraUrl}${carreraId}`, profesoresIds)
   }
 }

@@ -70,28 +70,6 @@
                 class="form-control" [(ngModel)]="nuevaCarrera!.descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
-    
-        <!-- Contacto -->
-        <div>
-            <mat-divider class="mt-3"></mat-divider>
-            <div class="row">
-                <div class="col text-center mt-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        <h3><strong>Contacto</strong></h3>
-                    </label>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <h5>Profesores</h5>
-                    <form>
-                        <select [disabled]="nuevaCarreraCreada" class="form-select" id="inputGroupSelect01" [(ngModel)]="profesorSeleccionado" name="profesor">
-                        <option  *ngFor="let profesor of profesores" [value]="profesor.profesoresId">{{ profesor.nombre }}</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>  
         
         <div class="row">
             <div class="col text-center mt-3 mb-3">

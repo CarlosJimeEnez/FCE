@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
-import { Profesor } from 'src/app/interfaces/profesores';
+import { Profesor, ProfesorDto } from 'src/app/interfaces/profesores';
 import { concat, concatMap } from 'rxjs';
 
 @Component({
@@ -40,7 +40,7 @@ export class PostCarrerasComponent implements OnInit {
   dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
   displayedColumns: string[] = ["atributos", "Acciones"]; 
   
-  profesores: Profesor[] = []
+  profesores: ProfesorDto[] = []
   profesorSeleccionado: number = 1;
 
   //Dto 

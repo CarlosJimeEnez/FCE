@@ -99,13 +99,3 @@ export interface AdsDtoFile
     link: string;
     file: File; 
 }
-
-export interface ProfesorDto
-{
-    id? : number;
-    nombre: string,
-    edificio: string,
-    horario: string,
-    telefono: string,
-    correo: string,
-}

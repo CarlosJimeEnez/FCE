@@ -8,11 +8,13 @@ import { LoginComponent } from './componentes/admin/login/login.component';
 import { TableroAdminComponent } from './componentes/admin/tableros/tablero-admin/tablero-admin.component';
 import { EditCarrerasComponent } from './componentes/admin/tableros/edit-carreras/edit-carreras.component';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
-import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
+import { PostCarrerasComponent } from './componentes/admin/tableros/edit-carreras/post-carreras/post-carreras.component';
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
 import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit-ads.component';
 import { PostAdsComponent } from './componentes/admin/tableros/ads/post-ads/post-ads.component';
 import { PostProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/post-profesores/post-profesores.component';
+import { EditRolComponent } from './componentes/admin/tableros/edit-carreras/edit-rol/edit-rol.component';
+import { AddProfesorComponent } from './componentes/admin/tableros/edit-carreras/add-profesor/add-profesor.component';
 
 const routes: Routes = [
   {path: '', component: TableroComponent, pathMatch: 'full'},
@@ -30,7 +32,8 @@ const routes: Routes = [
   {path: 'admin/anuncios', component: AdsComponent},
   {path: 'admin/editar-ads/:id', component: EditAdsComponent},
   {path: 'admin/post-ads', component: PostAdsComponent},
-  
+  {path: 'admin/carrera/editarRolProfesor', component: EditRolComponent},
+  {path: 'admin/add-profesor/carrera', component: AddProfesorComponent},
 ];
 
 @NgModule({

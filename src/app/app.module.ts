@@ -18,7 +18,6 @@ import { LoginComponent } from './componentes/admin/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedesSocialesComponent } from './componentes/redes-sociales/redes-sociales.component';
 import { TableroAdminComponent } from './componentes/admin/tableros/tablero-admin/tablero-admin.component';
-
 import {MatTableModule} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -28,11 +27,15 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
 import { OffCanvasComponent } from './componentes/admin/off-canvas/off-canvas.component';
-import { PostCarrerasComponent } from './componentes/admin/post-carreras/post-carreras.component';
+import { PostCarrerasComponent } from './componentes/admin/tableros/edit-carreras/post-carreras/post-carreras.component';
 import { AdsComponent } from './componentes/admin/tableros/ads/ads.component';
 import { EditAdsComponent } from './componentes/admin/tableros/ads/edit-ads/edit-ads.component';
 import { PostAdsComponent } from './componentes/admin/tableros/ads/post-ads/post-ads.component';
 import { PostProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/post-profesores/post-profesores.component';
+import { CommonModule } from '@angular/common';
+import { EditRolComponent } from './componentes/admin/tableros/edit-carreras/edit-rol/edit-rol.component';
+import { AddProfesorComponent } from './componentes/admin/tableros/edit-carreras/add-profesor/add-profesor.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -54,9 +57,12 @@ import { PostProfesoresComponent } from './componentes/admin/tableros/tablero-pr
     EditAdsComponent,
     PostAdsComponent,
     PostProfesoresComponent,
-    
+    EditRolComponent,
+    AddProfesorComponent,
   ],
-  imports: [
+  imports: [    
+    MatCheckboxModule, 
+    CommonModule,
     MatSnackBarModule,
     MatDividerModule,
     MatButtonModule,

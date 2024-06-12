@@ -7,6 +7,7 @@ import { ScrollService } from 'src/app/services/scroll.service';
 import { AdsService } from 'src/app/services/ads/ads.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdsDto } from 'src/app/interfaces/Dto';
+import { environment } from 'src/app/enviroments/enviroments';
 
 @Component({
   selector: 'app-tablero',
@@ -20,6 +21,7 @@ export class TableroComponent implements OnInit, AfterViewInit {
   urlSegura!: SafeResourceUrl;
   Ads: {ad: AdsDto, safeUrl: SafeResourceUrl}[] = []; 
   adNoCargadas: boolean = true;
+  api = environment.apiUrl
   // Servicios con guion bajo
   constructor
   (
@@ -28,7 +30,10 @@ export class TableroComponent implements OnInit, AfterViewInit {
     private _route: ActivatedRoute,
     private _sanitizer: DomSanitizer,
     private _scrollService: ScrollService
-  ){}
+  )
+  {
+    console.log(this.api)
+  }
   
   ngOnInit(): void{
     this.getAds();

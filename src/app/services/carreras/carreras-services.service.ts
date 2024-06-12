@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/enviroments';
-import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from '../../interfaces/carrera';
+import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales } from '../../interfaces/carrera';
+import { Profesor } from 'src/app/interfaces/profesores';
 @Injectable({
   providedIn: 'root'
 })

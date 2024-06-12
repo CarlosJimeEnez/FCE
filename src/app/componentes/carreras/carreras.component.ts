@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales, Profesor } from 'src/app/interfaces/carrera';
+import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
+import { Profesor } from 'src/app/interfaces/profesores';
 
 
 @Component({
