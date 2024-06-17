@@ -67,17 +67,6 @@ export interface CoordinadorDto
     contactoId?: number ;
 }
 
-export interface CarreraDto 
-{   
-    id?: number;
-    carreraNombre: string;
-    mision: string;
-    vision: string;
-    objetivos: string;
-    coordinadorID: number | null;
-    descripcion: string;
-}
-
 export interface AdsDto
 {
     id?: number;

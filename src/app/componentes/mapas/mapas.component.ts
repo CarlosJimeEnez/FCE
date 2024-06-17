@@ -2,9 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
-import { Documentos } from 'src/app/interfaces/carrera';
-import { environment } from 'src/app/enviroments/enviroments';
-import { ScrollService } from 'src/app/services/scroll.service';
+import { Documentos, DocumentosDto } from 'src/app/interfaces/documento';
 
 @Component({
   selector: 'app-mapas',
@@ -18,10 +16,13 @@ export class MapasComponent implements OnInit, AfterViewInit  {
     private _router: Router) {
   }
   
-  urlSegura!: SafeResourceUrl;
-  carreraID!: number;
-  id!: number;
-  documento!: Documentos;
+  documento: DocumentosDto = {
+    carreraId: 0,
+    nombreArchivo: "",
+    file: ""
+  }
+  id: number = 0;
+  urlSegura!: SafeResourceUrl
   documentoNoCargado: boolean = true;
   fragment: string = "licenciaturas"
 
@@ -31,7 +32,7 @@ export class MapasComponent implements OnInit, AfterViewInit  {
     });
 
     this._route.queryParams.subscribe(params => {
-      this.carreraID = +params['carreraId'];
+      this.documento.carreraId = +params['carreraId'];
     })
   }
 
@@ -40,10 +41,8 @@ export class MapasComponent implements OnInit, AfterViewInit  {
   }
 
   getDocumentoPdf(id: number){
-    this._carreraService.getDocumentoPDF(id).subscribe(res => {
-      this.documento =  res;
-      console.log(this.documento);
-      const urlInsegura = this.documento.rutaArchivo
+    this._carreraService.getDocumentoPDF(id, this.documento.carreraId).subscribe(res => {   
+      const urlInsegura = res.url
       this.urlSegura = this._sanitizer.bypassSecurityTrustResourceUrl(urlInsegura);
       this.documentoNoCargado = false
     },
@@ -51,7 +50,7 @@ export class MapasComponent implements OnInit, AfterViewInit  {
   }
 
   desplazarAFragmento() {
-    this._router.navigate([`verCarrera/${this.carreraID}`], {fragment: 'planDeEstudios'});
+    this._router.navigate([`verCarrera/${this.documento.carreraId}`], {fragment: 'planDeEstudios'});
   }
   
 }

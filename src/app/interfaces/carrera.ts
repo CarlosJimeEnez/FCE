@@ -14,14 +14,6 @@ export interface CarreraDto {
     objetivos: string;
 }
 
-export interface Documentos {
-    documentoID?: number;
-    carreraId: number;
-    nombreArchivo: string;
-    rutaArchivo: string;
-    fechaSubidade: number;
-}
-
 export interface AtributosEducacionales {
     id?: number;
     carreraId: number;

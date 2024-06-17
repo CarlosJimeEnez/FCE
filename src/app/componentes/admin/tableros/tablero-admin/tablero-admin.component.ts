@@ -1,12 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Carrera } from 'src/app/interfaces/carrera';
+import { Carrera, CarreraDto } from 'src/app/interfaces/carrera';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
-import { CarreraDto } from 'src/app/interfaces/Dto';
 
 @Component({
   selector: 'app-tablero-admin',

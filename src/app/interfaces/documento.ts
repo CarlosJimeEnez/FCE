@@ -1,5 +1,14 @@
-export interface DocumentosDto {
-    carreraId?: number;
+export interface Documentos {
+    id?: number;
+    carreraId: number;
     nombreArchivo: string;
-    file: File;
+    rutaArchivo: string;
+    file: any
+}
+
+export interface DocumentosDto {
+    id?: number;
+    carreraId: number;
+    nombreArchivo: string;
+    file: any;
 }

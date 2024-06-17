@@ -152,7 +152,9 @@ export class EditCarrerasComponent implements OnInit {
     const file: File = event.target.files[0];
 
     const actions: {[key: string]: () => void} = {
-      catalogoAsignaturas: () => {this.catalogoAsignatura.file = file}, 
+      catalogoAsignaturas: () => {
+        this.catalogoAsignatura.file = file
+      }, 
       mapaTutorial: () => {this.mapaTutorial.file = file},
       listadoMaterias: () => {this.listadoMaterias.file = file},
       listadoMateriasOp: () => {this.listadoMateriasOptativas.file = file}
@@ -161,7 +163,6 @@ export class EditCarrerasComponent implements OnInit {
     if(actions[fieldType]) {
       actions[fieldType]()
     }
-
   }
 
   isFieldValid(fieldName: string): boolean {
@@ -170,14 +171,17 @@ export class EditCarrerasComponent implements OnInit {
   }
   
   cambiarCatalogoAsigUrl(){
-    console.log("Cambiar Catalogo de Asignatura...") 
+    console.log("Cambiar Catalogo de Asignatura...")
+
     const formData = new FormData(); 
     this.catalogoAsignatura.carreraId = this.id
 
     formData.append("carreraId", this.catalogoAsignatura.carreraId.toString()); 
     formData.append("nombreArchivo", this.catalogoAsignatura.nombreArchivo); 
     formData.append("file", this.catalogoAsignatura.file);
-
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
     this._carreraPutService.putCatalogosAsignaturas(formData, this.id).subscribe({
       next: (data: any) => {
         console.log(data);

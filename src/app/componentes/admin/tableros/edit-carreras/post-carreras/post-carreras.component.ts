@@ -1,16 +1,17 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Carrera } from 'src/app/interfaces/carrera';
+import { Carrera, CarreraDto } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
+import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor, ProfesorDto } from 'src/app/interfaces/profesores';
 import { concat, concatMap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-carreras',
@@ -19,8 +20,16 @@ import { concat, concatMap } from 'rxjs';
 })
 export class PostCarrerasComponent implements OnInit {
   id: number = 0;
-  nuevaCarrera!: CarreraDto;
+  carreraForm!: FormGroup;
+  
+  nuevaCarrera: CarreraDto = {
+    carreraNombre: "", 
+    mision: "",
+    vision: "",
+    objetivos: "",
+  };
 
+  // Variables control
   nuevaCarreraCreada: boolean = false;
   atributosCargados: boolean = false;
   competenciasCargados: boolean = false;
@@ -43,7 +52,7 @@ export class PostCarrerasComponent implements OnInit {
   profesores: ProfesorDto[] = []
   profesorSeleccionado: number = 1;
 
-  //Dto 
+  //Atributos competencias objetivos: 
   atributoNuevo: AtributoEgresoDto = {
     carreraId: this.id,
     descripcion: "",
@@ -57,7 +66,7 @@ export class PostCarrerasComponent implements OnInit {
     carreraId: this.id
   }
 
-  // Documentos
+  // Documentos cargados
   catalogosAsignaturasURL: CarreraCatAsignaturasDto = {
     carreraId: this.id,
     catalogoAsignaturaUrl: "",
@@ -75,49 +84,36 @@ export class PostCarrerasComponent implements OnInit {
     listadoMateriasOpURL: "",
   }
 
-  //Coordinador
-  coordinador: CoordinadorDto = {
-    carreraId: this.id,
-    contactoId: 0
-  }
-
-  
-  constructor(private _carreraService: CarrerasServicesService,
+  constructor(
+    private _carreraService: CarrerasServicesService,
     private _route: ActivatedRoute,
+    private _fb: FormBuilder,
     private _carreraPostService: PostCarrerasService,
-    private _carreraPutService: PutCarrerasServiceService,
-    private _carreraDeleteService: DeleteCarrerasService,
     private _router: Router,
     private _snackBar: MatSnackBar,
     private _profesoresService: GetProfesoresService
-    )
-    {
-      this.nuevaCarrera = {
-        carreraNombre: "",
-        mision: "",
-        vision: "",
-        objetivos: "",
-        descripcion: "",
-        coordinadorID: this.profesorSeleccionado
-      }
-    }
+  ){}
   
     @ViewChild(MatTable) table!: MatTable<AtributoEgresoDto>;
     ngOnInit(): void {
+      this.carreraForm = this._fb.group({
+        nombre: [this.nuevaCarrera.carreraNombre, Validators.required],
+        mision: [this.nuevaCarrera.mision, Validators.required],
+        vision: [this.nuevaCarrera.vision, Validators.required],
+        objetivos: [this.nuevaCarrera.objetivos, Validators.required], 
+      })    
       this.getProfesores();
     }
 
+    
     postLicenciatura(){
       if(
         this.nuevaCarrera.carreraNombre != "" &&
         this.nuevaCarrera.mision != "" &&
         this.nuevaCarrera.vision != "" &&
-        this.nuevaCarrera.objetivos != "" &&
-        this.nuevaCarrera.descripcion != ""
+        this.nuevaCarrera.objetivos != ""
       )
         {
-          this.cambiarProfesor();
-
           this._carreraPostService.postLicenciatura(this.nuevaCarrera).subscribe({
             next: (data) => {
               console.log("Next: ");
@@ -356,18 +352,6 @@ export class PostCarrerasComponent implements OnInit {
       this.atributosEducacionales.splice(i, 1)
       this.dataSource = new MatTableDataSource(this.atributosEducacionales)
       this.table.renderRows();
-    }
-
-    cambiarProfesor(){
-      console.log(this.coordinador)
-      console.log("Cambiando de profesor")
-      if(this.profesores != null){
-        this.nuevaCarrera.coordinadorID = this.profesorSeleccionado
-        console.log(this.nuevaCarrera.coordinadorID) 
-      }
-      else {
-        console.log("No hay profesores")
-      }
     }
 
     volverInicio(){

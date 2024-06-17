@@ -39,6 +39,7 @@ export class PutCarrerasServiceService {
   }
 
   putCatalogosAsignaturas(catalogo: FormData, catalogoId: number): Observable<any> {
+    
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${catalogoId}`, catalogo)
   }
 

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/enviroments';
-import { AtributosEducacionales, Carrera, CompetenciasEspecificas, Documentos, ObjetivosEducacionales } from '../../interfaces/carrera';
+import { AtributosEducacionales, Carrera, CompetenciasEspecificas, ObjetivosEducacionales } from '../../interfaces/carrera';
 import { Profesor } from 'src/app/interfaces/profesores';
+import { Documentos } from 'src/app/interfaces/documento';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class CarrerasServicesService {
   myAppUrl: string = environment.endpoint
   myApiUrl: string = "api/Carrerras/"
   myApiProfesorUrl: string = "profesores/"
-  myApiDocumentosPdfUrl: string = "documentosPDF/"
+  myApiDocumentosPdfUrl: string = "documentoPDF/"
   myApiDocumentosUrl: string = "documentos/"
   myApiDocumentoPorCarreraUrl: string = "porCarrera/carreraId"
   myApiCarreraIdAtributosEgreso: string = "carreraId/atributosEgreso/"
@@ -55,8 +56,8 @@ export class CarrerasServicesService {
     return this.http.get<Documentos[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}`)
   }
 
-  getDocumentoPDF(id: number): Observable<Documentos> {
-    return this.http.get<Documentos>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`)
+  getDocumentoPDF(id: number, carreraId: number): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}/${carreraId}`)
   }
 
   getDocumentosByCarreraId(carreraId: number): Observable<Documentos[]> {
