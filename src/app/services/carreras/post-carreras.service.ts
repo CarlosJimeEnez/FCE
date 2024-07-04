@@ -29,10 +29,12 @@ export class PostCarrerasService {
 
   constructor(private _http: HttpClient) { }
 
+  // ! Deprecated Method  
   postAtributosEgreso(atributo: AtributoEgresoDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresoUrl}`, atributo)
   }
 
+  
   postAtributosEgresos(atributo: AtributoEgresoDto[]): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresosUrl}`, atributo)
   }

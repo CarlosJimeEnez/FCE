@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Carrera, CarreraDto } from 'src/app/interfaces/carrera';
+import { Carrera, CarreraAtributosDto, CarreraDto } from 'src/app/interfaces/carrera';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { PutCarrerasServiceService } from 'src/app/services/carreras/put-carreras-service.service';
@@ -21,38 +21,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PostCarrerasComponent implements OnInit {
   id: number = 0;
   carreraForm!: FormGroup;
-  
-  nuevaCarrera: CarreraDto = {
+  atributosForm!: FormGroup;
+  objetivosForm!: FormGroup; 
+  competenciasForm!: FormGroup; 
+
+  nuevaCarrera: CarreraAtributosDto = {
     carreraNombre: "", 
     mision: "",
     vision: "",
     objetivos: "",
+    atributosEducacionales: [
+      {carreraId: 0, descripcion: ""}
+    ],  
+    objetivosEducacionales: [
+      {carreraId: 0, descripcion: ""}
+    ],
   };
 
-  // Variables control
+
+
+  // Datos cargados de la Db
   nuevaCarreraCreada: boolean = false;
   atributosCargados: boolean = false;
   competenciasCargados: boolean = false;
   objetivosCargados: boolean = false;
   documentosCargados: boolean = false;
-
   catalogoAsignaturaCargado: boolean = false;
   mapaTutorialCargado: boolean = false;
   listaMateriasCargadas: boolean = false;
   listaMateriasOpCargado: boolean = false;
 
-  atributosEducacionales: AtributoEgresoDto[] = [];
-  objetivosEducacionales: ObjetivosEducacionalesDto[] = [];
-  competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
-  dataSource = new MatTableDataSource(this.atributosEducacionales)
-  dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales)
-  dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
-  displayedColumns: string[] = ["atributos", "Acciones"]; 
-  
-  profesores: ProfesorDto[] = []
-  profesorSeleccionado: number = 1;
-
-  //Atributos competencias objetivos: 
+  //Atributos educacionales
   atributoNuevo: AtributoEgresoDto = {
     carreraId: this.id,
     descripcion: "",
@@ -61,11 +60,21 @@ export class PostCarrerasComponent implements OnInit {
     descripcion: "",
     carreraId: this.id
   }
+
+  competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
+
+  dataSource = new MatTableDataSource(this.nuevaCarrera.atributosEducacionales)
+  dataSourceObejtivosEduc = new MatTableDataSource(this.nuevaCarrera.objetivosEducacionales)
+  dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
+  displayedColumns: string[] = ["atributos", "Acciones"]; 
+  
+  profesores: ProfesorDto[] = []
+  profesorSeleccionado: number = 1;
+
   competenciasNuevo: CompetenciasEspecificasDto = {
     descripcion: "",
     carreraId: this.id
   }
-
   // Documentos cargados
   catalogosAsignaturasURL: CarreraCatAsignaturasDto = {
     carreraId: this.id,
@@ -95,90 +104,36 @@ export class PostCarrerasComponent implements OnInit {
   ){}
   
     @ViewChild(MatTable) table!: MatTable<AtributoEgresoDto>;
+    
     ngOnInit(): void {
       this.carreraForm = this._fb.group({
-        nombre: [this.nuevaCarrera.carreraNombre, Validators.required],
-        mision: [this.nuevaCarrera.mision, Validators.required],
-        vision: [this.nuevaCarrera.vision, Validators.required],
-        objetivos: [this.nuevaCarrera.objetivos, Validators.required], 
+        nombre: [this.nuevaCarrera.carreraNombre, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)]) ],
+        mision: [this.nuevaCarrera.mision,  Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)] )],
+        vision: [this.nuevaCarrera.vision, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)] )],
+        objetivos: [this.nuevaCarrera.objetivos, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)]) ],
       })    
+
+      this.atributosForm = this._fb.group({
+        atributoNuevo: [this.atributoNuevo.descripcion, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)])],
+      });
+      
+      this.objetivosForm = this._fb.group({
+        objetivoEducacionalNuevo: [this.objetivoEducacionalNuevo.descripcion, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)])]
+      })
+      
+      this.competenciasForm = this._fb.group({
+        competenciasNuevo: [this.competenciasNuevo.descripcion, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)])]
+      });
+
       this.getProfesores();
     }
 
-    
     postLicenciatura(){
-      if(
-        this.nuevaCarrera.carreraNombre != "" &&
-        this.nuevaCarrera.mision != "" &&
-        this.nuevaCarrera.vision != "" &&
-        this.nuevaCarrera.objetivos != ""
-      )
-        {
-          this._carreraPostService.postLicenciatura(this.nuevaCarrera).subscribe({
-            next: (data) => {
-              console.log("Next: ");
-              console.log(data);
-              this.nuevaCarreraCreada = true;
-              this.id = data.id;
-            },
-            error: (err) => {
-              console.log(err)
-              this.alerta("Error en la petición")
-            },
-            complete: () => {
-              console.log(`Nueva carrera creada con id: ${this.id}`)
-              this.alerta("Datos registrados")
-            }
-          })
-        }
-        else{
-          this.alerta("Error en la peticion, falta algun campo")
-        }
-      }
-
-    postAtributos(){
-      if(this.atributosEducacionales.length > 0)
-      {
-        this._carreraPostService.postAtributosEgresos(this.atributosEducacionales).subscribe({
-          next: (data) => {
-            console.log(data)
-          },
-          error: (err) => {
-            console.log(err)
-            this.alerta("Error en la petición")
-          },
-          complete: () => {
-            console.log("Los atributos se cargaro")
-            this.alerta("Los atributos se cargaron")
-            this.atributosCargados = true
-          }
-        })
-      }
-      else{
-        this.alerta("Error, campos vacios")
-      }
-    }
-
-    postObjetivos(){
-      if(this.objetivosEducacionales.length > 0)
-      {
-        this._carreraPostService.postObjetivosEducacionales(this.objetivosEducacionales).subscribe({
-          next: (data) => {
-            console.log(data)
-          },
-          error: (err) => {
-            console.log(err)
-            this.alerta("Error en la petición")
-          },
-          complete: () => {
-            this.alerta("Los objetivos se cargaron")
-            this.objetivosCargados = true
-          }
-        })
-      }
-      else{
-        this.alerta("Error, campos vacios")
-      }
+      this.nuevaCarrera.carreraNombre = this.carreraForm.get("nombre")?.value;
+      this.nuevaCarrera.mision = this.carreraForm.get("mision")?.value;
+      this.nuevaCarrera.vision = this.carreraForm.get("vision")?.value;
+      this.nuevaCarrera.objetivos = this.carreraForm.get("objetivos")?.value
+      this.nuevaCarreraCreada = true
     }
 
     postCompetencias(){
@@ -290,15 +245,15 @@ export class PostCarrerasComponent implements OnInit {
     }
 
     addAtributos(){
-      if(this.atributoNuevo.descripcion != ""){
-        const atributoNuevo: AtributoEgresoDto = {
-          carreraId: this.id,
-          descripcion: this.atributoNuevo.descripcion
-        }
-        this.atributoNuevo.descripcion = ""
-        this.atributosEducacionales.push(atributoNuevo)
-        this.dataSource = new MatTableDataSource(this.atributosEducacionales)
+      if(this.atributosForm.get("atributoNuevo")?.value != ""){
+        this.atributoNuevo.descripcion = this.atributosForm.get("atributoNuevo")?.value
+        
+        const nuevoAtributo = {...this.atributoNuevo}
+
+        this.nuevaCarrera.atributosEducacionales.push(nuevoAtributo)
+        this.dataSource = new MatTableDataSource(this.nuevaCarrera.atributosEducacionales)
         this.table.renderRows();
+        this.alerta("Nuevo atributo añadido")
       }
       else {
         this.alerta("Campo vacio")
@@ -306,34 +261,40 @@ export class PostCarrerasComponent implements OnInit {
     }
 
     addObjetivos(){
-      if(this.objetivoEducacionalNuevo.descripcion != ""){
-        const objetivoNuevo: ObjetivosEducacionalesDto = {
-          carreraId: this.id,
-          descripcion: this.objetivoEducacionalNuevo.descripcion
-        }
-        this.objetivoEducacionalNuevo.descripcion = ""
-        this.objetivosEducacionales.push(objetivoNuevo);
-        this.dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales);
+      if(this.objetivosForm.get("objetivoEducacionalNuevo")?.value != ""){
+        this.objetivoEducacionalNuevo.descripcion = this.objetivosForm.get("objetivoEducacionalNuevo")?.value
+
+        const nuevoObjetivo = {...this.objetivoEducacionalNuevo}
+
+        this.nuevaCarrera.objetivosEducacionales.push(nuevoObjetivo)
+        this.dataSourceObejtivosEduc = new MatTableDataSource(this.nuevaCarrera.objetivosEducacionales)
         this.table.renderRows(); 
+        this.alerta("Nuevo objetivo añadido")
       }
-      else{
+      else {
         this.alerta("Campo vacio")
       }
     }
-    
+
     addCompetencia(){
-      if(this.competenciasNuevo.descripcion){
-        const competenciaNueva: CompetenciasEspecificasDto = {
-          carreraId: this.id,
-          descripcion: this.competenciasNuevo.descripcion
-        }
-        this.competenciasEspecíficas.push(competenciaNueva);
-        this.dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
-        this.table.renderRows();
-      }
-      else{
-        this.alerta("Campo vacio")
-      }      
+      // if(this.competenciasForm.get("competenciasNuevo")?.value != ""){
+        
+      //   this.competenciasEspecíficas.push(competenciaNueva);
+      //   this.dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
+      //   this.table.renderRows();
+      // }
+      // else{
+      //   this.alerta("Campo vacio")
+      // }      
+    }
+
+    addCompetencias(){}
+
+    removeData(i: number): void {
+      this.nuevaCarrera.atributosEducacionales.splice(i, 1)
+      this.dataSource = new MatTableDataSource(this.nuevaCarrera.atributosEducacionales)
+      this.table.renderRows();
+      this.alerta("Atributo eliminado")
     }
 
     removeCompetenciasEspecificas(i: number){
@@ -343,15 +304,10 @@ export class PostCarrerasComponent implements OnInit {
     }
 
     removeObjetivos(i: number): void{
-      this.objetivosEducacionales.splice(i, 1);
-      this.dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales)
+      this.nuevaCarrera.objetivosEducacionales.splice(i, 1)
+      this.dataSourceObejtivosEduc = new MatTableDataSource(this.nuevaCarrera.objetivosEducacionales)
       this.table.renderRows();
-    }
-
-    removeData(i: number): void {
-      this.atributosEducacionales.splice(i, 1)
-      this.dataSource = new MatTableDataSource(this.atributosEducacionales)
-      this.table.renderRows();
+      this.alerta("Objetivo eliminado")
     }
 
     volverInicio(){

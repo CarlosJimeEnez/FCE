@@ -1,3 +1,5 @@
+import { ObjetivosEducacionalesDto } from "./Dto";
+
 export interface Carrera {
     id?: number;
     carreraNombre: string;
@@ -12,6 +14,17 @@ export interface CarreraDto {
     mision: string;
     vision: string;
     objetivos: string;
+}
+
+export interface CarreraAtributosDto {
+    id?: number;
+    carreraNombre: string;
+    mision: string;
+    vision: string;
+    objetivos: string;
+    atributosEducacionales: AtributosEducacionales[];
+    objetivosEducacionales: ObjetivosEducacionales[]; 
+    
 }
 
 export interface AtributosEducacionales {
