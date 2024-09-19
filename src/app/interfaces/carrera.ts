@@ -1,3 +1,4 @@
+import { DocumentosDto } from "./documento";
 import { ObjetivosEducacionalesDto } from "./Dto";
 
 export interface Carrera {
@@ -24,7 +25,11 @@ export interface CarreraAtributosDto {
     objetivos: string;
     atributosEducacionales: AtributosEducacionales[];
     objetivosEducacionales: ObjetivosEducacionales[]; 
-    
+    competenciasEspecificas: CompetenciasEspecificas[];
+    catalogoAsignatura: DocumentosDto;
+    mapaTutorial: DocumentosDto; 
+    listadoMaterias: DocumentosDto;
+    listadoMateriasOptativas: DocumentosDto; 
 }
 
 export interface AtributosEducacionales {

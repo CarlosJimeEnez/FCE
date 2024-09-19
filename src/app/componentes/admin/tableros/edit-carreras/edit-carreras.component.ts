@@ -63,22 +63,22 @@ export class EditCarrerasComponent implements OnInit {
   catalogoAsignatura: DocumentosDto = {
     carreraId: 0, 
     nombreArchivo: "Catalogo Asignatura",
-    file: null as any
+    rutaArchivo: null as any
   }
   mapaTutorial: DocumentosDto = {
     carreraId: 0, 
     nombreArchivo: "Mapa Tutorial",
-    file: null as any
+    rutaArchivo: null as any
   }
   listadoMaterias: DocumentosDto = {
     carreraId: 0, 
     nombreArchivo: "Listado materias",
-    file: null as any
+    rutaArchivo: null as any
   }
   listadoMateriasOptativas: DocumentosDto = {
     carreraId: 0, 
     nombreArchivo: "Listado de materias Optativas",
-    file: null as any
+    rutaArchivo: null as any
   }
 
   animal: string = "panda" 
@@ -116,10 +116,10 @@ export class EditCarrerasComponent implements OnInit {
     })
 
     this.pdfForm = this._fb.group({
-      catalogoAsignaturas: [this.catalogoAsignatura.file, Validators.required],
-      mapaTutorial: [this.mapaTutorial.file, Validators.required],
-      listadoMaterias: [this.listadoMaterias.file, Validators.required],
-      listadoMateriasOp: [this.listadoMateriasOptativas.file, Validators.required],
+      catalogoAsignaturas: [this.catalogoAsignatura.rutaArchivo, Validators.required],
+      mapaTutorial: [this.mapaTutorial.rutaArchivo, Validators.required],
+      listadoMaterias: [this.listadoMaterias.rutaArchivo, Validators.required],
+      listadoMateriasOp: [this.listadoMateriasOptativas.rutaArchivo, Validators.required],
     })
 
     this.getAtributos(this.id);
@@ -149,15 +149,15 @@ export class EditCarrerasComponent implements OnInit {
   }
 
   onFileSelected(event: any, fieldType: string): void {
-    const file: File = event.target.files[0];
+    const rutaArchivo: File = event.target.files[0];
 
     const actions: {[key: string]: () => void} = {
       catalogoAsignaturas: () => {
-        this.catalogoAsignatura.file = file
+        this.catalogoAsignatura.rutaArchivo = rutaArchivo
       }, 
-      mapaTutorial: () => {this.mapaTutorial.file = file},
-      listadoMaterias: () => {this.listadoMaterias.file = file},
-      listadoMateriasOp: () => {this.listadoMateriasOptativas.file = file}
+      mapaTutorial: () => {this.mapaTutorial.rutaArchivo = rutaArchivo},
+      listadoMaterias: () => {this.listadoMaterias.rutaArchivo = rutaArchivo},
+      listadoMateriasOp: () => {this.listadoMateriasOptativas.rutaArchivo = rutaArchivo}
     }
 
     if(actions[fieldType]) {
@@ -178,10 +178,11 @@ export class EditCarrerasComponent implements OnInit {
 
     formData.append("carreraId", this.catalogoAsignatura.carreraId.toString()); 
     formData.append("nombreArchivo", this.catalogoAsignatura.nombreArchivo); 
-    formData.append("file", this.catalogoAsignatura.file);
+    formData.append("rutaArchivo", this.catalogoAsignatura.rutaArchivo);
     formData.forEach((value, key) => {
       console.log(`${key}: ${value}`);
     });
+    
     this._carreraPutService.putCatalogosAsignaturas(formData, this.id).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -211,7 +212,7 @@ export class EditCarrerasComponent implements OnInit {
 
     formData.append("carreraId", this.mapaTutorial.carreraId.toString()); 
     formData.append("nombreArchivo", this.mapaTutorial.nombreArchivo); 
-    formData.append("file", this.mapaTutorial.file);
+    formData.append("rutaArchivo", this.mapaTutorial.rutaArchivo);
 
     this._carreraPutService.putMapaTutorialAsignaturas(formData, this.id).subscribe({
       next: (data: any) => {
@@ -242,7 +243,7 @@ export class EditCarrerasComponent implements OnInit {
 
     formData.append("carreraId", this.listadoMaterias.carreraId.toString()); 
     formData.append("nombreArchivo", this.listadoMaterias.nombreArchivo); 
-    formData.append("file", this.listadoMaterias.file);
+    formData.append("rutaArchivo", this.listadoMaterias.rutaArchivo);
 
     this._carreraPutService.putListadoMaterias(formData, this.id).subscribe({
       next: (data: any) => {
@@ -273,7 +274,7 @@ export class EditCarrerasComponent implements OnInit {
 
     formData.append("carreraId", this.listadoMateriasOptativas.carreraId.toString()); 
     formData.append("nombreArchivo", this.listadoMateriasOptativas.nombreArchivo); 
-    formData.append("file", this.listadoMateriasOptativas.file);
+    formData.append("rutaArchivo", this.listadoMateriasOptativas.rutaArchivo);
 
     this._carreraPutService.putListadoMaterias(formData, this.id).subscribe({
       next: (data: any) => {

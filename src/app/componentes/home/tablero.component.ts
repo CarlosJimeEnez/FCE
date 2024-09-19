@@ -29,7 +29,6 @@ export class TableroComponent implements OnInit, AfterViewInit {
     private _adsService: AdsService,
     private _route: ActivatedRoute,
     private _sanitizer: DomSanitizer,
-    private _scrollService: ScrollService
   )
   {
     console.log(this.api)

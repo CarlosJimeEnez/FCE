@@ -25,7 +25,7 @@ export class PostCarrerasService {
   myListadoMateriasURL: string = "listadoMaterias"
   myListadoMateriasOptativasURL: string = "listadoMateriasOp"
   myCoordinadorUrl: string = "coordinador"
-  nuevaLicenciaturaUrl: string = "licenciatura"
+  nuevaLicenciaturaUrl: string = "nuevaLicenciatura"
 
   constructor(private _http: HttpClient) { }
 
@@ -71,8 +71,9 @@ export class PostCarrerasService {
   postListadoMateriasOp(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myListadoMateriasOptativasURL}`, listadoMateriasOp)
   }
- 
-  postLicenciatura(licenciatura: CarreraDto): Observable<any>{
+  
+  // !USADO
+  postLicenciatura(licenciatura: FormData): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.nuevaLicenciaturaUrl}`, licenciatura)
   }
 

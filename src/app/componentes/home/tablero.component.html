@@ -1,0 +1,166 @@
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-2 p-2 titulo-card">
+            <h5 class="mb-0">Facultad de Ciencias de la Electrónica</h5>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!adNoCargadas" id="carouselExampleIndicators" class="mt-2 carousel slide">
+    <div class="carousel-indicators">
+        <button *ngFor="let ad of Ads; let i = index" type="button" 
+            [attr.data-bs-target]="'#carouselExampleIndicators'" 
+            [attr.data-bs-slide-to]="i" 
+            [class.active]="i === 0" 
+            [attr.aria-current]="i === 0 ? 'true' : null" 
+            [attr.aria-label]="'Slide ' + (i + 1)">        
+        </button>
+
+    </div>
+    <div class="carousel-inner">
+        <div  *ngFor="let ad of Ads; let i = index" class="carousel-item image-placeholder" [class.active]="i === 0">
+            <img (click)="verLink(ad.ad.link)" [src]="ad.safeUrl" class="image">
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Accordeon -->
+<div class="row m-5">
+    <div class="col-md-12 ">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <strong> Misión </strong>
+                </button>
+              </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        La Misión de la <strong> Facultad de Ciencias de la Electrónica </strong> es formar profesionales íntegros,
+                        socialmente responsables, propositivos, capaces de gestionar su propio aprendizaje de manera crítica y libre,
+                        en espacios educativos de calidad para el desarrollo humano sustentable,
+                        generando en ellos habilidades de gestión y desarrollo del conocimiento científico y tecnológico en las áreas de Electrónica Mecatrónica Y Automatización.
+                    </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <strong>Visión</strong> 
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    En la <strong>Facultad de Ciencias de la Electrónica</strong> nos visualizamos como una comunidad de aprendizaje solidario e integrada plenamente con el entorno regional
+                    por la capacidad y diversidad de proyectos tecnológicos y científicos de alto impacto que desarrollan y aplican los estudiantes y académicos con ética y espíritu
+                    de servicio.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <strong>Humanos</strong>
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul>
+                        <li>Responsabilidad</li>
+                        <li>Ética</li>
+                        <li>Respeto</li>
+                        <li>Colaboración</li>
+                        <li>Tolerancia</li>
+                        <li>Espíritu de Servicio</li>
+                        <li>Solidaridad</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                        <strong>Estratégicos</strong>
+                    </button>
+                </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                        <ul>                            
+                            <li>Planeación</li>
+                            <li>Innovación</li>
+                            <li>Emprendimiento</li>
+                            <li>Mejora Continua</li>
+                            <li>Sinergia</li>
+                            <li>Sustentabilidad</li>
+                            <li>Aprendizaje</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid shadow-box mt-4" id="licenciaturas">
+    <!-- Licenciaturas -->
+    <div class="row">
+        <div class="col texto_centrado">
+            <h3>Nuestros servicios educativos</h3>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-md-3 mt-3" >
+            <div class="card">
+                <div class="card-custom">
+                    <img src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
+                    <div class="col dropup">
+                        <ul class="mt-4">
+                            <li *ngFor="let carrera of carreras">
+                                <div class="row">
+                                    <h6 (click)="verCarrera(carrera.id!)">{{carrera.carreraNombre}}</h6> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">     
+                    <h5 class="card-title"> <strong>Licenciaturas</strong> </h5>
+                        <p class="card-text">
+                        Contamos con las carreras acordes a tus aptitudes
+                    </p>              
+                </div>
+            </div>            
+        </div>
+    </div>    
+</div>
+
+
+<!-- Google Maps -->
+<div class="row google-map justify-content-center mt-5 pb-2 pt-2">
+    <div class="col-12 text-center">
+        <h2>
+            ¿Cómo llegar a la FCE?
+        </h2>
+        <h5>
+            No te pierdas, te estamos esperando
+        </h5>
+    </div>
+</div> 
+
+<!-- Google Maps -->
+<div >
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4486.140634508462!2d-98.2042948012168!3d19.002988481652498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfbf5f010d16ab%3A0xb50e01e698295034!2sFCE1!5e0!3m2!1ses-419!2smx!4v1709754828737!5m2!1ses-419!2smx" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    
+</div>

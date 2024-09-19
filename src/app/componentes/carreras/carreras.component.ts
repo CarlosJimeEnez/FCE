@@ -64,10 +64,6 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   getCarrera() {
     this._carreraService.getCarrera(this.id).subscribe(data => {
       this.carrera = data;
-      // const carreraId = this.carrera.coordinadorID
-    //   this._carreraService.getProfesor(carreraId).subscribe(data => {    
-    //   console.log(this.profesores);
-    // });
     }, error => console.log(error));
   }
 
@@ -90,13 +86,12 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
     });
   }
 
-  verDocumento(id: number) {
-    this._router.navigate([`verMapa/${id}`], { queryParams: { carreraId: this.id}});
+  verDocumento(documentoId: number) {
+    this._router.navigate([`verMapa/${documentoId}`], { queryParams: { carreraId: this.id}});
   }
 
   getDocumentos(){
     this._carreraService.getDocumentosByCarreraId(this.id).subscribe(res =>{
-      console.log(res);
       this.documentos = res
       this.documentosNoCargados = false;
     }, err => console.log(err));

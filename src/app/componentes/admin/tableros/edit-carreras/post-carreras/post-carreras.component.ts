@@ -9,9 +9,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
-import { Profesor, ProfesorDto } from 'src/app/interfaces/profesores';
-import { concat, concatMap } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProfesorDto } from 'src/app/interfaces/profesores';
+
+import { from, of } from 'rxjs';
+import { concatMap, catchError } from 'rxjs/operators';
+
+import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-post-carreras',
@@ -20,25 +25,51 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PostCarrerasComponent implements OnInit {
   id: number = 0;
+
+  // !Forms
   carreraForm!: FormGroup;
   atributosForm!: FormGroup;
   objetivosForm!: FormGroup; 
   competenciasForm!: FormGroup; 
+  pdfForm!: FormGroup
 
   nuevaCarrera: CarreraAtributosDto = {
     carreraNombre: "", 
     mision: "",
     vision: "",
     objetivos: "",
+
     atributosEducacionales: [
       {carreraId: 0, descripcion: ""}
     ],  
     objetivosEducacionales: [
       {carreraId: 0, descripcion: ""}
     ],
+    competenciasEspecificas: [
+      {carreraId: 0, descripcion: ""}
+    ],
+    
+    catalogoAsignatura: {
+      carreraId: this.id, 
+      nombreArchivo: "Catalogo Asignatura",
+      rutaArchivo: null as any, 
+    },
+    mapaTutorial: {
+      carreraId: this.id,
+      nombreArchivo: "Mapa Tutorial",
+      rutaArchivo: null as any
+    },
+    listadoMaterias: {
+      carreraId: this.id,
+      nombreArchivo: "Listado Materias",
+      rutaArchivo: null as any
+    },
+    listadoMateriasOptativas: {
+      carreraId: this.id,
+      nombreArchivo: "Listado de materias Optativas",
+      rutaArchivo: null as any
+    }
   };
-
-
 
   // Datos cargados de la Db
   nuevaCarreraCreada: boolean = false;
@@ -60,21 +91,19 @@ export class PostCarrerasComponent implements OnInit {
     descripcion: "",
     carreraId: this.id
   }
-
-  competenciasEspecíficas: CompetenciasEspecificasDto[] = [];
+  competenciasEspecíficasNuevo: CompetenciasEspecificasDto = {
+    descripcion: "",
+    carreraId: this.id,
+  };
 
   dataSource = new MatTableDataSource(this.nuevaCarrera.atributosEducacionales)
   dataSourceObejtivosEduc = new MatTableDataSource(this.nuevaCarrera.objetivosEducacionales)
-  dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
+  dataSourceCompetencias = new MatTableDataSource(this.nuevaCarrera.competenciasEspecificas)
   displayedColumns: string[] = ["atributos", "Acciones"]; 
   
   profesores: ProfesorDto[] = []
   profesorSeleccionado: number = 1;
 
-  competenciasNuevo: CompetenciasEspecificasDto = {
-    descripcion: "",
-    carreraId: this.id
-  }
   // Documentos cargados
   catalogosAsignaturasURL: CarreraCatAsignaturasDto = {
     carreraId: this.id,
@@ -122,118 +151,74 @@ export class PostCarrerasComponent implements OnInit {
       })
       
       this.competenciasForm = this._fb.group({
-        competenciasNuevo: [this.competenciasNuevo.descripcion, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)])]
+        competenciasNuevo: [this.competenciasEspecíficasNuevo.descripcion, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)])]
       });
+
+      this.pdfForm = this._fb.group({
+        cataogoAsignaturas: [this.nuevaCarrera.catalogoAsignatura.rutaArchivo, Validators.required],
+        mapaTutorial: [this.nuevaCarrera.mapaTutorial.rutaArchivo, Validators.required],
+        listadoMaterias: [this.nuevaCarrera.listadoMaterias.rutaArchivo, Validators.required],
+        listadoMateriasOp: [this.nuevaCarrera.listadoMateriasOptativas.rutaArchivo, Validators.required],
+      })
 
       this.getProfesores();
     }
 
-    postLicenciatura(){
-      this.nuevaCarrera.carreraNombre = this.carreraForm.get("nombre")?.value;
-      this.nuevaCarrera.mision = this.carreraForm.get("mision")?.value;
-      this.nuevaCarrera.vision = this.carreraForm.get("vision")?.value;
+    postLicenciatura(form: FormGroupDirective){ 
+      const formData = new FormData();
+
+      const files = [] as any[];
+      files.push(this.nuevaCarrera.catalogoAsignatura)
+      files.push(this.nuevaCarrera.mapaTutorial)
+      files.push(this.nuevaCarrera.listadoMaterias)
+      files.push(this.nuevaCarrera.listadoMateriasOptativas)
+      console.log(files)
+
+      this.nuevaCarrera.carreraNombre = this.carreraForm.get("nombre")?.value,
+      this.nuevaCarrera.mision = this.carreraForm.get("mision")?.value,
+      this.nuevaCarrera.vision = this.carreraForm.get("vision")?.value,
       this.nuevaCarrera.objetivos = this.carreraForm.get("objetivos")?.value
+
+      formData.append("CarreraNombre", this.nuevaCarrera.carreraNombre.toString());
+      formData.append("Mision", this.nuevaCarrera.mision.toString());
+      formData.append("Vision", this.nuevaCarrera.vision.toString());
+      formData.append("Objetivos", this.nuevaCarrera.objetivos.toString());
+      
+      files.forEach((rutaArchivo, index) => {
+        formData.append(`rutaArchivo${index}`, rutaArchivo.rutaArchivo)
+        formData.append(`rutaArchivo:${index}`, JSON.stringify({
+          carreraId: rutaArchivo.carreraId,  
+          nombreArchivo: rutaArchivo.nombreArchivo
+        }))
+      })
+
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      })
+      
+      this._carreraPostService.postLicenciatura(formData).subscribe({
+        next: (data: any) => {
+          console.log(data);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.alerta("Error al enviar el documento");
+          console.log(err.error);
+          if(err.error.errors){
+            for(const key in err.error.errors){
+              if (err.error.errors.hasOwnProperty(key)) {
+                console.error(`${key}: ${err.error.errors[key]}`);
+              }
+            }
+          }
+        },
+        complete: () => {
+          console.log("Carrera Guardada");
+          this.alerta("Documento cargado correctamente");
+        }
+      })
+
       this.nuevaCarreraCreada = true
-    }
-
-    postCompetencias(){
-      if(this.competenciasEspecíficas.length > 0){
-        this._carreraPostService.postCompetenciasEspecificass(this.competenciasEspecíficas).subscribe({
-          next: (data) => {
-            console.log(data)
-          },
-          error: (err) => {
-            console.log(err)
-            this.alerta("Error en la petición")
-          },
-          complete: () => {
-            this.alerta("Las competencias se cargaron")
-            this.competenciasCargados = true
-          }
-        });
-      }
-    }
-    
-    // Documentos
-    postCatalogos(){
-      if(this.catalogosAsignaturasURL.catalogoAsignaturaUrl != "")
-      {
-        this.catalogosAsignaturasURL.carreraId = this.id
-        this._carreraPostService.postCatalogoAsignatura(this.catalogosAsignaturasURL).subscribe({
-          next: () => {},
-          error: () => {this.alerta("Error en la petición")},
-          complete: () => {
-            this.catalogoAsignaturaCargado = true
-            
-            this.alerta("Documento cargado")
-          }
-        })
-      }
-      else 
-      {
-        this.alerta("Campos vacios")
-      }
-    }
-
-    postMapaTutorial(){
-      // Documentos
-      if(this.mapaTutorial.mapaTutorialUrl != "")
-      {
-        this.mapaTutorial.carreraId = this.id
-        this._carreraPostService.postMapaTutorial(this.mapaTutorial).subscribe({
-          next: () => {},
-          error: () => {this.alerta("Error en la petición")},
-          complete: () => {
-            this.alerta("Documento cargado")
-            this.mapaTutorialCargado = true
-          }
-        })
-      }
-      else 
-      {
-        this.alerta("Campos vacios")
-      }
-    }
-
-    postListaMaterias(){
-      // Documentos
-      if(this.listadoMaterias.listadoMateriasUrl != "")
-      {
-        this.listadoMaterias.carreraId = this.id
-        this._carreraPostService.postListadoMaterias(this.listadoMaterias).subscribe({
-          next: () => {},
-          error: () => {this.alerta("Error en la petición")},
-          complete: () => {
-            this.alerta("Documento cargado")
-            this.listaMateriasCargadas = true
-          }
-        })
-      }
-      else 
-      {
-        this.alerta("Campos vacios")
-      }
-    }
-
-    postListaMateriasOp(){
-      // Documentos
-      if(this.listadoMateriasOptativas.listadoMateriasOpURL != "")
-      {
-        this.listadoMateriasOptativas.carreraId = this.id
-        this._carreraPostService.postListadoMateriasOp(this.listadoMateriasOptativas).subscribe({
-          next: () => {},
-          error: () => {this.alerta("Error en la petición")},
-          complete: () => {
-            this.alerta("Documento cargado")
-            this.listaMateriasOpCargado = true
-            this.volverInicio()
-          }
-        })
-      }
-      else 
-      {
-        this.alerta("Campos vacios")
-      }
+      this.alerta("Nueva carrera creada")
     }
 
     getProfesores(){
@@ -251,6 +236,7 @@ export class PostCarrerasComponent implements OnInit {
         const nuevoAtributo = {...this.atributoNuevo}
 
         this.nuevaCarrera.atributosEducacionales.push(nuevoAtributo)
+
         this.dataSource = new MatTableDataSource(this.nuevaCarrera.atributosEducacionales)
         this.table.renderRows();
         this.alerta("Nuevo atributo añadido")
@@ -277,18 +263,20 @@ export class PostCarrerasComponent implements OnInit {
     }
 
     addCompetencia(){
-      // if(this.competenciasForm.get("competenciasNuevo")?.value != ""){
-        
-      //   this.competenciasEspecíficas.push(competenciaNueva);
-      //   this.dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
-      //   this.table.renderRows();
-      // }
-      // else{
-      //   this.alerta("Campo vacio")
-      // }      
-    }
+      if(this.competenciasForm.get("competenciasNuevo")?.value != ""){
+        this.competenciasEspecíficasNuevo.descripcion = this.competenciasForm.get("competenciasNuevo")?.value
 
-    addCompetencias(){}
+        const nuevaCompetencia = {...this.competenciasEspecíficasNuevo}
+
+        this.nuevaCarrera.competenciasEspecificas.push(nuevaCompetencia)
+        this.dataSourceCompetencias = new MatTableDataSource(this.nuevaCarrera.competenciasEspecificas)
+        this.table.renderRows() 
+        this.alerta("Nueva competencia añadida")
+      }
+      else{
+        this.alerta("Campo vacio")
+      }      
+    }
 
     removeData(i: number): void {
       this.nuevaCarrera.atributosEducacionales.splice(i, 1)
@@ -298,9 +286,10 @@ export class PostCarrerasComponent implements OnInit {
     }
 
     removeCompetenciasEspecificas(i: number){
-      this.competenciasEspecíficas.splice(i, 1);
-      this.dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas)
+      this.nuevaCarrera.competenciasEspecificas.splice(i, 1);
+      this.dataSourceCompetencias = new MatTableDataSource(this.nuevaCarrera.competenciasEspecificas)
       this.table.renderRows();
+      this.alerta("Cometencia elimindada")
     }
 
     removeObjetivos(i: number): void{
@@ -321,4 +310,20 @@ export class PostCarrerasComponent implements OnInit {
         horizontalPosition: 'right'
       })
     };
+    
+    // Carga los archivos
+    onFileSelected(event: any, fieldType: string): void {
+      const rutaArchivo: File = event.target.files[0];
+  
+      const actions: {[key: string]: () => void} = {
+        catalogoAsignaturas: () => {this.nuevaCarrera.catalogoAsignatura.rutaArchivo = rutaArchivo},
+        mapaTutorial: () => {this.nuevaCarrera.mapaTutorial.rutaArchivo = rutaArchivo},
+        listadoMaterias: () => {this.nuevaCarrera.listadoMaterias.rutaArchivo = rutaArchivo},
+        listadoMateriasOp: () => {this.nuevaCarrera.listadoMateriasOptativas.rutaArchivo = rutaArchivo}
+      }
+  
+      if(actions[fieldType]) {
+        actions[fieldType]()
+      }
+    }
 }

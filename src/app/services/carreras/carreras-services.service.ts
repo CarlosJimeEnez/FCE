@@ -56,10 +56,13 @@ export class CarrerasServicesService {
     return this.http.get<Documentos[]>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosUrl}`)
   }
 
-  getDocumentoPDF(id: number, carreraId: number): Observable<any> {
-    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}/${carreraId}`)
+  
+  // ** Recupera el PDF de un documento específico por su id y carreraId
+  getDocumentoPDF(id: number): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`)
   }
-
+  
+  // ** Recupera los PDF por carrera Id
   getDocumentosByCarreraId(carreraId: number): Observable<Documentos[]> {
     const params = new HttpParams().set('careerId', carreraId);
     return this.http.get<Documentos[]>(`

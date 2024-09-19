@@ -39,7 +39,6 @@ export class PutCarrerasServiceService {
   }
 
   putCatalogosAsignaturas(catalogo: FormData, catalogoId: number): Observable<any> {
-    
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${catalogoId}`, catalogo)
   }
 
@@ -62,18 +61,6 @@ export class PutCarrerasServiceService {
   putCarreraObjetivos(carreraObjetivo: CarreraObjetivosDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraObjetivo}${carreraObjetivo.id}`, carreraObjetivo) 
   }
-
-  // putCarreraCatAsignaturas(catalogoAsignaturaURL: CarreraCatAsignaturasDto): Observable<any> {
-  //   return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.catalogosAsignaturasURL}`, catalogoAsignaturaURL) 
-  // }
-
-  // putMapaTutorial(mapaTutorial: CarreraMapaTutorialDto): Observable<any> {
-  //   return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.mapaTutorialURL}`, mapaTutorial) 
-  // }
-
-  // putListadoMaterias(listadoMaterias: CarreraListadoMateriasDto): Observable<any> {
-  //   return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoMateriasURL}`, listadoMaterias)
-  // }
 
   putListadoMateriasOptativas(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoDeMateriasOptativas}`, listadoMateriasOp)

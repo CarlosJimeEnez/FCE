@@ -6,8 +6,32 @@ import { Documentos, DocumentosDto } from 'src/app/interfaces/documento';
 
 @Component({
   selector: 'app-mapas',
-  templateUrl: './mapas.component.html',
-  styleUrls: ['./mapas.component.css']
+  template: `
+  <div class="container ">
+    <div class="row justify-content-center ">
+        <div class="col-1 text-center align-item-center" >
+            <button type="button" (click)="desplazarAFragmento()" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left fa-2x "></i>
+            </button>
+        </div>
+        <div class="col-10  text-center align-item-center">
+            <h3 *ngIf="!documentoNoCargado">{{documento.nombreArchivo}}</h3>
+        </div>
+        <div class="col-1  text-center align-item-center">
+           
+        </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <iframe class="mb-5" *ngIf="!documentoNoCargado; else noDocumento" [src]="urlSegura" width="100%" height="600px" frameborder="0" scrolling="no" ></iframe>
+          <ng-template #noDocumento>
+            <h1>El documento no se ha cargado.</h1>
+          </ng-template>
+        </div>
+      </div>
+    
+</div>
+`
 })
 export class MapasComponent implements OnInit, AfterViewInit  {
   constructor(private _route: ActivatedRoute,
@@ -19,8 +43,9 @@ export class MapasComponent implements OnInit, AfterViewInit  {
   documento: DocumentosDto = {
     carreraId: 0,
     nombreArchivo: "",
-    file: ""
+    rutaArchivo: ""
   }
+  
   id: number = 0;
   urlSegura!: SafeResourceUrl
   documentoNoCargado: boolean = true;
@@ -41,14 +66,17 @@ export class MapasComponent implements OnInit, AfterViewInit  {
   }
 
   getDocumentoPdf(id: number){
-    this._carreraService.getDocumentoPDF(id, this.documento.carreraId).subscribe(res => {   
-      const urlInsegura = res.url
+    this._carreraService.getDocumentoPDF(id).subscribe(res => {   
+      const urlInsegura = res.rutaArchivo
       this.urlSegura = this._sanitizer.bypassSecurityTrustResourceUrl(urlInsegura);
       this.documentoNoCargado = false
+      this.documento.nombreArchivo = res.nombreArchivo
+      console.log(res.rutaArchivo)
     },
     err => console.log(err))
   }
 
+  // Se desplaza a donde estaba el estado de la pagina anterior back()
   desplazarAFragmento() {
     this._router.navigate([`verCarrera/${this.documento.carreraId}`], {fragment: 'planDeEstudios'});
   }
