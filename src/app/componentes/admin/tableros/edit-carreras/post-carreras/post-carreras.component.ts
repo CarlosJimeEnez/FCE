@@ -175,14 +175,6 @@ export class PostCarrerasComponent implements OnInit {
       formData.append('ListadoMateriasOptativas.File', this.nuevaCarrera.listadoMateriasOptativas.file);
       formData.append('ListadoMateriasOptativas.RutaArchivo', this.nuevaCarrera.listadoMateriasOptativas.rutaArchivo);
 
-      // files.forEach((file, index) => {
-      //   formData.append(`file${index}`, file.file)
-      //   formData.append(`file:${index}`, JSON.stringify({
-      //     carreraId: file.carreraId,  
-      //     nombreArchivo: file.nombreArchivo
-      //   }))
-      // })
-
       // Formateo de datos del form data: 
       formData.forEach((value, key) => {
         console.log(`${key}: ${value}`);
