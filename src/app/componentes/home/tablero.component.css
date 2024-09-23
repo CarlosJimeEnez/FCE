@@ -30,7 +30,8 @@
 .shadow-box {
     background-color: var(--gris-t4);
     padding: 20px;
-    border-radius: 20px; /* Bordes redondeados */
+    border-top-right-radius: 20px; /* Bordes redondeados */
+    border-top-left-radius: 20px; /* Bordes redondeados */
     box-shadow: var(--gris-t4)
 }
 
