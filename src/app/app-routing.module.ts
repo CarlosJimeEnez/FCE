@@ -5,7 +5,7 @@ import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { MapasComponent } from './componentes/PDF/pdf.component';
 import { AdminAuthComponent } from './componentes/admin-auth/admin-auth.component';
 import { LoginComponent } from './componentes/admin/login/login.component';
-import { TableroAdminComponent } from './componentes/admin/tableros/tablero-admin/tablero-admin.component';
+import { TableroAdminComponent } from './componentes/admin/tableros/home-admin/tablero-admin.component';
 import { EditCarrerasComponent } from './componentes/admin/tableros/edit-carreras/edit-carreras.component';
 import { TableroProfesoresComponent } from './componentes/admin/tableros/tablero-profesores/tablero-profesores.component';
 import { PostCarrerasComponent } from './componentes/admin/tableros/edit-carreras/post-carreras/post-carreras.component';

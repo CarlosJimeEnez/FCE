@@ -17,7 +17,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginComponent } from './componentes/admin/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedesSocialesComponent } from './componentes/redes-sociales/redes-sociales.component';
-import { TableroAdminComponent } from './componentes/admin/tableros/tablero-admin/tablero-admin.component';
+import { TableroAdminComponent } from './componentes/admin/tableros/home-admin/tablero-admin.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

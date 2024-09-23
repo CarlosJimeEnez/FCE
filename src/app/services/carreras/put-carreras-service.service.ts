@@ -34,11 +34,16 @@ export class PutCarrerasServiceService {
     return this._http.put(`${this.myAppUrl}${this.myApiProfesoresCarreraUrl}${profesorId}/${carreraId}`, profesor)
   }
 
+  // ** Nombre, vision, mision, objetivos. ** //
   putCarreraMetadata(carrera: CarreraDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraMetadata}${carrera.id}`, carrera)    
   }
 
   putCatalogosAsignaturas(catalogo: FormData, catalogoId: number): Observable<any> {
+    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${catalogoId}`, catalogo)
+  }
+
+  putListadoMateriasOptativas(catalogo: FormData, catalogoId: number): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${catalogoId}`, catalogo)
   }
 
@@ -50,6 +55,8 @@ export class PutCarrerasServiceService {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${Id}`, listadoMaterias)
   }
 
+
+  // TODO: REVISAR METODOS A PARTIR DE ESTA LINEA: 
   putCarreraNombre(carreraNombre: CarreranombreDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraNombreApi}${carreraNombre.id}`, carreraNombre)
   }
@@ -60,10 +67,6 @@ export class PutCarrerasServiceService {
 
   putCarreraObjetivos(carreraObjetivo: CarreraObjetivosDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraObjetivo}${carreraObjetivo.id}`, carreraObjetivo) 
-  }
-
-  putListadoMateriasOptativas(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any> {
-    return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.listadoDeMateriasOptativas}`, listadoMateriasOp)
   }
 
   putAtributosEducacionales(atributo: AtributosEducacionales): Observable<any> {

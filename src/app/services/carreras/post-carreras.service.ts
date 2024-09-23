@@ -13,8 +13,9 @@ export class PostCarrerasService {
   myApiUrl: string = "api/CarrerrasControllerPost/"
 
   myApiProfesoresCarreraUrl: string = "api/ProfesoresCarrerasPost/"
+  myApiRelatedData: string = "api/addRelatedCollectionsAndDocuments"
 
-  myAtributosEgresoUrl: string = "atributosEgreso"
+  myAtributoEgresoUrl: string = "atributoEgreso"
   myAtributosEgresosUrl: string = "atributosEgresos"
   myObjetivosEducacionalUrl: string = "objetivosEducacional"
   myObjetivosEducacionalesUrl: string = "objetivosEducacionales"
@@ -29,24 +30,28 @@ export class PostCarrerasService {
 
   constructor(private _http: HttpClient) { }
 
-  // ! Deprecated Method  
-  postAtributosEgreso(atributo: AtributoEgresoDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresoUrl}`, atributo)
+  // ** ATRIBUTO Egreso ** // 
+  postAtributoEgreso(atributo: AtributoEgresoDto): Observable<any>{
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributoEgresoUrl}`, atributo)
   }
-
   
+  // ** ATRIBUTOS Egresos ** // 
   postAtributosEgresos(atributo: AtributoEgresoDto[]): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresosUrl}`, atributo)
   }
 
+  // ** OBJETIVO educacionales: 
   postObjetivoEducacional(objetivo: ObjetivosEducacionalesDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalesUrl}`, objetivo)
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalUrl}`, objetivo)
   }
 
+  // ** OBJETIVOS Educacionales:
   postObjetivosEducacionales(objetivo: ObjetivosEducacionalesDto[]): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalesUrl}`, objetivo)
   }
 
+
+  //Post Competencias especificas 
   postCompetenciasEspecificas(competencia: CompetenciasEspecificasDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCompetenciaEspecificasUrl}`, competencia)
   }
@@ -72,9 +77,14 @@ export class PostCarrerasService {
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myListadoMateriasOptativasURL}`, listadoMateriasOp)
   }
   
-  // !USADO
+  // ** POST LICENCIATURA ** //
   postLicenciatura(licenciatura: FormData): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.nuevaLicenciaturaUrl}`, licenciatura)
+  }
+
+  // ** Related Data LICENCIATURA ** //
+  addRelatedCollectionsAndDocuments(licenciatura: FormData): Observable<any>{
+      return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiRelatedData}`, licenciatura)
   }
 
   postProfesoresCarreras(carreraId: number, profesoresIds: number[]): Observable<any> {

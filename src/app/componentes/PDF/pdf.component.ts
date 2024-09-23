@@ -43,7 +43,8 @@ export class MapasComponent implements OnInit, AfterViewInit  {
   documento: DocumentosDto = {
     carreraId: 0,
     nombreArchivo: "",
-    rutaArchivo: ""
+    rutaArchivo: "",
+    file: null as any,
   }
   
   id: number = 0;

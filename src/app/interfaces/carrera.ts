@@ -17,7 +17,7 @@ export interface CarreraDto {
     objetivos: string;
 }
 
-export interface CarreraAtributosDto {
+export interface CarreraPostDto {
     id?: number;
     carreraNombre: string;
     mision: string;
