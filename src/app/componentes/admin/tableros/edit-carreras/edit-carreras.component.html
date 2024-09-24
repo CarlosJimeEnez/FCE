@@ -1,0 +1,321 @@
+<div class="container mt-5 ">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 container-flex ">
+            <div>
+                <button color="primary" (click)="back()" mat-button>
+                    <mat-icon class="arrow-button">arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="content-container">
+                <h2>Editando:</h2>
+                <h2><strong>{{carrera.carreraNombre}}</strong> </h2> 
+            </div>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Forms -->
+    <form [formGroup]="nombreForm" (ngSubmit)="onSubmitNombreForm()">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Nombre</h4>
+
+                <input [ngClass]="{'is-invalid': nombreForm.get('nombre')?.invalid && nombreForm.get('nombre')?.touched}" 
+                class="form-control" type="text" id="nombre" formControlName="nombre" placeholder="Nombre">
+            </div>
+        </div>
+   
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Misión</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('mision')?.invalid && nombreForm.get('mision')?.touched}" 
+                class="form-control" type="text" id="mision" formControlName="mision" placeholder="Misión"  [(ngModel)]="carrera.mision">
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Visión</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('vision')?.invalid && nombreForm.get('vision')?.touched}"
+                 class="form-control" type="text" id="vision" formControlName="vision" placeholder="Vision" [(ngModel)]="carrera.vision">
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Objetivo</h4>
+                <input [ngClass]="{'is-invalid': nombreForm.get('objetivo')?.invalid && nombreForm.get('objetivo')?.touched}"
+                 class="form-control" type="text" id="objetivo" formControlName="objetivo" placeholder="Objetivo" [(ngModel)]="carrera.objetivos">
+            </div>
+        </div>
+
+        <div class="row justify-content-end ">
+            <div class="col-12 d-flex justify-content-end mt-5 mb-5">
+                <!-- <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button> -->
+                <button type="submit" (click)="onSubmitNombreForm()" [disabled]="!nombreForm.valid" class="btn btn-secondary ms-3">Guardar</button>
+            </div>
+        </div>
+       
+    </form>
+
+    <mat-divider class="mt-3"></mat-divider>
+    
+    <!-- Aatributos -->
+    <div class="col text-center mt-3">
+        <label for="exampleFormControlTextarea1" class="form-label">
+            <h3> Atributos </h3>
+        </label>
+    </div>
+
+    <!-- Atributos de egreso -->
+    <div class="row">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h5><strong>Atributos de Egreso</strong></h5>
+            </label>
+            <div class="demo-button-container ">
+                <button mat-raised-button (click)="addAtributo()" class="demo-button me-3">
+                  Añadir
+                </button>
+            </div>
+              
+              <div class="input-group mt-3">
+                <span class="input-group-text">Atributo: </span>
+                <textarea class="form-control" [(ngModel)]="atributoNuevo.descripcion" aria-label="With textarea"></textarea>
+              </div>
+            
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table mt-3">               
+                <!-- Name Column -->
+                <ng-container matColumnDef="atributos">
+                  <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                  <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="Acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let element">
+                        
+                        <button (click)="removeData(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon  class="delete-button">remove</mat-icon>
+                        </button>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+        </div>
+    </div>
+
+    <!-- Objetivos educacionales -->
+    <div class="row mt-5">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h5><strong>Objetivos educacionales</strong></h5>
+            </label>
+            <div class="demo-button-container ">
+                <button mat-raised-button (click)="addObjetivoEduc()" class="demo-button me-3">
+                    Añadir
+                </button>
+              </div>
+
+              <div class="input-group mt-3">
+                <span class="input-group-text">Atributo: </span>
+                <textarea class="form-control" [(ngModel)]="objetivoEducacionalNuevo.descripcion" aria-label="With textarea"></textarea>
+              </div>
+
+            <table mat-table [dataSource]="dataSourceObejtivosEduc" class="mat-elevation-z8 demo-table mt-3">              
+ 
+                <!-- Name Column -->
+                <ng-container matColumnDef="atributos">
+                  <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                  <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="Acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let element">
+                        
+                        <button (click)="removeObjetivoEducacional(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon  class="delete-button">remove</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table> 
+        </div>
+    </div>
+
+    <!-- Competencia especifica -->
+    <div class="row mt-5">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h5><strong>Competencias específicas</strong></h5>
+            </label>
+            <div class="demo-button-container ">
+                <button mat-raised-button (click)="addCompetencias()" class="demo-button me-3">
+                  Añadir
+                </button>
+              </div>
+
+              <div class="input-group mt-3">
+                <span class="input-group-text">Atributo: </span>
+                <textarea class="form-control" [(ngModel)]="competenciasNuevo.descripcion" aria-label="With textarea"></textarea>
+              </div>
+
+              <table mat-table [dataSource]="dataSourceCompetencias" class="mat-elevation-z8 demo-table mt-3">              
+                <!-- Name Column -->
+                <ng-container matColumnDef="atributos">
+                  <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                  <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="Acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let element">
+                        
+                        <button (click)="removeCompetenciasEspecificas(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon  class="delete-button">remove</mat-icon>
+                        </button>
+                    </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table> 
+        </div>
+    </div>
+
+    <mat-divider class="mt-3"></mat-divider>
+
+    <!-- Plan de estudios -->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h3>Plan de estudios</h3>
+            </label>
+        </div>
+
+        <form [formGroup]="pdfForm">
+            <!-- Catalogo Asignatura -->
+            <div class="row justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Catálogo de asignatura</h4>
+                    <input [ngClass]="{'is-invalid': pdfForm.get('catalogoAsignaturas')?.invalid && pdfForm.get('catalogoAsignaturas')?.touched}" 
+                    class="form-control" (change)="onFileSelected($event, 'catalogoAsignaturas')" type="file" id="catalogoAsignaturas" formControlName="catalogoAsignaturas" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="cancelFile('catalogoAsignaturas')" class="btn btn-danger" [disabled]="!isFieldValid('catalogoAsignaturas')">Cancelar</button>
+                    <button type="submit" (click)="cambiarCatalogoAsigUrl()" [disabled]="!isFieldValid('catalogoAsignaturas')" class="btn btn-secondary ms-3">Guardar</button>
+                </div>
+            </div>
+
+            <!-- Mapa Tutorial -->
+            <div class="row  justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Mapa tutorial</h4>
+                    <input [ngClass]="{'is-invalid': pdfForm.get('mapaTutorial')?.invalid && pdfForm.get('mapaTutorial')?.touched}" 
+                    class="form-control" (change)="onFileSelected($event, 'mapaTutorial')" type="file" id="mapaTutorial" formControlName="mapaTutorial" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="cancelFile('mapaTutorial')" [disabled]="!isFieldValid('mapaTutorial')" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit"  (click)="cambiarMapaTutorialUrl()"  [disabled]="!isFieldValid('mapaTutorial')" class="btn btn-secondary ms-3">Guardar</button>
+                </div>
+            </div>
+
+             <!-- Listado de materias -->
+            <div class="row justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Listado materias</h4>
+                    <input [ngClass]="{'is-invalid': pdfForm.get('listadoMaterias')?.invalid && pdfForm.get('listadoMaterias')?.touched}" 
+                    class="form-control" (change)="onFileSelected($event, 'listadoMaterias')" type="file" id="listadoMaterias" formControlName="listadoMaterias" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="cancelFile('listadoMaterias')" [disabled]="!isFieldValid('listadoMaterias')" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit" (click)="cambiarListadoMaterias()"  [disabled]="!isFieldValid('listadoMaterias')" class="btn btn-secondary ms-3">Guardar</button>
+                </div>
+            </div>
+
+            <!-- Listado de materias optativas -->
+            <div class="row justify-content-center">
+                <div class="col-6 mt-5">
+                    <h4>Listado de materias optativas</h4>
+                    <input [ngClass]="{'is-invalid': pdfForm.get('listadoMateriasOp')?.invalid && pdfForm.get('listadoMateriasOp')?.touched}"
+                    class="form-control" (change)="onFileSelected($event, 'listadoMateriasOp')" type="file" id="listadoMateriasOp" formControlName="listadoMateriasOp" placeholder="Mapa Tutorial">
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-6 mt-2 d-flex justify-content-start">
+                    <button type="button" (click)="cancelFile('listadoMateriasOp')" [disabled]="!isFieldValid('listadoMateriasOp')" class="btn btn-danger ">Cancelar</button>
+                    <button type="submit" (click)="cambiarListadoMateriasOp()" [disabled]="!isFieldValid('listadoMateriasOp')" class="btn btn-secondary ms-3">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <mat-divider class="mt-3"></mat-divider>
+    
+    <!-- Profesores -->
+    <div class="row my-3">
+        <div class="col-1  text-center align-item-center">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h3><strong>Profesores</strong></h3>
+            </label>
+        </div>
+        <div class="col-11  d-flex justify-content-end">       
+            <button type="button" (click)="addProfesor()" class="btn btn-secondary d-flex justify-content-center align-items-center">
+                <p class="p-0 me-3 m-0">Nuevo profesor</p>
+                <mat-icon class="add-button ">add</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col">
+              <table mat-table [dataSource]="dataSourceProfesores" class="table-profesor mat-elevation-z8 demo-table mt-3">              
+                <!-- Name Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                  <td mat-cell *matCellDef="let element">{{element.nombre}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="rol" >
+                    <th mat-header-cell *matHeaderCellDef>Rol</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.rol}}
+                    </td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let element, let i = index">
+                        <button mat-icon-button (click)="editarRolProfesor(element, i)" type="button">
+                            <mat-icon class="edit">edit</mat-icon>
+                        </button>
+
+                        <button (click)="removeData(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon  class="delete-button">remove</mat-icon>
+                        </button>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsProfesores"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsProfesores;"></tr>
+              </table>   
+        </div>
+    </div>
+</div>

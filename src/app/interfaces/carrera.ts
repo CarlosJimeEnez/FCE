@@ -1,29 +1,35 @@
+import { DocumentosDto } from "./documento";
+import { ObjetivosEducacionalesDto } from "./Dto";
+
 export interface Carrera {
     id?: number;
     carreraNombre: string;
     mision: string;
     vision: string;
-    descripcion: string;
-    coordinadorID: number;
     objetivos: string;
 }
 
-export interface Profesor {
+export interface CarreraDto {
     id?: number;
-    nombre: string;
-    cargo: string;
-    edificio: string;
-    horario: string;
-    telefono: string;
-    correo: string;
+    carreraNombre: string;
+    mision: string;
+    vision: string;
+    objetivos: string;
 }
 
-export interface Documentos {
-    documentoID?: number;
-    carreraId: number;
-    nombreArchivo: string;
-    rutaArchivo: string;
-    fechaSubidade: number;
+export interface CarreraPostDto {
+    id?: number;
+    carreraNombre: string;
+    mision: string;
+    vision: string;
+    objetivos: string;
+    atributosEducacionales: AtributosEducacionales[];
+    objetivosEducacionales: ObjetivosEducacionales[]; 
+    competenciasEspecificas: CompetenciasEspecificas[];
+    catalogoAsignatura: DocumentosDto;
+    mapaTutorial: DocumentosDto; 
+    listadoMaterias: DocumentosDto;
+    listadoMateriasOptativas: DocumentosDto; 
 }
 
 export interface AtributosEducacionales {

@@ -1,0 +1,40 @@
+<div class="container edit-placeholder">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 container-flex">
+            <div>
+                <button (click)="back()" color="primary" mat-button>
+                    <mat-icon class="arrow-button">arrow_back</mat-icon>
+                </button>
+            </div>
+            <div>
+                <h3>Editando: <strong> {{ad.nombreArchivo}} </strong></h3>
+            </div>
+            <span></span>
+    </div>
+
+    <!-- Forms -->
+    <form [formGroup]="editForm">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Nombre</h4>
+                <input class="form-control" type="text" id="nombre" formControlName="nombre" placeholder="Nombre">
+            </div>
+        </div>
+   
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h4>Link</h4>
+                <input class="form-control" type="text" id="link" formControlName="link" placeholder="Link">
+            </div>
+        </div>
+        
+        <div class="row justify-content-end ">
+            <div class="col-12 d-flex justify-content-end mt-5 mb-5">
+                <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                <button type="submit" (click)="editAd()" [disabled]="!editForm.valid" class="btn btn-success ms-3">Guardar</button>
+            </div>
+        </div>
+    </form>
+        
+    
+</div>

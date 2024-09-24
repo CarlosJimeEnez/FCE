@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 container-flex ">
+            <div>
+                <button color="primary" (click)="back()" mat-button>
+                    <mat-icon class="arrow-button">arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="content-container">
+                <h2>Editando rol</h2>
+            </div>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Forms -->
+    <form [formGroup]="rolForm" (ngSubmit)="onSubmitRolForm()">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <!-- <input [ngClass]="{'is-invalid': rolForm.get('rol')?.invalid && rolForm.get('rol')?.touched}" 
+                class="form-control" type="text" id="rol" formControlName="rol" placeholder="Rol"> -->
+                    
+                <div class="mb-3">
+                    <label for="rolControl" class="form-label">Rol</label>
+                    <select id="rolControl" class="form-select" formControlName="rol" aria-label="Default select example">
+                      <option *ngFor="let rol of roles" [value]="rol.value">{{rol.label}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-end ">
+            <div class="col-12 d-flex justify-content-end mt-5 mb-5">
+                <button type="button" (click)="back()" class="btn btn-danger ">Cancelar</button>
+                <button type="submit"  [disabled]="!rolForm.valid" class="btn btn-success ms-3">Guardar</button>
+            </div>
+        </div>
+    </form>
+
+</div>

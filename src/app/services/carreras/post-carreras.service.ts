@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/enviroments';
-import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
-import { Carrera, CompetenciasEspecificas } from '../../interfaces/carrera';
+import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';
+import { Carrera, CarreraDto, CompetenciasEspecificas } from '../../interfaces/carrera';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,11 @@ import { Carrera, CompetenciasEspecificas } from '../../interfaces/carrera';
 export class PostCarrerasService {
   myAppUrl: string = environment.endpoint
   myApiUrl: string = "api/CarrerrasControllerPost/"
-  myAtributosEgresoUrl: string = "atributosEgreso"
+
+  myApiProfesoresCarreraUrl: string = "api/ProfesoresCarrerasPost/"
+  myApiRelatedData: string = "api/addRelatedCollectionsAndDocuments"
+
+  myAtributoEgresoUrl: string = "atributoEgreso"
   myAtributosEgresosUrl: string = "atributosEgresos"
   myObjetivosEducacionalUrl: string = "objetivosEducacional"
   myObjetivosEducacionalesUrl: string = "objetivosEducacionales"
@@ -22,26 +26,32 @@ export class PostCarrerasService {
   myListadoMateriasURL: string = "listadoMaterias"
   myListadoMateriasOptativasURL: string = "listadoMateriasOp"
   myCoordinadorUrl: string = "coordinador"
-  nuevaLicenciaturaUrl: string = "licenciatura"
+  nuevaLicenciaturaUrl: string = "nuevaLicenciatura"
 
   constructor(private _http: HttpClient) { }
 
-  postAtributosEgreso(atributo: AtributoEgresoDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresoUrl}`, atributo)
+  // ** ATRIBUTO Egreso ** // 
+  postAtributoEgreso(atributo: AtributoEgresoDto): Observable<any>{
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributoEgresoUrl}`, atributo)
   }
-
+  
+  // ** ATRIBUTOS Egresos ** // 
   postAtributosEgresos(atributo: AtributoEgresoDto[]): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myAtributosEgresosUrl}`, atributo)
   }
 
+  // ** OBJETIVO educacionales: 
   postObjetivoEducacional(objetivo: ObjetivosEducacionalesDto): Observable<any>{
-    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalesUrl}`, objetivo)
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalUrl}`, objetivo)
   }
 
+  // ** OBJETIVOS Educacionales:
   postObjetivosEducacionales(objetivo: ObjetivosEducacionalesDto[]): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myObjetivosEducacionalesUrl}`, objetivo)
   }
 
+
+  //Post Competencias especificas 
   postCompetenciasEspecificas(competencia: CompetenciasEspecificasDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myCompetenciaEspecificasUrl}`, competencia)
   }
@@ -66,9 +76,23 @@ export class PostCarrerasService {
   postListadoMateriasOp(listadoMateriasOp: CarreraListadoOpURLDto): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myListadoMateriasOptativasURL}`, listadoMateriasOp)
   }
-
-  // Post TODO 
-  postLicenciatura(licenciatura: CarreraDto): Observable<any>{
+  
+  // ** POST LICENCIATURA ** //
+  postLicenciatura(licenciatura: FormData): Observable<any>{
     return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.nuevaLicenciaturaUrl}`, licenciatura)
+  }
+
+  // ** Related Data LICENCIATURA ** //
+  addRelatedCollectionsAndDocuments(licenciatura: FormData): Observable<any>{
+      return this._http.post<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiRelatedData}`, licenciatura)
+  }
+
+  postProfesoresCarreras(carreraId: number, profesoresIds: number[]): Observable<any> {
+    let params = new HttpParams(); 
+    profesoresIds.forEach(id => {
+      params = params.append("profesoresIds", id.toString()); 
+    })
+
+    return this._http.post<any>(`${this.myAppUrl}${this.myApiProfesoresCarreraUrl}${carreraId}`, profesoresIds)
   }
 }

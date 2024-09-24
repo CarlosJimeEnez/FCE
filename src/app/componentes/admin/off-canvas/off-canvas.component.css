@@ -4,9 +4,19 @@
     border-radius: 1%;
 }
 .navs:hover {
-    background-color: var(--neutro_activo);
+    background-color: var(--gris-t2);
+    border-radius: 5px;
 }
 
 .edit {
     color: var(--editar);
+}
+
+.navs {
+    cursor: pointer;
+}
+
+.active-link {
+    background-color: var(--gris-t2);
+    font-weight: bold;
 }

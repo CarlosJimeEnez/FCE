@@ -1,3 +1,17 @@
 .Titular-dashboard {
     margin-top: 10vh;
 }
+
+button mat-icon.add-icon {
+    margin: 0px;
+}
+
+.content-area {
+    position: relative;
+}
+
+.demo-button {
+    position: sticky;
+    bottom: 20px;
+    right: 20px;
+}

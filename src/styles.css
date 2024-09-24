@@ -110,6 +110,14 @@ li {
     color: var(--negro_translucido);
 }
 
+.light-font {
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6); 
+}
+
+.accent-text{
+    color: var(--azul_calro);
+}
 
 /* Gotham Black */
 @font-face {
