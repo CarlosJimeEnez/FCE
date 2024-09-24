@@ -12,8 +12,6 @@ import { HeaderComponent } from './componentes/header/header.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { MapasComponent } from './componentes/PDF/pdf.component';
-import { AdminAuthComponent } from './componentes/admin-auth/admin-auth.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginComponent } from './componentes/admin/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedesSocialesComponent } from './componentes/redes-sociales/redes-sociales.component';
@@ -45,7 +43,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CarrerasComponent,
     FooterComponent,
     MapasComponent,
-    AdminAuthComponent,
     LoginComponent,
     RedesSocialesComponent,
     TableroAdminComponent,
@@ -76,7 +73,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule, 
-    OAuthModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
