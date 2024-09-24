@@ -55,6 +55,7 @@ export class LoginComponent {
         token => {
           // Aquí manejarías la respuesta del servidor, como guardar el token, etc.
           localStorage.setItem('tokenJWT', token);
+          console.log('Token JWT:', token);
           this.formSubmitted = true;
           this.inicioSesion()
         },

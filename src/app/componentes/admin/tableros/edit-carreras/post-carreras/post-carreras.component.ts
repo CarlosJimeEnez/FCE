@@ -1,8 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CarreraPostDto } from 'src/app/interfaces/carrera';
-import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { PostCarrerasService } from 'src/app/services/carreras/post-carreras.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AtributoEgresoDto, CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CompetenciasEspecificasDto, CoordinadorDto, ObjetivosEducacionalesDto } from 'src/app/interfaces/Dto';
@@ -73,7 +72,6 @@ export class PostCarrerasComponent implements OnInit {
   profesores: ProfesorDto[] = []
   profesorSeleccionado: number = 1;
 
-  // TODO Se necesita ? 
   catalogosAsignaturasURL: CarreraCatAsignaturasDto = { carreraId: this.id,  catalogoAsignaturaUrl: "" }
   mapaTutorial: CarreraMapaTutorialDto = {carreraId: this.id, mapaTutorialUrl: ""}
   listadoMaterias: CarreraListadoMateriasDto = { carreraId: this.id, listadoMateriasUrl: ""}

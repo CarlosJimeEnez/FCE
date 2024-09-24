@@ -1,30 +1,33 @@
-<div class="container">
-    <div class="row login-style" *ngIf="!formSubmitted; else loading">
+<div class="container login-style">
+    <div class="row" *ngIf="!formSubmitted; else loading">
+      <div class="col mt-5">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Dirección de correo</label>
-              
-              <input type="email" (click)="restablecerColorEmail()" #emailStyle name="email" formControlName="email" required class="form-control"
-                    id="exampleInputEmail1" aria-describedby="emailHelp"
-                    [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
-              
-              <div id="emailHelp" class="form-text"></div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-              <input type="password" (click)="restablecerColorPassword()" #passwordStyle name="password" formControlName="password" required
-                    [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
-                    class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="mb-3 form-check">
-              <input   type="checkbox" name="rememberMe" formControlName="rememberMe" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1" >Recuerdame</label>
-            </div>
-            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Entrar</button>
-          </form>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Dirección de correo</label>
+            
+            <input type="email" (click)="restablecerColorEmail()" #emailStyle name="email" formControlName="email" required class="form-control"
+                  id="exampleInputEmail1" aria-describedby="emailHelp"
+                  [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+            
+            <div id="emailHelp" class="form-text"></div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" (click)="restablecerColorPassword()" #passwordStyle name="password" formControlName="password" required
+                  [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
+                  class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3 form-check">
+            <input   type="checkbox" name="rememberMe" formControlName="rememberMe" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1" >Recuerdame</label>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Entrar</button>
+        </form>
+      </div>
     </div>
 
     <ng-template #loading>
         <H1>CARGANDO</H1>
     </ng-template>
+    
 </div>
