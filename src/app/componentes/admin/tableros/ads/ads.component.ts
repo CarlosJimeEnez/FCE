@@ -42,7 +42,6 @@ export class AdsComponent implements OnInit {
   getAds() {
     this._adService.getAds().subscribe({
       next: (data: AdsDto[]) => {
-        console.log(data);
 
         this.Ads = data.map(ad => ({
           ad,
@@ -78,17 +77,13 @@ export class AdsComponent implements OnInit {
   };
 
   eliminarCarrera(id: number): void {
-    console.log(id);
     this._deleteAd.deleteAd(id).subscribe({
       next: (data: any) => {
-        console.log(data);
       },
       error: (data: any) => {
-        console.log(data);
         this.alerta("Error en la petición")
       },
       complete: () => {
-        console.log("Se eliminó de forma correcta")
         this.alerta("Elemento eliminado")
         this.getAds();
       },

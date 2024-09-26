@@ -18,7 +18,7 @@ export class TableroProfesoresComponent implements OnInit{
   constructor(private _router: Router,
     private _profesoresService: GetProfesoresService,
     private _deleteProf: DeleteProfesoresService,
-    private _snackBar: MatSnackBar,){}
+    private _snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.getProfesores()

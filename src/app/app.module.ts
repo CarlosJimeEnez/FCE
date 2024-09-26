@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +12,6 @@ import { HeaderComponent } from './componentes/header/header.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { MapasComponent } from './componentes/PDF/pdf.component';
-import { AdminAuthComponent } from './componentes/admin-auth/admin-auth.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginComponent } from './componentes/admin/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedesSocialesComponent } from './componentes/redes-sociales/redes-sociales.component';
@@ -36,6 +34,8 @@ import { CommonModule } from '@angular/common';
 import { EditRolComponent } from './componentes/admin/tableros/edit-carreras/edit-rol/edit-rol.component';
 import { AddProfesorComponent } from './componentes/admin/tableros/edit-carreras/add-profesor/add-profesor.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { LoginUserService } from './services/login-user.service';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CarrerasComponent,
     FooterComponent,
     MapasComponent,
-    AdminAuthComponent,
     LoginComponent,
     RedesSocialesComponent,
     TableroAdminComponent,
@@ -76,9 +75,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule, 
-    OAuthModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    LoginUserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,6 +32,19 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/enviroments/enviroments.ts",
+                  "with": "src/app/enviroments/environments.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -61,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "FCE:build:production"
+              "buildTarget": "FCE:build:production"
             },
             "development": {
-              "browserTarget": "FCE:build:development"
+              "buildTarget": "FCE:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FCE:build"
+            "buildTarget": "FCE:build"
           }
         },
         "test": {

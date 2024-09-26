@@ -17,26 +17,24 @@ export class LoginComponent {
   formSubmitted: boolean = false;
   colorPredeterminado: string = "primary"
 
-  constructor(private _fb: FormBuilder,
+  constructor (
+    private _fb: FormBuilder,
     private _loginService: LoginUserService,
     private _renderer: Renderer2,
-    private _router: Router){    
-    this.user = {
-      email: "",
-      password: "",
-      rememberMe: false
-    }
-    
-    this.loginForm = this._fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      rememberMe: ['']
-    });
+    private _router: Router,
+  )
+    {    
+      this.user = { email: "", password: "", rememberMe: false}
+
+      this.loginForm = this._fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
+        rememberMe: ['']
+      });
   }
 
   restablecerColorEmail(): void{
     this._renderer.addClass(this.emailStyle.nativeElement, 'predeterminado');
-    console.log("Cambiar color")
   }
 
   restablecerColorPassword(): void{
@@ -54,8 +52,8 @@ export class LoginComponent {
       this._loginService.login(this.user).subscribe(
         token => {
           // Aquí manejarías la respuesta del servidor, como guardar el token, etc.
-          localStorage.setItem('tokenJWT', token);
-          console.log('Token JWT:', token);
+          // localStorage.setItem('tokenJWT', token);
+          this._loginService.setToken(token);
           this.formSubmitted = true;
           this.inicioSesion()
         },

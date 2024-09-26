@@ -95,7 +95,13 @@
             </div>
           </li>
         </ul>
-      
+        
+        <!-- Botón de usuario para cerrar sesión -->
+      <ul *ngIf="isLogged" class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+        </li>
+      </ul>
       </div>
     </div>
   </nav>
