@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../enviroments/enviroments';
+import { environment } from 'src/app/environments/environment';'../../environments/environment';
 import { AtributosEducacionales, Carrera, CompetenciasEspecificas, ObjetivosEducacionales } from '../../interfaces/carrera';
 import { Profesor } from 'src/app/interfaces/profesores';
 import { Documentos } from 'src/app/interfaces/documento';

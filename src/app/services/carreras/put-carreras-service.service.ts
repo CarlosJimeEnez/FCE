@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../enviroments/enviroments';
+import { environment } from 'src/app/environments/environment';'../../environments/environment';
 import { AtributosEducacionales, Carrera, CarreraDto } from '../../interfaces/carrera';
 import { Observable } from 'rxjs';
 import { CarreraCatAsignaturasDto, CarreraListadoMateriasDto, CarreraListadoOpURLDto, CarreraMapaTutorialDto, CarreraMisionDto, CarreraObjetivosDto, CarreranombreDto, CoordinadorDto } from '../../interfaces/Dto';

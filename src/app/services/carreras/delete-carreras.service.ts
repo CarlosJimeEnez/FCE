@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../enviroments/enviroments';
+import { environment } from 'src/app/environments/environment';'../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AtributoEgresoDto, CompetenciasEspecificasDto, ObjetivosEducacionalesDto } from '../../interfaces/Dto';

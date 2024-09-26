@@ -7,7 +7,7 @@ import { ScrollService } from 'src/app/services/scroll.service';
 import { AdsService } from 'src/app/services/ads/ads.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdsDto } from 'src/app/interfaces/Dto';
-import { environment } from 'src/app/enviroments/enviroments';
+import { environment } from 'src/app/environments/environment';'src/app/environments/enviroments';
 
 @Component({
   selector: 'app-tablero',
