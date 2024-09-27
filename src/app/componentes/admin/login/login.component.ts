@@ -27,7 +27,7 @@ export class LoginComponent {
       this.user = { email: "", password: "", rememberMe: false}
 
       this.loginForm = this._fb.group({
-        email: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)]],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)]],
         rememberMe: ['']
       });
