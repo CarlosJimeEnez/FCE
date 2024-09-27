@@ -36,7 +36,7 @@ import { AddProfesorComponent } from './componentes/admin/tableros/edit-carreras
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginUserService } from './services/login-user.service';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
-
+import { SidebarComponent } from "./componentes/sidebar/sidebar.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,8 +59,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     EditRolComponent,
     AddProfesorComponent,
   ],
-  imports: [    
-    MatCheckboxModule, 
+  imports: [
+    MatCheckboxModule,
     CommonModule,
     MatSnackBarModule,
     MatDividerModule,
@@ -74,8 +74,9 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule, 
-  ],
+    ReactiveFormsModule,
+    SidebarComponent
+],
   providers: [
     LoginUserService,
     {

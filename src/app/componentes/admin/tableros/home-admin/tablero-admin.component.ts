@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras.service';
+import { SidebarComponent } from 'src/app/componentes/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-tablero-admin',
@@ -14,6 +15,8 @@ import { DeleteCarrerasService } from 'src/app/services/carreras/delete-carreras
 })
 export class TableroAdminComponent implements OnInit {
   carrerasNoCargadas: boolean = true;
+  eliminar: boolean = false;
+  carreraNombre: string = "";
   carreras: Carrera[] = [];
   dataSource = new MatTableDataSource(this.carreras)
   @ViewChild(MatTable) table!: MatTable<Carrera>;
@@ -56,16 +59,24 @@ export class TableroAdminComponent implements OnInit {
   }
 
   eliminarCarrera(carrera: CarreraDto ,id: number, nombre: string): void{
-    this._carreraDeleteService.deleteCarrera(carrera).subscribe({
-      next: () => {
-        this.getCarreras()
-        this.table.renderRows();
-      },
-      error: (err: any) => {console.log(err);},
-      complete: () => {
-        this.alerta(`Se eliminó la carrera: ${nombre}`)
-      }
-    })
+    this.carreraNombre = nombre;
+    if(this.eliminar){
+      this._carreraDeleteService.deleteCarrera(carrera).subscribe({
+        next: () => {
+          this.getCarreras()
+          this.table.renderRows();
+        },
+        error: (err: any) => {console.log(err);},
+        complete: () => {
+          this.alerta(`Se eliminó la carrera: ${nombre}`)
+          
+        }
+      })
+    } 
+  }
+
+  confirmacionEliminacion(): void{
+    this.eliminar = true;
   }
 
   alerta(message: string){

@@ -1,0 +1,17 @@
+button mat-icon.icon-add {
+    margin: 0px; /* Ajusta según tus necesidades */
+}
+
+.btn-hover{
+    text-align: left;
+}
+.btn-hover:hover{
+    background-color: var(--gris-t2);
+    border-radius: 5px;
+}
+
+.active-link{
+    background-color: #f8f9fa; /* Color de fondo para el enlace activo */
+    border: 1px solid #ddd; /* Borde para el enlace activo */
+    color: #000; /* Color del texto para el enlace activo */
+}
