@@ -200,6 +200,7 @@ export class PostCarrerasComponent implements OnInit {
           form.resetForm();
           this.alerta("Carrera creada con éxito")
           this.initializeForms();
+          this._router.navigate(['admin/inicio']);
         }
       });
     }

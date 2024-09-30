@@ -19,6 +19,14 @@ export class TableroAdminComponent implements OnInit {
   carreraNombre: string = "";
   carreras: Carrera[] = [];
   dataSource = new MatTableDataSource(this.carreras)
+  selectedCarrera: CarreraDto = {
+    id: undefined,
+    carreraNombre: '',
+    mision: '',
+    vision: '',
+    objetivos: ''
+  };
+  
   @ViewChild(MatTable) table!: MatTable<Carrera>;
   
   constructor(
@@ -58,8 +66,7 @@ export class TableroAdminComponent implements OnInit {
     this._router.navigate(['admin/post-carrera']);
   }
 
-  eliminarCarrera(carrera: CarreraDto ,id: number, nombre: string): void{
-    this.carreraNombre = nombre;
+  eliminarCarrera(carrera: CarreraDto , nombre: string): void{
     if(this.eliminar){
       this._carreraDeleteService.deleteCarrera(carrera).subscribe({
         next: () => {
@@ -75,8 +82,15 @@ export class TableroAdminComponent implements OnInit {
     } 
   }
 
-  confirmacionEliminacion(): void{
+  preparaElimanacion(elemento: any, nombre: string): void{
+    this.selectedCarrera = elemento;
+    console.log(this.selectedCarrera)
+    this.carreraNombre = nombre;
+  }
+
+  confirmarEliminacion(): void{
     this.eliminar = true;
+    this.eliminarCarrera(this.selectedCarrera, this.carreraNombre)
   }
 
   alerta(message: string){
