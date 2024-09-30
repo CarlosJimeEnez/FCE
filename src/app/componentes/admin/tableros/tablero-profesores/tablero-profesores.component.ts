@@ -14,7 +14,9 @@ import { GetProfesoresService } from 'src/app/services/profesores/get-profesores
 export class TableroProfesoresComponent implements OnInit{
   profesores: ProfesorDTO[] = [];
   dataSource = new MatTableDataSource(this.profesores)
-
+  nombreProfesor: string = ""; 
+  eliminar: boolean = false;
+  
   constructor(private _router: Router,
     private _profesoresService: GetProfesoresService,
     private _deleteProf: DeleteProfesoresService,
@@ -35,6 +37,10 @@ export class TableroProfesoresComponent implements OnInit{
       }, err => {
         console.log(err)
       })
+  }
+
+  confirmacionEliminacion():void{
+    this.eliminar = true;
   }
 
   editarProfesor(id: number, profesor: string){

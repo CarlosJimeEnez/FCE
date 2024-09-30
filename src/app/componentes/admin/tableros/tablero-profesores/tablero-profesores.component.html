@@ -1,31 +1,37 @@
-
-<div class="container" id="inicio">
-    <div class="row Titular-dashboard">
-        <div class="col-4">
+<div class="container-fluid" id="inicio">
+    <div class="row">
+        <div class="d-flex d-block m-4 d-md-none col-1 justify-content-center  align-items-center">
             <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                 <i class="fa-solid fa-angles-right fa-xl"></i>
             </button>
         </div>
-        <div class="col-4 text-center">
-            <h3>Profesores</h3>
-        </div>
-        <div class="col-4">
+        <div class="col mt-4 text-center m-auto">
+            <h1> Anuncios</h1>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-6">
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
-            </mat-form-field>        
+        <div class="col-md-2 d-none d-sm-block d-sm-flex flex-column align-items-center justify-content-center" style="height: 60vh;">
+            <app-sidebar></app-sidebar>
         </div>
-        <div class="col-4">
+    
+        <div class="col-md-10 my-3">
             
-        </div>
-            
-        <div class="content-area">
             <div class="row">
-                <div class="col">
+                <div class="col-6">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <div class="col-5 text-end">
+                    <button mat-raised-button (click)="postProfesor()"  class="demo-button mt-3">
+                        <mat-icon class="icon-add">add</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mb-3">
                         
                         <!-- Nombre Column -->
@@ -68,16 +74,31 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
+                    
+
                 </div>
-            </div>
-            <button
-            (click)="postProfesor()" 
-            mat-raised-button 
-            class="demo-button mt-3 mb-3">
-                <mat-icon class="add-icon">add</mat-icon>
-            </button>
+            </div>            
         </div>
     </div>
 </div>
 
 <app-off-canvas></app-off-canvas>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminando la carrera: {{nombreProfesor}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" (click)="confirmacionEliminacion()" data-bs-dismiss="modal" class="btn btn-primary">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

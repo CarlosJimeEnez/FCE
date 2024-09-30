@@ -76,6 +76,6 @@ export class PostAdsComponent implements OnInit  {
   }
 
   back():void{
-    this._router.navigate(['admin/anuncios', {}])
+    this._router.navigate(['admin/anuncios'])
   }
 }

@@ -15,7 +15,10 @@ import { DeleteAdsService } from 'src/app/services/ads/delete-ads.service';
 export class AdsComponent implements OnInit {
   adNoCargadas: boolean = true;
   navNombre!: string
+  eliminar: boolean = false;
   Ads: {ad: AdsDto, safeUrl: SafeResourceUrl}[] = [];
+  adNombreAEliminar: string = "";
+  selectedAdId: number = 0;
 
   dataSource = new MatTableDataSource(this.Ads)
   @ViewChild(MatTable) table!: MatTable<AdsDto>;
@@ -65,7 +68,7 @@ export class AdsComponent implements OnInit {
   }
 
   nuevoAds(){
-    this._router.navigate(['admin/post-carrera']);
+    this._router.navigate(['admin/post-ads']);
   }
 
   alerta(message: string){
@@ -76,18 +79,30 @@ export class AdsComponent implements OnInit {
     })
   };
 
-  eliminarCarrera(id: number): void {
-    this._deleteAd.deleteAd(id).subscribe({
-      next: (data: any) => {
-      },
-      error: (data: any) => {
-        this.alerta("Error en la petición")
-      },
-      complete: () => {
-        this.alerta("Elemento eliminado")
-        this.getAds();
-      },
-    });
+  eliminarAd(id: number): void {
+    if(this.eliminar){
+      this._deleteAd.deleteAd(id).subscribe({
+        next: (data: any) => {
+        },
+        error: (data: any) => {
+          this.alerta("Error en la petición")
+        },
+        complete: () => {
+          this.alerta("Elemento eliminado")
+          this.getAds();
+        },
+      });
+    }
+  }
+
+  prepararEliminacion(id: number, nombre: string): void{
+    this.selectedAdId = id;
+    this.adNombreAEliminar = nombre;
+  }
+
+  confirmacionEliminacion(): void{
+    this.eliminar = true;
+    this.eliminarAd(this.selectedAdId)
   }
 
   postAd():void {

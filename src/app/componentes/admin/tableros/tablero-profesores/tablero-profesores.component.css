@@ -15,3 +15,8 @@ button mat-icon.add-icon {
     bottom: 20px;
     right: 20px;
 }
+
+
+button mat-icon.icon-add {
+    margin: 0px; /* Ajusta según tus necesidades */
+}
