@@ -6,7 +6,7 @@
             </button>
         </div>
         <div class="col mt-4 text-center m-auto">
-            <h1> Anuncios</h1>
+            <h1> Profesores </h1>
         </div>
     </div>
 
@@ -65,7 +65,7 @@
                                 <button (click)="editarProfesor(element.id, element.carreraNombre)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                                     <mat-icon class="edit">edit</mat-icon>
                                 </button>
-                                <button (click)="eliminarProfesor(element.id)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="preparEliminacion(element.id, element.nombre)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                                     <mat-icon class="delete-button">remove</mat-icon>
                                 </button>
                             </td>
@@ -90,7 +90,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminando la carrera: {{nombreProfesor}}</h1>
+          <h5 class="modal-title fs-5" id="exampleModalLabel">Eliminando profesor: <h1>{{nombreProfesor}}</h1></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-footer">

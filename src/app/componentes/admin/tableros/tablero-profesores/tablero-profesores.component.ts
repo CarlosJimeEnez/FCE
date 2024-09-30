@@ -16,7 +16,8 @@ export class TableroProfesoresComponent implements OnInit{
   dataSource = new MatTableDataSource(this.profesores)
   nombreProfesor: string = ""; 
   eliminar: boolean = false;
-  
+  selectedProfesorId: number | null = null;
+
   constructor(private _router: Router,
     private _profesoresService: GetProfesoresService,
     private _deleteProf: DeleteProfesoresService,
@@ -40,7 +41,8 @@ export class TableroProfesoresComponent implements OnInit{
   }
 
   confirmacionEliminacion():void{
-    this.eliminar = true;
+    this.eliminar = true
+    this.eliminarProfesor(this.selectedProfesorId!)
   }
 
   editarProfesor(id: number, profesor: string){
@@ -49,6 +51,13 @@ export class TableroProfesoresComponent implements OnInit{
 
   postProfesor(){
     this._router.navigate([`admin/post-profesores/`])
+  }
+
+  preparEliminacion(id: number, nombre: string){
+    console.log(id)
+    console.log(nombre)
+    this.nombreProfesor = nombre;
+    this.selectedProfesorId = id;
   }
 
   applyFilter(event: KeyboardEvent): void {
@@ -65,19 +74,21 @@ export class TableroProfesoresComponent implements OnInit{
   };
 
   eliminarProfesor(id: number): void {
-    this._deleteProf.deleteProfesor(id).subscribe({
-      next: (data: any) => {
-        
-      },
-      error: (data: any) => {
-        this.alerta("Error al eliminar el elemento")
-        console.log(data);
-      },
-      complete: () => {
-        console.log("Elemento eliminado correctamente");
-        this.alerta("Elemento eliminado correctamente")
-        this.getProfesores()
-      },
-    })    
+    if(this.eliminar){
+      this._deleteProf.deleteProfesor(id).subscribe({
+        next: (data: any) => {
+          
+        },
+        error: (data: any) => {
+          this.alerta("Error al eliminar el elemento")
+          console.log(data);
+        },
+        complete: () => {
+          console.log("Elemento eliminado correctamente");
+          this.alerta("Elemento eliminado correctamente")
+          this.getProfesores()
+        },
+      })    
+    }
   }
 }
