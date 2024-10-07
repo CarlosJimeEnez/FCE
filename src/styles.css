@@ -53,6 +53,7 @@ html, body {
     --gris-t2: #bdc7cb2f;
     --gris-t3: #d3dadc3a;
     --gris-t4: #F2F5F7;
+    --gris-t5: #0000002d;
 
     /* ?? */
     --boton_activo: #02A0C7; 
@@ -120,6 +121,26 @@ li {
 
 .accent-text{
     color: var(--azul_calro);
+}
+
+.text-gradient {
+    background: linear-gradient(to right, var(--azul-claro-t1), var(--azul_obscuro));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: loading 3s ease-in-out infinite;
+}
+
+.loading-text {
+    animation: loading 3s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: .3;
+    }
 }
 
 /* Gotham Black */
