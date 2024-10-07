@@ -37,6 +37,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginUserService } from './services/login-user.service';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { SidebarComponent } from "./componentes/sidebar/sidebar.component";
+
 @NgModule({
   declarations: [
     AppComponent,

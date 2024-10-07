@@ -33,6 +33,7 @@ const routes: Routes = [
   {path: 'admin/post-ads', component: PostAdsComponent, canActivate: [AuthGuard]},
   {path: 'admin/carrera/editarRolProfesor', component: EditRolComponent, canActivate: [AuthGuard]},
   {path: 'admin/add-profesor/carrera', component: AddProfesorComponent, canActivate: [AuthGuard]},
+  // { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 ];
 
 @NgModule({
