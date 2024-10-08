@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -56,7 +57,9 @@ export class PostAdsComponent implements OnInit  {
       next: (data: any) => {
         console.log(data)
       },
-      error: (data: any) => {
+      error: (data: HttpErrorResponse) => {
+        console.error(`Error en la petición: ${data.message}`);
+        console.log(data)
         this.alerta("Error en la petición")
       },
       complete: () => {
