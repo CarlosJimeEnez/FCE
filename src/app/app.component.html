@@ -1,6 +1,11 @@
 <app-header></app-header>
-<main>
-    <router-outlet></router-outlet>
-</main>
-<app-footer></app-footer>
+
+<img *ngIf="!carrerasCargadas else carrerasNoCargadas" class="position-relative top-50 start-50 translate-middle" src="../assets/gif/electron.svg" alt="">
+
+<ng-template #carrerasNoCargadas>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+</ng-template>
 <app-redes-sociales></app-redes-sociales>

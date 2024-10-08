@@ -87,7 +87,7 @@ export class TableroComponent implements OnInit, AfterViewInit {
 
   getCarreras() {
     this._carrerasService.getCarreras().subscribe(data => {
-      console.log(data);
+      console.log(data);  
       this.carrerasNoCargadas = false
       this.carreras = data
     }, error => this.carrerasNoCargadas = true);
