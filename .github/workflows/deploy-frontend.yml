@@ -26,7 +26,7 @@ jobs:
       run: |
         docker build -t my_frontend_image .
         docker tag my_frontend_image:latest ${{ secrets.DOCKER_USERNAME }}/my_frontend_image:latest
-        docker push ${{ secrets.DOCKER_PASSWORD }}/my_frontend_image:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/my_frontend_image:latest
 
     - name: Deploy frontend
       run: |
