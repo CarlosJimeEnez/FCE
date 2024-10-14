@@ -24,7 +24,7 @@ jobs:
 
     - name: Build and push frontend image
       run: |
-        docker build -t my_frontend_image 
+        docker build -t my_frontend_image .
         docker tag my_frontend_image:latest my_dockerhub_username/my_frontend_image:latest
         docker push my_dockerhub_username/my_frontend_image:latest
 
