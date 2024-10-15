@@ -28,4 +28,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/fce-frontend:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/fce-frontend:latest
