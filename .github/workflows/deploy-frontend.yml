@@ -28,11 +28,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: |
-          ${{ secrets.DOCKER_USERNAME }}/frontend:latest
-          ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
-
-    - name: Deploy frontend
-      run: |
-        docker-compose pull frontend
-        docker-compose up -d frontend
+        tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
