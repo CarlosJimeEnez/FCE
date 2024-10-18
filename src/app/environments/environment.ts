@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  endpoint: "http://localhost:5000/",
+  endpoint: "http://fce-prueba.ece.buap.mx:5000/",
   apiUrl: "api",
 };
