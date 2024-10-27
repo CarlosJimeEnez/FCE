@@ -112,4 +112,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  borrarFuncion(){
+    console.log('asd')
+  }
 }
