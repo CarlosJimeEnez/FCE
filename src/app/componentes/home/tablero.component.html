@@ -22,7 +22,7 @@
         <!-- Carousel Items -->
         <div class="carousel-inner">
             <div *ngFor="let ad of Ads; let i = index" class="carousel-item image-placeholder" [class.active]="i === 0">
-                <img (click)="verLink(ad.ad.link)" [src]="ad.safeUrl" class="image">
+                <img (click)="verLink(ad.ad.link)" [src]="ad.safeUrl" loading="lazy" class="image" alt="Imagne de carrousel">
             </div>
         </div>
 
@@ -150,7 +150,7 @@
             <div class="col-12 col-md-2 mb-5" >
                 <div class="card">
                     <div class="card-custom">
-                        <img src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
+                        <img loading="lazy" src="../../../assets/images/Fce_fondo.jpg" class="card-image" alt="Licenciaturas">
                         <div>
                             <div class="col dropup">
                                 <ul class="mt-4">
@@ -175,7 +175,7 @@
             <div class="col-12 col-md-2 mb-5" >
                 <div class="card">
                     <div class="card-custom">
-                        <img src="../../../assets/images/PPSS.jpg" class="card-image img-fluid" alt="Licenciaturas">
+                        <img loading="lazy" src="../../../assets/images/PPSS.jpg" class="card-image img-fluid" alt="Licenciaturas">
                         <div>
                             <div class="col dropup">
                                 <ul class="mt-4">
@@ -210,7 +210,7 @@
             <div class="col-12 col-md-2 mb-5" >
                 <div class="card">
                     <div class="card-custom">
-                        <img src="../../../assets/images/Fce_fondo.jpg" class="card-image img-fluid" alt="Licenciaturas">
+                        <img loading="lazy" src="../../../assets/images/Fce_fondo.jpg" class="card-image img-fluid" alt="Licenciaturas">
                         <div>
                             <div class="col dropup">
                                 <ul class="mt-4">
