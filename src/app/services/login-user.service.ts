@@ -16,7 +16,6 @@ export class LoginUserService {
   constructor(private _http: HttpClient, private router: Router) {}
 
   login(credentials: LoginModel): Observable<string> {
-    console.log(credentials)
     return this._http.post<string>(`${this.myAppUrl}${this.myControllerUrl}`, credentials,  { responseType: 'text' as 'json' })
       .pipe(
         tap(token => {

@@ -79,6 +79,5 @@ export class LoginComponent {
 
   inicioSesion(): void {
     this._router.navigate([`admin/inicio`], {fragment: 'inicio'});
-  }
-  
+  }  
 }
