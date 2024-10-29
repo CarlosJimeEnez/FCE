@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { GetProfesoresService } from 'src/app/services/profesores/get-profesores.service';
 import { Profesor } from 'src/app/interfaces/profesores';
 import { Documentos } from 'src/app/interfaces/documento';
+import { ImagenCarrerasService } from 'src/app/services/imagen-carreras.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<Profesor>;
 
   constructor(
+    private _imagesService: ImagenCarrerasService, 
     private _carreraService: CarrerasServicesService,
     private _route: ActivatedRoute,
     private _router: Router,
@@ -95,6 +97,13 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
       this.documentos = res
       this.documentosNoCargados = false;
     }, err => console.log(err));
+  }
+
+  getBackgroundStyle():any {
+    const imageUrl = this._imagesService.getImagenUrl(this.carrera)
+    return {
+      'background-image': `url(${imageUrl})`
+    }
   }
 
   getProfesores():void {

@@ -1,9 +1,9 @@
-<app-header></app-header>
+<app-header ></app-header>
 
 <img *ngIf="!carrerasCargadas else carrerasNoCargadas" class="position-relative top-50 start-50 translate-middle" src="../assets/gif/electron.svg" alt="">
 
 <ng-template #carrerasNoCargadas>
-    <main>
+    <main class="mt-5 pt-1">
         <router-outlet></router-outlet>
     </main>
     <app-footer></app-footer>

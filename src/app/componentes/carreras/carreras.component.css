@@ -1,4 +1,5 @@
 .dashboard-background {
+    position: relative;
     align-items: center;
     display: flex;
     background-image: url("src\assets\images\renovables.jpeg");
@@ -6,9 +7,22 @@
     background-position: center; /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     height: 100vh;
+    padding: 0%;
+    margin: 0%;
     justify-content: space-between;
     width: 100%;
 }
+
+.dashboard-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Color y opacidad del fondo translúcido */
+    z-index: 1;
+  }
 
 .contenedor-con-fondo {
     position: relative;

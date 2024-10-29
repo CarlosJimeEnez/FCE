@@ -1,8 +1,9 @@
-<div class="dashboard-background mb-5" id="section1">
+<div class="dashboard-background mb-5" [ngStyle]="getBackgroundStyle()" id="section1">
+
   <div class="row">
   </div>
 
-  <div *ngIf="carrera != null" class="carreras-centered">
+  <div *ngIf="carrera != null" class="carreras-centered z-2">
       <div class="row">
           <div class="col">
               <h1>{{carrera.carreraNombre}}</h1>
