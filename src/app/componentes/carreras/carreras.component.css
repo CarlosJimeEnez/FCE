@@ -2,7 +2,6 @@
     position: relative;
     align-items: center;
     display: flex;
-    background-image: url("src\assets\images\renovables.jpeg");
     background-size: cover; /* Asegura que la imagen cubra toda la página */
     background-position: center; /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
