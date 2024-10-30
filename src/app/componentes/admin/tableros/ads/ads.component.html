@@ -1,91 +1,143 @@
- <div class="container-fluid" id="inicio">
-    <div class="row">
-        <div class="d-flex d-block m-4 d-md-none col-1 justify-content-center  align-items-center">
-            <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                <i class="fa-solid fa-angles-right fa-xl"></i>
-            </button>
-        </div>
-        <div class="col mt-4 text-center m-auto">
-            <h1> Anuncios</h1>
-        </div>
+<div class="container-fluid vh-100" id="inicio">
+  <div class="row">
+    <div
+      class="d-flex d-block m-4 d-md-none col-1 justify-content-center align-items-center"
+    >
+      <button
+        class="btn btn-light"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions"
+      >
+        <i class="fa-solid fa-angles-right fa-xl"></i>
+      </button>
+    </div>
+    <div class="col mt-4 text-center m-auto">
+      <h1>Anuncios</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div
+      class="col-md-2 d-none d-sm-block d-sm-flex flex-column align-items-center justify-content-center"
+      style="height: 60vh"
+    >
+      <app-sidebar></app-sidebar>
     </div>
 
-    <div class="row">
-        <div class="col-md-2 d-none d-sm-block d-sm-flex flex-column align-items-center justify-content-center" style="height: 60vh;">
-            <app-sidebar></app-sidebar>
+    <div class="col-md-10 my-3">
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Filter"
+            />
+          </mat-form-field>
         </div>
-    
-        <div class="col-md-10 my-3">
-            
-            <div class="row">
-                <div class="col-6">
-                    <mat-form-field>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
-                    </mat-form-field>
-                </div>
-                <div class="col-5 text-end">
-                    <button mat-raised-button (click)="nuevoAds()" class="demo-button mt-3">
-                        <mat-icon class="icon-add">add</mat-icon>
-                    </button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">    
-                        <!-- Name Column -->
-                        <ng-container matColumnDef="Nombre">
-                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                            <td mat-cell *matCellDef="let element"> {{element.ad.nombreArchivo}} </td>
-                        </ng-container>
-                        
-                        <!-- Imagenes -->
-                        <ng-container matColumnDef="Imagenes">
-                            <th mat-header-cell *matHeaderCellDef> Imagenes </th>
-                            <td mat-cell class="image-placeholder" *matCellDef="let element"> 
-                                <img class="img" [src]="element.safeUrl" alt="">
-                            </td>
-                        </ng-container>
-    
-                        <!-- Acciones Column -->
-                        <ng-container matColumnDef="Acciones">
-                            <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                            <td mat-cell *matCellDef="let element"> 
-                                <button (click)="editarAds(element.ad.id, element.ad.nombreArchivo)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                                    <mat-icon class="edit">edit</mat-icon>
-                                </button>
-                                <button data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="prepararEliminacion(element.ad.id, element.ad.nombreArchivo)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                                    <mat-icon class="delete-button">remove</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-        
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-
-                </div>
-            </div>            
+        <div class="col-5 text-end">
+          <button
+            mat-raised-button
+            (click)="nuevoAds()"
+            class="demo-button mt-3"
+          >
+            <mat-icon class="icon-add">add</mat-icon>
+          </button>
         </div>
-    </div>
-</div>
+      </div>
 
-<app-off-canvas></app-off-canvas>
+      <div class="row">
+        <div class="col-12">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Name Column -->
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.ad.nombreArchivo }}
+              </td>
+            </ng-container>
 
+            <!-- Imagenes -->
+            <ng-container matColumnDef="Imagenes">
+              <th mat-header-cell *matHeaderCellDef>Imagenes</th>
+              <td mat-cell class="image-placeholder" *matCellDef="let element">
+                <img class="img" [src]="element.safeUrl" alt="" />
+              </td>
+            </ng-container>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fs-5" id="exampleModalLabel">Eliminando: <h1>{{this.adNombreAEliminar}}</h1></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" (click)="confirmacionEliminacion()" data-bs-dismiss="modal" class="btn btn-primary">Eliminar</button>
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="Acciones">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  (click)="editarAds(element.ad.id, element.ad.nombreArchivo)"
+                  mat-icon-button
+                  aria-label="Example icon button with a vertical three dot icon"
+                >
+                  <mat-icon class="edit">edit</mat-icon>
+                </button>
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  (click)="
+                    prepararEliminacion(element.ad.id, element.ad.nombreArchivo)
+                  "
+                  mat-icon-button
+                  aria-label="Example icon button with a vertical three dot icon"
+                >
+                  <mat-icon class="delete-button">remove</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<app-off-canvas></app-off-canvas>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5" id="exampleModalLabel">
+          Eliminando:
+          <h1>{{ this.adNombreAEliminar }}</h1>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          type="button"
+          (click)="confirmacionEliminacion()"
+          data-bs-dismiss="modal"
+          class="btn btn-primary"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
