@@ -15,6 +15,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdsDto } from 'src/app/interfaces/Dto';
 import { environment } from 'src/app/environments/environment';
 import { NoticiasService } from 'src/app/services/noticias.service';
+import { NoticiasDto } from 'src/app/interfaces/noticias';
 ('src/app/environments/enviroments');
 
 @Component({
@@ -29,6 +30,7 @@ export class TableroComponent implements OnInit, AfterViewInit {
   Ads: { ad: AdsDto; safeUrl: SafeResourceUrl }[] = [];
   adNoCargadas: boolean = true;
   api = environment.apiUrl;
+  noticias: NoticiasDto[] = [];
   // Servicios con guion bajo
   constructor(
     private _carrerasService: CarrerasServicesService,
@@ -58,7 +60,8 @@ export class TableroComponent implements OnInit, AfterViewInit {
   getNoticias() {
     this._noticiasService.getNoticias().subscribe({
       next: (data: any) => {
-        console.log(data);
+        this.noticias = data;
+        console.log(this.noticias);
       },
       error: (error: any) => {
         console.log(error);
