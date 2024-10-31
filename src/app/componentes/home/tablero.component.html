@@ -346,13 +346,21 @@
     <div class="row justify-content-center align-items-center">
       <!-- Noticas Card -->
       @for (noticia of noticias; track $index) {
-      <div class="col-12 col-md-4 mb-5">
-        <div class="card">
-          <img [src]="noticia.filename" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <p class="card-text">{{ noticia.title }}</p>
+      <div class="col-12 col-md-4 mb-5" style="cursor: pointer">
+        <a [href]="noticia.url" class="text-reset text-decoration-none">
+          <div class="card" style="height: 18vh">
+            <img
+              [src]="noticia.filename"
+              loading="lazy"
+              class="card-img-top"
+              alt="Noticas"
+              style="height: 200px; object-fit: cover"
+            />
+            <div class="card-body">
+              <p class="card-text mt-auto">{{ noticia.title }}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
       }
     </div>

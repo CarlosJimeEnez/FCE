@@ -30,6 +30,7 @@ export class TableroComponent implements OnInit, AfterViewInit {
   Ads: { ad: AdsDto; safeUrl: SafeResourceUrl }[] = [];
   adNoCargadas: boolean = true;
   api = environment.apiUrl;
+  noticiasApi: any = 'https://boletin.buap.mx/?q=node/';
   noticias: NoticiasDto[] = [];
   // Servicios con guion bajo
   constructor(
@@ -61,6 +62,9 @@ export class TableroComponent implements OnInit, AfterViewInit {
     this._noticiasService.getNoticias().subscribe({
       next: (data: any) => {
         this.noticias = data;
+        this.noticias.forEach((noticia) => {
+          noticia.url = `${this.noticiasApi}${noticia.nid}`;
+        });
         console.log(this.noticias);
       },
       error: (error: any) => {
