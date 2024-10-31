@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment';'../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LoginModel } from '../interfaces/login';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -18,11 +18,13 @@ export class LoginUserService {
   login(credentials: LoginModel): Observable<string> {
     return this._http.post<string>(`${this.myAppUrl}${this.myControllerUrl}`, credentials,  { responseType: 'text' as 'json' })
       .pipe(
-        tap(token => {
-          this.isLoggedIn.next(true);
-        })
-      )
+        tap(
+          token =>  this.isLoggedIn.next(true),
+        ),
+      );
   }
+  // Método para manejar errores
+
 
     // Método para guardar el token en el localStorage
     setToken(token: string): void {
