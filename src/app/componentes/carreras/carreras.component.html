@@ -1,202 +1,379 @@
-<div class="dashboard-background mb-5" [ngStyle]="getBackgroundStyle()" id="section1">
-
-  <div class="row">
-  </div>
+<div
+  class="dashboard-background mb-5"
+  [ngStyle]="getBackgroundStyle()"
+  id="section1"
+>
+  <div class="row"></div>
 
   <div *ngIf="carrera != null" class="carreras-centered z-2">
-      <div class="row">
-          <div class="col">
-              <h1>{{carrera.carreraNombre}}</h1>
-          </div>
+    <div class="row">
+      <div class="col">
+        <h1>{{ carrera.carreraNombre }}</h1>
       </div>
-      <div class="row mb-3">
-          <div class="col texto_centrado">
-              <h4>Vive la experiencia</h4>
-          </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col texto_centrado">
+        <h4>Vive la experiencia</h4>
       </div>
-      <div class="row">
-          <div class="col">
-              
-          </div>
-      </div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+    </div>
   </div>
 
-  <div class="row">
-  </div>
-  
+  <div class="row"></div>
 </div>
 
-<div *ngIf="carrera != null" class="container my-5" >
+<div *ngIf="carrera != null" class="container my-5">
   <div class="row">
     <!-- Misión -->
     <div class="col-md-6 d-flex mb-3">
       <div class="card flex-fill">
         <div class="card-body text-center">
-          <i class="fas fa-rocket fa-3x mb-3"></i> <!-- Asegúrate de incluir FontAwesome para este ícono -->
+          <i class="fas fa-rocket fa-3x mb-3"></i>
+          <!-- Asegúrate de incluir FontAwesome para este ícono -->
           <h3 class="card-title">MISIÓN</h3>
-          <p class="card-text">{{carrera.mision}}</p>
+          <p class="card-text">{{ carrera.mision }}</p>
         </div>
       </div>
     </div>
-    
+
     <!-- Visión -->
     <div class="col-md-6 d-flex mb-3">
       <div class="card flex-fill">
         <div class="card-body text-center">
-          <i class="fas fa-eye fa-3x mb-3"></i> <!-- Asegúrate de incluir FontAwesome para este ícono -->
+          <i class="fas fa-eye fa-3x mb-3"></i>
+          <!-- Asegúrate de incluir FontAwesome para este ícono -->
           <h3 class="card-title">VISIÓN</h3>
-          <p class="card-text">{{carrera.vision}}</p>
+          <p class="card-text">{{ carrera.vision }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="carrera != null" class="container-fluid text-center contenedor-con-fondo">
+<div
+  *ngIf="carrera != null"
+  class="container-fluid text-center contenedor-con-fondo"
+>
   <div class="row justify-content-center">
     <div class="col-10 mt-4">
       <h1>Objetivos</h1>
       <h5 class="mt-3">General</h5>
       <p>
-        {{carrera.objetivos}}
+        {{ carrera.objetivos }}
       </p>
     </div>
   </div>
 </div>
 
-  <!-- Accordion -->
-  <div class="container mt-5">
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-            <h5>Atributos de egreso y objetivos educacionales</h5>
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-          <ul class="mt-2">
-            <li class="mt-1" *ngFor="let atributos of atributosEducacionales">{{atributos.descripcion}}</li>
-          </ul>
-        </div>
+<!-- Accordion -->
+<div class="container mt-5">
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseOne"
+          aria-expanded="true"
+          aria-controls="panelsStayOpen-collapseOne"
+        >
+          <h5>Atributos de egreso y objetivos educacionales</h5>
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseOne"
+        class="accordion-collapse collapse show"
+      >
+        <ul class="mt-2">
+          <li class="mt-1" *ngFor="let atributos of atributosEducacionales">
+            {{ atributos.descripcion }}
+          </li>
+        </ul>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            <h5>Objetivos Educacionales</h5> 
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <li class="mt-1" *ngFor="let objetivos of objetivosEducacionales">{{objetivos.descripcion}}</li>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            <h5>Competencias específicas</h5>
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <li class="mt-1" *ngFor="let competencias of competenciasEspecificas">{{competencias.descripcion}}</li>
-          </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseTwo"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseTwo"
+        >
+          <h5>Objetivos Educacionales</h5>
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <li class="mt-1" *ngFor="let objetivos of objetivosEducacionales">
+            {{ objetivos.descripcion }}
+          </li>
         </div>
       </div>
     </div>
-  
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseThree"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseThree"
+        >
+          <h5>Competencias específicas</h5>
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseThree"
+        class="accordion-collapse collapse"
+      >
+        <div class="accordion-body">
+          <li class="mt-1" *ngFor="let competencias of competenciasEspecificas">
+            {{ competencias.descripcion }}
+          </li>
+        </div>
+      </div>
+    </div>
   </div>
-  
-<div class="container text-center mt-5 ">
+</div>
+
+<div class="container text-center mt-5">
   <div class="row justify-content-center">
-    <div class="col-10 ">
+    <div class="col-10">
       <h2>PERFIL DE INGRESO Y EGRESO</h2>
     </div>
   </div>
   <div class="row justify-content-center mt-3">
     <div class="col-md-6 mb-3">
-      <div class="card ingr-egr ">
-        <i class="fas fa-user fa-3x mt-3 "></i> 
-        <div class="card-body">
-          <h5 class="card-title">Perfil de ingreso</h5>
-          <p class="card-text">El aspirante a ingresar al Plan de Estudios de la Licenciatura en Mectrónica, deberá tener los siguientes atributos</p>
+      <button
+        class="btn"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+        style="border: none"
+      >
+        <!-- Button with data-bs-target -->
+        <div class="card ingr-egr">
+          <i class="fas fa-user fa-3x mt-3"></i>
+          <div class="card-body">
+            <h5 class="card-title">Perfil de ingreso</h5>
+            <p class="card-text">
+              El aspirante a ingresar al Plan de Estudios de la Licenciatura en
+              Mectrónica, deberá tener los siguientes atributos
+            </p>
+          </div>
         </div>
-      </div>
-    
+      </button>
     </div>
     <div class="col-md-6 mb-3">
-      
-      <div class="card ingr-egr ">
-        <i class="fas fa-user-graduate fa-3x mt-3"></i> 
-        <div class="card-body">
-          <h5 class="card-title">Perfil de egreso</h5>
-          <p class="card-text">El egresado contará con los siguientes conocimientos, habilidades, actitudes y valores</p>
+      <button
+        class="btn"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample2"
+        aria-expanded="false"
+        aria-controls="collapseExample2"
+        style="border: none"
+      >
+        <div class="card ingr-egr">
+          <i class="fas fa-user-graduate fa-3x mt-3"></i>
+          <div class="card-body">
+            <h5 class="card-title">Perfil de egreso</h5>
+            <p class="card-text">
+              El egresado contará con los siguientes conocimientos, habilidades,
+              actitudes y valores
+            </p>
+          </div>
         </div>
-      </div>
-    
+      </button>
     </div>
   </div>
 
+  <!-- Perfil de ingreso Collapse -->
+  <div class="collapse mt-2" id="collapseExample">
+    <div class="card card-body">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+            >
+              Conocimientos:
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <div class="row">
+                Matemáticas: Álgebra, Geometría, Trigonometría, Cálculo básico,
+                Razonamiento matemático
+              </div>
+              <div class="row">
+                Física: Mecánica clásica, Electromagnetismo, Conceptos básicos
+                de electricidad, Energía
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo"
+              aria-expanded="false"
+              aria-controls="flush-collapseTwo"
+            >
+              Habilidades:
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <div class="row">
+                Técnicas: Capacidad de análisis y síntesis, Pensamiento
+                lógico-matemático, Habilidad para resolver problemas, Destreza
+                manual para trabajo con herramientas y equipos.
+              </div>
+              <div class="row">
+                Cognitivas: Razonamiento abstracto, Comprensión espacial
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree"
+              aria-expanded="false"
+              aria-controls="flush-collapseThree"
+            >
+              Actitudes y valores:
+            </button>
+          </h2>
+          <div
+            id="flush-collapseThree"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <div class="row">
+                Personales: Disciplina, Perseverancia, Curiosidad científica,
+                Creatividad e innovación
+              </div>
+              <div class="row">
+                Sociales: Trabajo en equipo, Tolerancia, Compromiso,
+                Responsabilidad, Empatía, Respeto, Honestidad, Integridad,
+                Compromiso con el desarrollo sostenible
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Perfil de egreso Collapse -->
+  <div class="collapse mt-2" id="collapseExample2">
+    <div class="card card-body">
+      Some placeholder content for the collapse component. This panel is hidden
+      by default but revealed when the user activates the relevant trigger.
+    </div>
+  </div>
 
   <!-- Asignaturas  -->
   <div class="container-fluid mt-5" id="planDeEstudios">
     <div class="row">
-      <div class="col ">
+      <div class="col">
         <h2>Plan de estudios</h2>
       </div>
     </div>
-    
+
     <div class="row mt-3">
-      <div *ngIf="carrera == null" class="d-flex justify-content-center align-items-center w-100">
-        <img loading="lazy" class="w-25 h-25" src="../../../assets/gif/electron.svg" alt="">
+      <div
+        *ngIf="carrera == null"
+        class="d-flex justify-content-center align-items-center w-100"
+      >
+        <img
+          loading="lazy"
+          class="w-25 h-25"
+          src="../../../assets/gif/electron.svg"
+          alt=""
+        />
       </div>
-      
 
       <!-- Catalogo de asignaturas -->
       <div class="col-md-3 mb-3" *ngFor="let documento of documentos">
         <div class="card ingr-egr" (click)="verDocumento(documento.id!)">
           <i class="fa-regular fa-file-pdf fa-3x mt-3"></i>
           <div class="card-body">
-            <h5 class="card-title">{{documento.nombreArchivo}}</h5>
+            <h5 class="card-title">{{ documento.nombreArchivo }}</h5>
             <p class="card-text"></p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
   <div class="container-fluid my-3">
     <div class="row">
       <div class="col">
-        <h2>Planta Docente</h2> 
+        <h2>Planta Docente</h2>
       </div>
     </div>
 
     <div class="row">
       <div class="col mb-5">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">    
-            <!-- Name Column -->
-            <ng-container matColumnDef="Nombre">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="Correo">
-              <th mat-header-cell *matHeaderCellDef> Correo </th>
-              <td mat-cell *matCellDef="let element" class="correoTabla"> {{element.correo}} </td>
-            </ng-container>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Name Column -->
+          <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          </ng-container>
 
-            <ng-container matColumnDef="Rol">
-              <th mat-header-cell *matHeaderCellDef> Rol </th>
-              <td mat-cell *matCellDef="let element"> {{element.rol}} </td>
-            </ng-container>
+          <ng-container matColumnDef="Correo">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let element" class="correoTabla">
+              <a
+                class="text-reset text-decoration-none"
+                href="mailto:{{ element.correo }}"
+                title="{{ element.correo }}"
+                ><i class="fas fa-envelope"></i
+              ></a>
+            </td>
+          </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <ng-container matColumnDef="Rol">
+            <th mat-header-cell *matHeaderCellDef>Rol</th>
+            <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
     </div>
-
   </div>
 </div>
