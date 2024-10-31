@@ -1,4 +1,5 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/interfaces/login';
@@ -7,77 +8,99 @@ import { LoginUserService } from 'src/app/services/login-user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
-  @ViewChild("emailStyle") emailStyle!: ElementRef; 
-  @ViewChild("passwordStyle") passwordStyle!: ElementRef; 
-  loginForm: FormGroup;
-  user: LoginModel; 
+export class LoginComponent implements OnInit {
+  @ViewChild('emailInput') emailInput: ElementRef | undefined;
+  @ViewChild('passwordInput') passwordInput: ElementRef | undefined;
+  loginForm!: FormGroup ;
+  loginError: string = '';
+  user!: LoginModel;
   formSubmitted: boolean = false;
-  colorPredeterminado: string = "primary"
+  colorPredeterminado: string = 'primary';
+  errorMessage: string = '';
+  loading = false;
+  isLogged: boolean = false
 
-  constructor (
+  constructor(
     private _fb: FormBuilder,
     private _loginService: LoginUserService,
     private _renderer: Renderer2,
     private _router: Router,
-  )
-    {    
-      this.user = { email: "", password: "", rememberMe: false}
+    private _loginUser: LoginUserService
+  ) {}
 
-      this.loginForm = this._fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/)]],
-        rememberMe: ['']
-      });
-  }
-
-  restablecerColorEmail(): void{
-    this._renderer.addClass(this.emailStyle.nativeElement, 'predeterminado');
-  }
-
-  restablecerColorPassword(): void{
-    this._renderer.addClass(this.passwordStyle.nativeElement, 'predeterminado');
-  }
-
-  login(): void {
-    if(this.loginForm.valid) {
-      this.user = {
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password,
-        rememberMe: false
-      }
-      
-      this._loginService.login(this.user).subscribe(
-        token => {
-          // Aquí manejarías la respuesta del servidor, como guardar el token, etc.
-          // localStorage.setItem('tokenJWT', token);
-          this._loginService.setToken(token);
-          this.formSubmitted = true;
-          this.inicioSesion()
-        },
-        error => {
-          console.error('Error durante el inicio de sesión:', error);
-          this.loginForm.reset();
-          this.addErrorStyleEmail();
-          this.addErrorStylePassword();
-        }
-      );
+  ngOnInit() {
+    this.loginForm = this._fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9,;/. ]*$/),
+        ],
+      ],
+    });
+    const token = this._loginUser.getToken()
+    if(token){
+      this.isLogged = true
     }
   }
 
-  addErrorStyleEmail(){
-    this._renderer.removeClass(this.emailStyle.nativeElement, 'predeterminado');
-    this._renderer.addClass(this.emailStyle.nativeElement, 'error');
+   // Getter para fácil acceso a los campos del formulario
+   get f() { return this.loginForm.controls; }
+
+  login(): void {
+    this.formSubmitted = true
+    this.errorMessage = '';
+
+    if(this.loginForm.invalid){
+      return
+    }
+
+    this.loading = true;
+
+    const credentials: LoginModel = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+      mantenerAbierta: false
+    };
+
+    this._loginService.login(credentials).subscribe({
+      next: (token: any) => {
+        this._loginService.setToken(token);
+        this.inicioSesion();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.loading = false
+        if (error.status === 401) {
+          this.errorMessage = 'Usuario o contraseña incorrectos';
+        } else if (error.status === 400) {
+          this.errorMessage = 'Datos de inicio de sesión inválidos';
+        } else {
+          this.errorMessage = 'Error en el servidor. Por favor, intente más tarde';
+        }
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
+    
   }
 
-  addErrorStylePassword(){
-    this._renderer.removeClass(this.passwordStyle.nativeElement, 'predeterminado');
-    this._renderer.addClass(this.passwordStyle.nativeElement, 'error');
+  // Método de estilo de error más robusto
+  addErrorStyle() {
+    // Usa métodos seguros de Angular para manipular estilos
+    if (this.emailInput?.nativeElement) {
+      this.emailInput.nativeElement.classList.add('is-invalid');
+    }
+
+    if (this.passwordInput?.nativeElement) {
+      this.passwordInput.nativeElement.classList.add('is-invalid');
+    }
   }
 
   inicioSesion(): void {
-    this._router.navigate([`admin/inicio`], {fragment: 'inicio'});
-  }  
+    this._router.navigate([`admin/inicio`], { fragment: 'inicio' });
+  }
 }
