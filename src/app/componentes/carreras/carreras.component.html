@@ -1,8 +1,4 @@
-<div
-  class="dashboard-background mb-5"
-  [ngStyle]="getBackgroundStyle()"
-  id="section1"
->
+<div class="dashboard-background mb-5" [ngStyle]="getBackgroundStyle()" id="section1">
   <div class="row"></div>
 
   <div *ngIf="carrera != null" class="carreras-centered z-2">
@@ -52,10 +48,7 @@
   </div>
 </div>
 
-<div
-  *ngIf="carrera != null"
-  class="container-fluid text-center contenedor-con-fondo"
->
+<div *ngIf="carrera != null" class="container-fluid text-center contenedor-con-fondo">
   <div class="row justify-content-center">
     <div class="col-10 mt-4">
       <h1>Objetivos</h1>
@@ -72,21 +65,12 @@
   <div class="accordion" id="accordionPanelsStayOpenExample">
     <div class="accordion-item">
       <h2 class="accordion-header">
-        <button
-          class="accordion-button"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#panelsStayOpen-collapseOne"
-          aria-expanded="true"
-          aria-controls="panelsStayOpen-collapseOne"
-        >
+        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
           <h5>Atributos de egreso y objetivos educacionales</h5>
         </button>
       </h2>
-      <div
-        id="panelsStayOpen-collapseOne"
-        class="accordion-collapse collapse show"
-      >
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
         <ul class="mt-2">
           <li class="mt-1" *ngFor="let atributos of atributosEducacionales">
             {{ atributos.descripcion }}
@@ -96,14 +80,8 @@
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header">
-        <button
-          class="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#panelsStayOpen-collapseTwo"
-          aria-expanded="false"
-          aria-controls="panelsStayOpen-collapseTwo"
-        >
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
           <h5>Objetivos Educacionales</h5>
         </button>
       </h2>
@@ -117,21 +95,13 @@
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header">
-        <button
-          class="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#panelsStayOpen-collapseThree"
-          aria-expanded="false"
-          aria-controls="panelsStayOpen-collapseThree"
-        >
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseThree">
           <h5>Competencias específicas</h5>
         </button>
       </h2>
-      <div
-        id="panelsStayOpen-collapseThree"
-        class="accordion-collapse collapse"
-      >
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
         <div class="accordion-body">
           <li class="mt-1" *ngFor="let competencias of competenciasEspecificas">
             {{ competencias.descripcion }}
@@ -150,15 +120,8 @@
   </div>
   <div class="row justify-content-center mt-3">
     <div class="col-md-6 mb-3">
-      <button
-        class="btn"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseExample"
-        aria-expanded="false"
-        aria-controls="collapseExample"
-        style="border: none"
-      >
+      <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample" style="border: none">
         <!-- Button with data-bs-target -->
         <div class="card ingr-egr">
           <i class="fas fa-user fa-3x mt-3"></i>
@@ -173,15 +136,8 @@
       </button>
     </div>
     <div class="col-md-6 mb-3">
-      <button
-        class="btn"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseExample2"
-        aria-expanded="false"
-        aria-controls="collapseExample2"
-        style="border: none"
-      >
+      <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+        aria-expanded="false" aria-controls="collapseExample2" style="border: none">
         <div class="card ingr-egr">
           <i class="fas fa-user-graduate fa-3x mt-3"></i>
           <div class="card-body">
@@ -202,91 +158,84 @@
       <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseOne"
-              aria-expanded="false"
-              aria-controls="flush-collapseOne"
-            >
-              Conocimientos:
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <strong>Conocimientos</strong>
             </button>
           </h2>
-          <div
-            id="flush-collapseOne"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionFlushExample"
-          >
+          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
               <div class="row">
-                Matemáticas: Álgebra, Geometría, Trigonometría, Cálculo básico,
-                Razonamiento matemático
+                <div class="col d-flex justify-content-start">
+                  <p><strong>Matemáticas:</strong> Álgebra, Geometría, Trigonometría, Cálculo básico,
+                    Razonamiento matemático</p>
+                </div>
               </div>
               <div class="row">
-                Física: Mecánica clásica, Electromagnetismo, Conceptos básicos
-                de electricidad, Energía
+                <div class="col d-flex justify-content-start">
+                  <p><strong>Física:</strong> Mecánica clásica, Electromagnetismo, Conceptos básicos
+                    de electricidad, Energía</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseTwo"
-              aria-expanded="false"
-              aria-controls="flush-collapseTwo"
-            >
-              Habilidades:
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseTwo">
+              <strong>Habilidades</strong>
             </button>
           </h2>
-          <div
-            id="flush-collapseTwo"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionFlushExample"
-          >
+          <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
               <div class="row">
-                Técnicas: Capacidad de análisis y síntesis, Pensamiento
-                lógico-matemático, Habilidad para resolver problemas, Destreza
-                manual para trabajo con herramientas y equipos.
+                <div class="col d-flex justify-content-start">
+                  <p><strong>Técnicas:</strong>
+                    Capacidad de análisis y síntesis, Pensamiento
+                    lógico-matemático, Habilidad para resolver problemas, Destreza
+                    manual para trabajo con herramientas y equipos.</p>
+                </div>
               </div>
               <div class="row">
-                Cognitivas: Razonamiento abstracto, Comprensión espacial
+                <div class="col d-flex justify-content-start">
+                  <p>
+                    <strong>Cognitivas:</strong> Razonamiento abstracto, Comprensión espacial
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseThree"
-              aria-expanded="false"
-              aria-controls="flush-collapseThree"
-            >
-              Actitudes y valores:
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              <strong>Actitudes y valores</strong>
             </button>
           </h2>
-          <div
-            id="flush-collapseThree"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionFlushExample"
-          >
+          <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
               <div class="row">
-                Personales: Disciplina, Perseverancia, Curiosidad científica,
-                Creatividad e innovación
+                <div class="col d-flex justify-content-start">
+                  <p>
+                    <strong>
+                      Personales:
+                    </strong>
+                    Disciplina, Perseverancia, Curiosidad científica,
+                    Creatividad e innovación
+                  </p>
+                </div>
               </div>
               <div class="row">
-                Sociales: Trabajo en equipo, Tolerancia, Compromiso,
-                Responsabilidad, Empatía, Respeto, Honestidad, Integridad,
-                Compromiso con el desarrollo sostenible
+                <div class="col d-flex justify-content-start">
+                  <p>
+                    <strong>Sociales:</strong>
+                    Trabajo en equipo, Tolerancia, Compromiso,
+                    Responsabilidad, Empatía, Respeto, Honestidad, Integridad,
+                    Compromiso con el desarrollo sostenible
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -298,8 +247,52 @@
   <!-- Perfil de egreso Collapse -->
   <div class="collapse mt-2" id="collapseExample2">
     <div class="card card-body">
-      Some placeholder content for the collapse component. This panel is hidden
-      by default but revealed when the user activates the relevant trigger.
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseOne">
+              <strong>Conocimientos técnicos</strong>
+            </button>
+          </h2>
+          <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <ul class="list-unstyled">
+                    <li>Fundamentos de circuitos eléctricos y electrónicos.</li>
+                    <li>Análisis y diseño de sistemas digitales y analógicos.</li>
+                    <li>Procesamiento de señales.</li>
+                    <li>Sistemas de comunicación.</li>
+                    <li>Instrumentación y control.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              <strong>Habilidades de comunicación y trabajo en equipo.</strong>
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <ul class="list-unstyled">
+                    <li>Comunicar de manera efectiva, tanto de forma escrita como oral.</li>
+                    <li>Trabajar de manera efectiva en equipos multidisciplinarios.</li>
+                    <li>Liderar y gestionar proyectos de ingeniería.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -312,16 +305,8 @@
     </div>
 
     <div class="row mt-3">
-      <div
-        *ngIf="carrera == null"
-        class="d-flex justify-content-center align-items-center w-100"
-      >
-        <img
-          loading="lazy"
-          class="w-25 h-25"
-          src="../../../assets/gif/electron.svg"
-          alt=""
-        />
+      <div *ngIf="carrera == null" class="d-flex justify-content-center align-items-center w-100">
+        <img loading="lazy" class="w-25 h-25" src="../../../assets/gif/electron.svg" alt="" />
       </div>
 
       <!-- Catalogo de asignaturas -->
@@ -356,12 +341,8 @@
           <ng-container matColumnDef="Correo">
             <th mat-header-cell *matHeaderCellDef>Correo</th>
             <td mat-cell *matCellDef="let element" class="correoTabla">
-              <a
-                class="text-reset text-decoration-none"
-                href="mailto:{{ element.correo }}"
-                title="{{ element.correo }}"
-                ><i class="fas fa-envelope"></i
-              ></a>
+              <a class="text-reset text-decoration-none" href="mailto:{{ element.correo }}"
+                title="{{ element.correo }}"><i class="fas fa-envelope"></i></a>
             </td>
           </ng-container>
 
