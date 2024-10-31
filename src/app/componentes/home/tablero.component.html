@@ -335,6 +335,29 @@
     </div>
   </div>
 
+  <!-- Noticias -->
+  <div class="container-fluid mt-5 p-5 shadow-box">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Noticias</h1>
+      </div>
+    </div>
+
+    <div class="row justify-content-center align-items-center">
+      <!-- Noticas Card -->
+      @for (noticia of noticias; track $index) {
+      <div class="col-12 col-md-4 mb-5">
+        <div class="card">
+          <img [src]="noticia.filename" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-text">{{ noticia.title }}</p>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
   <!-- Google Maps -->
   <div class="row google-map justify-content-center pb-2 pt-2">
     <div class="col-12 text-center">
