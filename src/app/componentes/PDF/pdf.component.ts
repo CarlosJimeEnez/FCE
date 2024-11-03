@@ -29,7 +29,7 @@ import { Documentos, DocumentosDto } from 'src/app/interfaces/documento';
           <iframe
             class="mb-5"
             *ngIf="!documentoNoCargado; else noDocumento"
-            [src]="urlSegura"
+            src="https://carlosjimeenez.github.io/PDF_FCE/catalogo_asignaturas.pdf"
             width="100%"
             height="600px"
             frameborder="0"

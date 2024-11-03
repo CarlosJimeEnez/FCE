@@ -95,6 +95,7 @@ export class CarrerasComponent implements OnInit, AfterViewInit {
   getDocumentos(){
     this._carreraService.getDocumentosByCarreraId(this.id).subscribe(res =>{
       this.documentos = res
+      console.log(this.documentos)
       this.documentosNoCargados = false;
     }, err => console.log(err));
   }
