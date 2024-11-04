@@ -20,3 +20,8 @@ button mat-icon.add-icon {
 button mat-icon.icon-add {
     margin: 0px; /* Ajusta según tus necesidades */
 }
+
+.table-container {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
