@@ -58,7 +58,12 @@ export class CarrerasServicesService {
   
   // ** Recupera el PDF de un documento específico por su id y carreraId
   getDocumentoPDF(id: number): Observable<any> {
-    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`)
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl}${this.myApiDocumentosPdfUrl}${id}`, {
+      responseType: 'blob' as 'json',
+      headers: new HttpHeaders({
+        'Accept': 'application/pdf'
+      })
+    });
   }
   
   // ** Recupera los PDF por carrera Id

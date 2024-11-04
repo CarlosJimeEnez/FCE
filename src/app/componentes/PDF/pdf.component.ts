@@ -26,21 +26,20 @@ import { Documentos, DocumentosDto } from 'src/app/interfaces/documento';
       <div class="row mt-3">
         <div class="col">
           <div style="position: relative">
-          <iframe
-            class="mb-5"
-            *ngIf="!documentoNoCargado; else noDocumento"
-            src="https://carlosjimeenez.github.io/PDF_FCE/catalogo_asignaturas.pdf"
-            width="100%"
-            height="600px"
-            frameborder="0"
-            scrolling="no"
-          ></iframe>
-          <div class="border-bottom border-primary" style="position: absolute; top: 0; left: 0; width: 100%; height: 9%; z-index: 10; background-color:white"></div>
+            <iframe
+              class="mb-5"
+              *ngIf="!documentoNoCargado; else noDocumento"
+              [src]="urlSegura"
+              width="100%"
+              height="600px"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+
+            <ng-template #noDocumento>
+              <h1>El documento no se ha cargado.</h1>
+            </ng-template>
           </div>
-          
-          <ng-template #noDocumento>
-            <h1>El documento no se ha cargado.</h1>
-          </ng-template>
         </div>
       </div>
     </div>
@@ -81,17 +80,23 @@ export class MapasComponent implements OnInit, AfterViewInit {
   }
 
   getDocumentoPdf(id: number) {
-    this._carreraService.getDocumentoPDF(id).subscribe(
-      (res) => {
-        const urlInsegura = res.rutaArchivo;
-        this.urlSegura =
-          this._sanitizer.bypassSecurityTrustResourceUrl(urlInsegura);
-        this.documentoNoCargado = false;
-        this.documento.nombreArchivo = res.nombreArchivo;
-        console.log(res.rutaArchivo);
+    this._carreraService.getDocumentoPDF(id).subscribe({
+      next: (data: Blob) => {
+        try {
+          const blob = new Blob([data], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(blob);
+          this.urlSegura = this._sanitizer.bypassSecurityTrustResourceUrl(url);
+          this.documentoNoCargado = false;
+        } catch (error) {
+          console.error('Error loading PDF:', error);
+          this.documentoNoCargado = true;
+        }
       },
-      (err) => console.log(err)
-    );
+      error: (error) => {
+        console.error('Error loading PDF:', error);
+        this.documentoNoCargado = true;
+      },
+    });
   }
 
   // Se desplaza a donde estaba el estado de la pagina anterior back()
