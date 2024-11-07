@@ -55,7 +55,6 @@ export class PutCarrerasServiceService {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.uploadUrl}${Id}`, listadoMaterias)
   }
 
-
   // TODO: REVISAR METODOS A PARTIR DE ESTA LINEA: 
   putCarreraNombre(carreraNombre: CarreranombreDto): Observable<any> {
     return this._http.put(`${this.myAppUrl}${this.myApiUrl}${this.carreraNombreApi}${carreraNombre.id}`, carreraNombre)

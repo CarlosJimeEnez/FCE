@@ -337,6 +337,7 @@
 
   <!-- Noticias -->
   <div class="container-fluid mt-5 p-5">
+    
     <div class="row">
       <div class="col-12 text-center">
         <h1>Noticias</h1>
@@ -345,25 +346,32 @@
 
     <div class="container">
       <div class="row mt-3 justify-content-center align-items-center">
+        
         <!-- Noticas Card -->
-        @for (noticia of noticias; track $index) {
-        <div class="col-12 col-md-4 mb-5" style="cursor: pointer">
-          <a [href]="noticia.url" class="text-reset text-decoration-none">
-            <div class="card" style="height: 270px">
-              <img
-                [src]="noticia.filename"
-                loading="lazy"
-                class="card-img-top"
-                alt="Noticas"
-                style="height: 200px; object-fit: cover"
-              />
-              <div class="card-body">
-                <p class="card-text mt-auto">{{ noticia.title }}</p>
-              </div>
+        <img *ngIf="!noticiasCargadas else carrerasNoCargadas" class="position-relative top-50 start-50 translate-middle" src="../assets/gif/electron.svg" alt="gif">
+        
+        <ng-template #carrerasNoCargadas>
+          @for (noticia of noticias; track $index) {
+            <div class="col-12 col-md-4 mb-5" style="cursor: pointer">
+              <a [href]="noticia.url" class="text-reset text-decoration-none">
+                <div class="card" style="height: 270px">
+                  <img
+                    [src]="noticia.filename"
+                    loading="lazy"
+                    class="card-img-top"
+                    alt="Noticas"
+                    style="height: 200px; object-fit: cover"
+                  />
+                  <div class="card-body">
+                    <p class="card-text mt-auto">{{ noticia.title }}</p>
+                  </div>
+                </div>
+              </a>
             </div>
-          </a>
-        </div>
-        }
+            }
+        </ng-template>
+        
+        
       </div>
     </div>
   </div>
