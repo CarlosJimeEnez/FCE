@@ -45,15 +45,22 @@ export class AdsComponent implements OnInit {
   getAds() {
     this._adService.getAds().subscribe({
       next: (data: AdsDto[]) => {
-
-        this.Ads = data.map(ad => ({
-          ad,
-          safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.url)
-        }))
-
+        this.Ads = data.map(ad => {
+          return {
+            ad,
+            safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.file)
+          }
+        });
+        
         this.dataSource = new MatTableDataSource(this.Ads)
       },
-      error: (data: any) => {console.log(data)},
+      error: (error: any) => {
+        if(error.status == 404){
+          console.log(`Error ${{error}}`)
+          this.alerta(error.error)
+        }
+        console.log(error)
+      },
       complete: () => {}
     })
   }

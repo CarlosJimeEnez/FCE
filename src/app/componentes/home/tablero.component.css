@@ -102,6 +102,16 @@
     background-color: var(--azul_calro);
     z-index: 1;
 }
+
+.card-body-noticias {
+    background-color: var(--neutro_activo);
+    color: black;
+}
+
+.card-text {
+    background-color: var(--neutro_activo);
+}
+
 .card:hover {
     background-color: var(--neutro_activo);
     transform: scale(1.01);

@@ -61,7 +61,7 @@
     <mat-divider class="mt-3"></mat-divider>
     
     <!-- Aatributos -->
-    <div class="col text-center mt-3">
+    <div class="col text-center mt-5">
         <label for="exampleFormControlTextarea1" class="form-label">
             <h3> Atributos </h3>
         </label>
@@ -268,7 +268,7 @@
     <mat-divider class="mt-3"></mat-divider>
     
     <!-- Profesores -->
-    <div class="row my-3">
+    <div class="row mt-5 mb-3">
         <div class="col-1  text-center align-item-center">
             <label for="exampleFormControlTextarea1" class="form-label">
                 <h3><strong>Profesores</strong></h3>
@@ -285,6 +285,7 @@
     
     <div class="row mb-3">
         <div class="col">
+            <div class="table-container">
               <table mat-table [dataSource]="dataSourceProfesores" class="table-profesor mat-elevation-z8 demo-table mt-3">              
                 <!-- Name Column -->
                 <ng-container matColumnDef="nombre">
@@ -315,7 +316,8 @@
               
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsProfesores"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumnsProfesores;"></tr>
-              </table>   
+              </table>
+            </div>   
         </div>
     </div>
 </div>

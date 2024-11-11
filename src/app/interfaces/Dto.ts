@@ -73,6 +73,7 @@ export interface AdsDto
     nombreArchivo: string;
     url: string;
     link: string;
+    file: any;
 }
 
 export interface AdsEditDto
@@ -80,6 +81,7 @@ export interface AdsEditDto
     id? : number;
     nombreArchivo: string;
     link: string;
+    file: any;
 }
 
 export interface AdsDtoFile

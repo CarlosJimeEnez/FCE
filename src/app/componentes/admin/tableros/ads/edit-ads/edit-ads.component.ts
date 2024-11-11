@@ -15,6 +15,7 @@ export class EditAdsComponent {
   ad: AdsEditDto = {
     nombreArchivo: "",
     link: "",
+    file: null
   }
   editForm!: FormGroup
 

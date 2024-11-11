@@ -91,21 +91,16 @@ export class TableroComponent implements OnInit, AfterViewInit {
 
     this._adsService.getAds().subscribe({
       next: (data: AdsDto[]) => {
-        console.log(data);
         this.Ads = data.map((ad) => ({
           ad,
-          safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.url),
+          safeUrl: this._sanitizer.bypassSecurityTrustResourceUrl(ad.file),
         }));
-
         this.adNoCargadas = false;
-        console.log(`Ad No Cargadas: ${this.adNoCargadas}`);
-        console.log(this.Ads);
       },
       error: (error) => {
-        console.log('Error al cargar Ads: ', error);
+        
       },
       complete: () => {
-        console.log('Ads cargadas completamente');
       },
     });
   }

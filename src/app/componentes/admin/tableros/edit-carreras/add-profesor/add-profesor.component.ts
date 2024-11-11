@@ -46,6 +46,11 @@ export class AddProfesorComponent implements OnInit  {
     })
   }
 
+  applyFilter(event: KeyboardEvent): void {
+    const inputValue = (event.target as HTMLInputElement).value
+    this.dataSourceProfesores.filter = inputValue.trim().toLowerCase();
+  }
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
