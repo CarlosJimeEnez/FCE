@@ -27,7 +27,6 @@
                 </button>
                 <ul class="dropdown-menu" [class.show]="openOfertaAcademica" >
                   <li><a class="dropdown-item" (click)="desplazarALicenciaturas()">Licenciaturas</a></li>
-                  <li><a class="dropdown-item" href="#">Posgrados</a></li>
                 </ul>
               </div>
           </li>
@@ -50,48 +49,6 @@
                   <li><a class="dropdown-item" href="#">Academias de Area</a></li>
                   <li><a class="dropdown-item" href="#">IDT</a></li>
                 </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <!-- Difusion -->
-            <div class="dropup-center dropup"
-            (mouseenter)="!isMobile && openDifusion = true"
-            (mouseleave)="!isMobile && openDifusion = false">
-              <button class="btn dropdown-toggle nav-link"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  [attr.aria-expanded]="openDifusion ? 'true' : 'false'"
-                  aria-haspopup="true">
-                Difusion
-              </button>
-
-              <ul class="dropdown-menu" [class.show]="openDifusion" >
-                <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
-              </ul>
-            </div>
-          </li> 
-          
-
-          <li class="nav-item">
-            <!-- Nostros -->
-            <div class="dropup-center dropup"
-            (mouseenter)="!isMobile && openNosotros = true"
-            (mouseleave)="!isMobile && openNosotros = false">
-              <button class="btn dropdown-toggle nav-link"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  [attr.aria-expanded]="openNosotros ? 'true' : 'false'"
-                  aria-haspopup="true">
-                Nosotros
-              </button>
-
-              <ul class="dropdown-menu" [class.show]="openNosotros" >
-                  <li><a class="dropdown-item" href="#">Directorio</a></li>
-                  <li><a class="dropdown-item" href="#">Historia FCE</a></li>
-              </ul>
             </div>
           </li>
         </ul>
