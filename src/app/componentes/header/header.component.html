@@ -8,49 +8,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a href="http://academica.ece.buap.mx/" class="nav-link">Secretaría Académica</a>
-          </li>
-          
-          <!-- Oferta academica -->
-          <li class="nav-item">
-            <div class="dropdown"
-              (mouseenter)="!isMobile && openOfertaAcademica = true"
-              (mouseleave)="!isMobile && openOfertaAcademica = false">
-                <button class="btn dropdown-toggle nav-link"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    [attr.aria-expanded]="openOfertaAcademica ? 'true' : 'false'"
-                    aria-haspopup="true">
-                  Oferta académica
-                </button>
-                <ul class="dropdown-menu" [class.show]="openOfertaAcademica" >
-                  <li><a class="dropdown-item" (click)="desplazarALicenciaturas()">Licenciaturas</a></li>
-                </ul>
-              </div>
-          </li>
-          
-          <li class="nav-item">
-            <!-- Academia -->
-            <div class="dropdown"
-              (mouseenter)="!isMobile && openAcademia = true"
-              (mouseleave)="!isMobile && openAcademia = false">
-                <button class="btn dropdown-toggle nav-link"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    [attr.aria-expanded]="openAcademia ? 'true' : 'false'"
-                    aria-haspopup="true">
-                  Academia
-                </button>
-                <ul class="dropdown-menu" [class.show]="openAcademia" >
-                  <li><a class="dropdown-item" href="#">Contacto de Profesores</a></li>
-                  <li><a class="dropdown-item" href="#">Academias de Area</a></li>
-                  <li><a class="dropdown-item" href="#">IDT</a></li>
-                </ul>
-            </div>
-          </li>
+         
+            
         </ul>
         
         <!-- Botón de usuario para cerrar sesión -->
