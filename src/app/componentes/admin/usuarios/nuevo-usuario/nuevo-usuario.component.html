@@ -1,0 +1,38 @@
+<div class="container" style="width: 100vw; height: 100vh;">
+    <div class="row">
+        <div class="col-12">
+        <h1>Nuevo Usuario</h1>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-12 ">
+            <form class="my-3" [formGroup]="usuariosForm" (ngSubmit)="guardarUsuario()">
+                
+               
+                <div class="form-group my-3">
+                    Email<span class="text-danger">*</span>
+                    <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{'is-invalid': usuariosForm.get('email')?.invalid && usuariosForm.get('email')?.touched}">
+                    <div class="invalid-feedback">
+                        El email es obligatorio.
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="form-group my-3">
+                    Contraseña <span class="text-danger">*</span>
+                    <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'is-invalid': usuariosForm.get('password')?.invalid && usuariosForm.get('password')?.touched}">
+                    <div class="invalid-feedback">
+                        La contraseña es obligatoria.
+                        <div *ngIf="usuariosForm.get('password')?.errors?.['minlength']"> 
+                            La contraseña debe tener al menos 6 caracteres.
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <button type="submit" class="btn btn-primary"> Guardar </button>
+            </form>
+    </div>   
+</div>
+

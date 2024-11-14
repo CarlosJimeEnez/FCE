@@ -13,6 +13,8 @@ import { PostProfesoresComponent } from '../componentes/admin/tableros/tablero-p
 import { EditRolComponent } from '../componentes/admin/tableros/edit-carreras/edit-rol/edit-rol.component';
 import { AddProfesorComponent } from '../componentes/admin/tableros/edit-carreras/add-profesor/add-profesor.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { UsuariosComponent } from '../componentes/admin/usuarios/usuarios.component';
+import { NuevoUsuarioComponent } from '../componentes/admin/usuarios/nuevo-usuario/nuevo-usuario.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -28,6 +30,8 @@ const routes: Routes = [
     { path: 'post-ads', component: PostAdsComponent, canActivate: [AuthGuard] },
     { path: 'carrera/editarRolProfesor', component: EditRolComponent, canActivate: [AuthGuard] },
     { path: 'add-profesor/carrera', component: AddProfesorComponent, canActivate: [AuthGuard] },
+    { path: 'tablero-usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+    { path: 'nuevoUsuario', component: NuevoUsuarioComponent, canActivate: [AuthGuard] }
   ]}
 ];
 

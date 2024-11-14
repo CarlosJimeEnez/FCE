@@ -10,7 +10,7 @@ import { DeleteAdsService } from 'src/app/services/ads/delete-ads.service';
 @Component({
   selector: 'app-ads',
   templateUrl: './ads.component.html',
-  styleUrls: ['./ads.component.css']
+  styleUrls: ['./ads.component.css'],
 })
 export class AdsComponent implements OnInit {
   adNoCargadas: boolean = true;

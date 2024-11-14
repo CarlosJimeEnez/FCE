@@ -37,6 +37,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginUserService } from './services/login-user.service';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { SidebarComponent } from "./componentes/sidebar/sidebar.component";
+import { UsuariosComponent } from './componentes/admin/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { SidebarComponent } from "./componentes/sidebar/sidebar.component";
     PostProfesoresComponent,
     EditRolComponent,
     AddProfesorComponent,
+    UsuariosComponent
   ],
   imports: [
     MatCheckboxModule,
@@ -76,7 +78,8 @@ import { SidebarComponent } from "./componentes/sidebar/sidebar.component";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    SidebarComponent
+    SidebarComponent,
+    
 ],
   providers: [
     LoginUserService,
