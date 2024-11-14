@@ -11,6 +11,7 @@ export class UsuariosService {
   myAppUrl: string = environment.endpoint
   myApiUrl: string = "api/LoginControllerGet/"
   myApiUrlPost: string = "api/LoginControllerGet/post"
+  myApiUrlDelete: string = "api/LoginControllerGet/delete"
 
   constructor(private _http: HttpClient) { }
 
@@ -20,5 +21,9 @@ export class UsuariosService {
   
   postUsuarios(usuarios: Usuarios):Observable<Usuarios>{
     return this._http.post<Usuarios>(`${this.myAppUrl}${this.myApiUrlPost}`, usuarios)
+  }
+
+  deleteUsuarios(id: number):Observable<Usuarios>{
+    return this._http.delete<Usuarios>(`${this.myAppUrl}${this.myApiUrlDelete}/${id}`)
   }
 }

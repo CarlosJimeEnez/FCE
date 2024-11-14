@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from "../../sidebar/sidebar.component";
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
@@ -21,10 +21,12 @@ export class UsuariosComponent implements OnInit {
   dataSource = new MatTableDataSource(this.usuarios)
   usuarioNoCargados: boolean = true;
   correo: string = ""
+  correoEliminar: number = 0
 
   constructor(
     private _router: Router,
-    private _usuariosService: UsuariosService
+    private _usuariosService: UsuariosService,
+    private _snackBar: MatSnackBar
   ){}
 
   displayedColumns: string[] = ["Correo", "Acciones"];
@@ -57,10 +59,33 @@ export class UsuariosComponent implements OnInit {
   }
 
   prepararEliminacion(id: number, correo: string){
-    console.log("Preparando eliminacion")
+    this.correoEliminar = id
+    this.correo = correo
   }
 
   confirmacionEliminacion(){
     console.log("Eliminando usuario")
+    this._usuariosService.deleteUsuarios(this.correoEliminar).subscribe({
+      next: (data) => {
+        console.log("Usuario eliminado")
+        this.getUsuarios()
+        
+      },
+      complete: () => {
+        this.alerta("Usuario eliminado correctamente")
+      },
+      error: (error) => {
+        console.log("Error al eliminar el usuario")
+        this.alerta("Error al eliminar el usuario")
+      }
+    })
   }
+
+  alerta(message: string){
+    this._snackBar.open(message, "Cerrar", {
+      duration: 2000,
+      verticalPosition: "bottom",
+      horizontalPosition: 'right'
+    })
+  };
 }

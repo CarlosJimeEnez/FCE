@@ -40,7 +40,6 @@ export class NuevoUsuarioComponent {
       email: this.usuariosForm.get('email')?.value,
       password: this.usuariosForm.get('password')?.value
     }
-    console.log(usuarios);  
 
     this._usuariosService.postUsuarios(usuarios).subscribe({
       next: (resp) => {
