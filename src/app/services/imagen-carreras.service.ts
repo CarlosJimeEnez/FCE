@@ -9,7 +9,7 @@ export class ImagenCarrerasService {
 
   getImagenUrl(carrera: Carrera): string {
     switch (carrera.carreraNombre) {
-      case 'Lic en Ing Mecatrónica':
+      case 'Mecatrónica':
         return 'assets/images/Mecatronica.jpg';
 
       case 'Gestión de Ciudades Inteligente y Trans. Tecno.':
