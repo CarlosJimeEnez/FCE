@@ -56,10 +56,9 @@ export class AdsComponent implements OnInit {
       },
       error: (error: any) => {
         if(error.status == 404){
-          console.log(`Error ${{error}}`)
+          
           this.alerta(error.error)
         }
-        console.log(error)
       },
       complete: () => {}
     })

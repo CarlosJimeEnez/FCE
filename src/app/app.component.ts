@@ -22,11 +22,9 @@ export class AppComponent implements OnInit{
 
   getCarreras() {
     this._carrerasService.getCarreras().subscribe(data => {
-      console.log(data);
       this.carrerasCargadas = true
     }, error => {
       this.carrerasCargadas = false
-      console.log(error);
     });
   }
 

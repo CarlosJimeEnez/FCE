@@ -42,18 +42,14 @@ export class EditAdsComponent {
   editAd():void {
     this.ad.nombreArchivo = this.editForm.get('nombre')?.value; 
     this.ad.link = this.editForm.get('link')?.value;
-    console.log(this.ad);
     
     this._editAd.editAd(this.ad).subscribe({
       next: (data: any) => {
-        console.log(data);
       },
       error: (err: any) => {
-        console.log(err);
         this.alerta("Error en la petición")
       },
       complete: () => {
-        console.log("informacion editada");
         this.alerta("Petición Exitosa")
         this.back();
       },

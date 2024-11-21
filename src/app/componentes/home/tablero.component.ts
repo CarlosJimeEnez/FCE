@@ -1,9 +1,6 @@
-import { fromEvent, Subscription } from 'rxjs';
 import {
   Component,
-  ElementRef,
   OnInit,
-  ViewChild,
   AfterViewInit,
 } from '@angular/core';
 import { CarrerasServicesService } from 'src/app/services/carreras/carreras-services.service';

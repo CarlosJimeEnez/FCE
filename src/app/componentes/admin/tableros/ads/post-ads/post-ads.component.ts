@@ -51,19 +51,14 @@ export class PostAdsComponent implements OnInit  {
     formData.append("link", this.ad.link)
     formData.append("file", this.ad.file)
 
-    // this.ad.file = this.postForm.get("archivo")?.value
-    console.log(formData) 
     this._postAd.postAd(formData).subscribe({
       next: (data: any) => {
-        console.log(data)
       },
       error: (data: HttpErrorResponse) => {
         console.error(`Error en la petición: ${data.message}`);
-        console.log(data)
         this.alerta("Error en la petición")
       },
       complete: () => {
-        console.log("Se creo un nuevo anuncio")
         this.alerta("Petición Exitosa")
         this.back();
       }

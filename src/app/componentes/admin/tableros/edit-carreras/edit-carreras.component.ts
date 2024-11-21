@@ -146,7 +146,6 @@ export class EditCarrerasComponent implements OnInit {
     this._carreraPutService.putCarreraMetadata(this.carrera).subscribe({
       next: (data: any) => { },
       error: (err: any) => {
-        console.log(err);
         this.alerta("Error al editar")
       },
       complete: () => {
@@ -200,11 +199,9 @@ export class EditCarrerasComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         this.alerta("Error al enviar el documento");
-        console.log(err.error);
         if (err.error.errors) {
           for (const key in err.error.errors) {
             if (err.error.errors.hasOwnProperty(key)) {
-              console.error(`${key}: ${err.error.errors[key]}`);
             }
           }
         }
@@ -234,10 +231,9 @@ export class EditCarrerasComponent implements OnInit {
 
   getAtributos(carreraId: number): void {
     this._carreraService.getAtributosEgresoByCarreraId(carreraId).subscribe(data => {
-      console.log(data);
       this.atributosEducacionales = data
       this.dataSource = new MatTableDataSource(this.atributosEducacionales);
-    }, error => console.log(error))
+    }, error => {})
   }
 
   getProfesoresDeCarrera(id: number) {
@@ -246,7 +242,7 @@ export class EditCarrerasComponent implements OnInit {
         this.profesores = data
         this.dataSourceProfesores = new MatTableDataSource(this.profesores)
       },
-      error: (error: any) => console.log(error),
+      error: (error: any) => {},
       complete: () => {
       }
     })
@@ -255,16 +251,15 @@ export class EditCarrerasComponent implements OnInit {
   getCarreraById(id: number) {
     this._carreraService.getCarrera(id).subscribe({
       next: (data: any) => {
-        console.log(data)
         this.carrera.carreraNombre = data.carreraNombre
         this.carrera.mision = data.mision
         this.carrera.objetivos = data.objetivos
         this.carrera.vision = data.vision
 
       },
-      error: (error: any) => console.log(error),
+      error: (error: any) => {},
       complete: () => {
-        console.log("Carrera cargada completamente");
+        
         this.carreraCargada = true
       }
     })
@@ -272,21 +267,19 @@ export class EditCarrerasComponent implements OnInit {
 
   getObjetivosEducacionalesByCarreraId(carreraId: number) {
     this._carreraService.getObjetivosEducacionalesByCarreraId(carreraId).subscribe(data => {
-      console.log(data);
       this.objetivosEducacionales = data
       this.dataSourceObejtivosEduc = new MatTableDataSource(this.objetivosEducacionales);
     }, err => {
-      console.log(err);
+      
     })
   }
 
   getCompetenciasEspecificasByCarreraId(carreraId: number) {
     this._carreraService.getCompetenciasEspecificasByCarreraId(carreraId).subscribe(data => {
-      console.log(data);
       this.competenciasEspecíficas = data
       this.dataSourceCompetencias = new MatTableDataSource(this.competenciasEspecíficas);
     }, err => {
-      console.log(err);
+      
     })
   }
 
@@ -298,11 +291,10 @@ export class EditCarrerasComponent implements OnInit {
           this.table.renderRows();
         },
         error: (err) => {
-          console.log(err.error);
+          
           if (err.error.errors) {
             for (const key in err.error.errors) {
               if (err.error.errors.hasOwnProperty(key)) {
-                console.error(`${key}: ${err.error.errors[key]}`);
               }
             }
           }
@@ -318,24 +310,23 @@ export class EditCarrerasComponent implements OnInit {
 
   addObjetivoEduc() {
     if (this.objetivoEducacionalNuevo.descripcion != "") {
-      console.log(this.objetivoEducacionalNuevo)
+      
       this._carreraPostService.postObjetivoEducacional(this.objetivoEducacionalNuevo).subscribe({
         next: (data) => {
           this.getObjetivosEducacionalesByCarreraId(this.id);
           this.table.renderRows();
         },
         error: (err) => {
-          console.log(err.error);
+          
           if (err.error.errors) {
             for (const key in err.error.errors) {
               if (err.error.errors.hasOwnProperty(key)) {
-                console.error(`${key}: ${err.error.errors[key]}`);
               }
             }
           }
         },
         complete: () => {
-          console.log("Request completed");
+          
         }
       });
     }
@@ -352,7 +343,7 @@ export class EditCarrerasComponent implements OnInit {
         this.table.renderRows();
       },
         err => {
-          console.log(err);
+          
           this.alerta("Error en la petición")
         })
     }
@@ -362,14 +353,13 @@ export class EditCarrerasComponent implements OnInit {
   }
 
   removeData(atributo: AtributosEducacionales) {
-    console.log(atributo)
+    
     this._carreraDeleteService.deleteAtributosEgreso(atributo).subscribe(data => {
-      console.log(data);
       this.alerta("Petición exitosa")
       this.getAtributos(this.id);
       this.table.renderRows();
     }, error => {
-      console.log(error)
+      {}
       this.alerta("Error en la petición")
     }
     )
@@ -377,12 +367,11 @@ export class EditCarrerasComponent implements OnInit {
 
   removeObjetivoEducacional(objetivo: ObjetivosEducacionalesDto) {
     this._carreraDeleteService.deleteObejtivoEducacionales(objetivo).subscribe(data => {
-      console.log(data);
       this.alerta("Petición exitosa")
       this.getObjetivosEducacionalesByCarreraId(this.id);
       this.table.renderRows();
     }, error => {
-      console.log(error)
+      {}
       this.alerta("Error en la petición")
     }
     )
@@ -390,12 +379,11 @@ export class EditCarrerasComponent implements OnInit {
 
   removeCompetenciasEspecificas(competencia: CompetenciasEspecificasDto) {
     this._carreraDeleteService.deleteCompetenciaEspecifica(competencia).subscribe(data => {
-      console.log(data);
       this.alerta("Petición exitosa")
       this.getCompetenciasEspecificasByCarreraId(this.id);
       this.table.renderRows();
     }, error => {
-      console.log(error)
+      {}
       this.alerta("Error en la petición")
     }
     )
@@ -411,9 +399,6 @@ export class EditCarrerasComponent implements OnInit {
 
   editarRolProfesor(profesor: ProfesorDTO, index: number): void {
     const profesorSelected = this.profesores[index]
-    console.log("ProfesorSelected: " + profesorSelected.profesorId)
-    console.log(profesorSelected)
-
     this._router.navigate(['admin/carrera/editarRolProfesor'], { queryParams: { profesor: JSON.stringify(profesorSelected), carreraId: JSON.stringify(this.id) } });
   }
 

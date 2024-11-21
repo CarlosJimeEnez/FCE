@@ -11,43 +11,42 @@ import { GetProfesoresService } from 'src/app/services/profesores/get-profesores
 @Component({
   selector: 'app-add-profesor',
   templateUrl: './add-profesor.component.html',
-  styleUrls: ['./add-profesor.component.css']
+  styleUrls: ['./add-profesor.component.css'],
 })
-export class AddProfesorComponent implements OnInit  {
-  carreraId!: number; 
-  excluirId: number[] = []; 
+export class AddProfesorComponent implements OnInit {
+  carreraId!: number;
+  excluirId: number[] = [];
 
   profesores: ProfesorDTO[] = [];
-  displayedColumnsProfesores: string[] = ["position", "nombre", "correo"]
-  
+  displayedColumnsProfesores: string[] = ['position', 'nombre', 'correo'];
+
   dataSourceProfesores = new MatTableDataSource(this.profesores);
-  selection = new SelectionModel<ProfesorDTO>(true, [])
+  selection = new SelectionModel<ProfesorDTO>(true, []);
   selectedElements: ProfesorDTO[] = [];
 
   constructor(
-    private _profesoresService: GetProfesoresService, 
+    private _profesoresService: GetProfesoresService,
     private _route: ActivatedRoute,
     private _profesoresCarreraPost: PostCarrerasService,
-    private _errorService: HandleErrorService, 
+    private _errorService: HandleErrorService,
     private _router: Router,
-    private _snackBar: MatSnackBar,
-  ){}
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this._route.queryParams.subscribe(params => {
-      this.carreraId = +JSON.parse(params['carreraId']); 
-    })
+    this._route.queryParams.subscribe((params) => {
+      this.carreraId = +JSON.parse(params['carreraId']);
+    });
 
-    console.log(this.carreraId);
-    this.getProfesoresDeCarrera(this.carreraId); 
+    this.getProfesoresDeCarrera(this.carreraId);
 
     this.selection.changed.subscribe(() => {
-      this.selectedElements = this.selection.selected; 
-    })
+      this.selectedElements = this.selection.selected;
+    });
   }
 
   applyFilter(event: KeyboardEvent): void {
-    const inputValue = (event.target as HTMLInputElement).value
+    const inputValue = (event.target as HTMLInputElement).value;
     this.dataSourceProfesores.filter = inputValue.trim().toLowerCase();
   }
 
@@ -73,68 +72,64 @@ export class AddProfesorComponent implements OnInit  {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.position + 1
+    }`;
   }
-  
-  getProfesoresDeCarrera(id: number){
+
+  getProfesoresDeCarrera(id: number) {
     this._profesoresService.getProfesorPorCarreraId(id).subscribe({
       next: (data: ProfesorDTO[]) => {
         this.profesores = data;
-        this.profesores.forEach(element => {
+        this.profesores.forEach((element) => {
           this.excluirId.push(element.profesorId);
         });
-        console.log("Profesores excluidos: ") 
-        console.log(this.excluirId);
       },
-      error: (error: any) => console.log(error),
+      error: (error: any) => {},
       complete: () => {
-        console.log("Profesores por carrera cargado completamente");
-
-        this.GetProfesores(this.excluirId)
-      }
-    })
+        this.GetProfesores(this.excluirId);
+      },
+    });
   }
 
-  GetProfesores(excluirId: number[]){
+  GetProfesores(excluirId: number[]) {
     this._profesoresService.getProfesoresExcluirById(excluirId).subscribe({
       next: (data: any) => {
-        console.log(data);        
-        this.profesores = data
-        this.dataSourceProfesores = new MatTableDataSource(this.profesores)
+        
+        this.profesores = data;
+        this.dataSourceProfesores = new MatTableDataSource(this.profesores);
       },
       error: (err: any) => {
-        console.log(err)
+        
       },
       complete: () => {
-        console.log("Profesores cargados completamente")
-      }
-    })
+        
+      },
+    });
   }
 
-  addProfesores():void{
-    console.log(this.selectedElements)
-
-    let profesoresIds: number[] = []; 
+  addProfesores(): void {
+    let profesoresIds: number[] = [];
     this.selectedElements.forEach((profesor: any) => {
       profesoresIds.push(profesor.id);
-    })
-    console.log(profesoresIds)
+    });
 
-    this._profesoresCarreraPost.postProfesoresCarreras(this.carreraId, profesoresIds).subscribe({
-      next: (data: any) => {
-        console.log(data)
-      },
-      error: (err) => {
-        console.log(err)
-      },
-      complete: () => {
-        console.log("Se ha completado la carga de profesores")
-        this.back();
-      }
-    })
+    this._profesoresCarreraPost
+      .postProfesoresCarreras(this.carreraId, profesoresIds)
+      .subscribe({
+        next: (data: any) => {
+          
+        },
+        error: (err) => {
+          
+        },
+        complete: () => {
+          this.back();
+        },
+      });
   }
 
-  back():void{ 
+  back(): void {
     this._router.navigate([`admin/editar-carrera/${this.carreraId}`]);
   }
 }
