@@ -23,6 +23,7 @@ export class ImagenCarrerasService {
 
       case 'Ingeniería en Sistemas Automotrices':
         return 'assets/images/Automotriz.jpg';
+        
       default:
         return 'assets/images/electronica.jpg';
     }

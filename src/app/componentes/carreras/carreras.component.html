@@ -120,7 +120,7 @@
   </div>
   <div class="row justify-content-center mt-3">
     <div class="col-md-6 mb-3">
-      <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+      <button class="btn h-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
         aria-expanded="false" aria-controls="collapseExample" style="border: none">
         <!-- Button with data-bs-target -->
         <div class="card ingr-egr">
@@ -136,7 +136,7 @@
       </button>
     </div>
     <div class="col-md-6 mb-3">
-      <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+      <button class="btn h-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
         aria-expanded="false" aria-controls="collapseExample2" style="border: none">
         <div class="card ingr-egr">
           <i class="fas fa-user-graduate fa-3x mt-3"></i>
@@ -305,20 +305,25 @@
     </div>
 
     <div class="row mt-3">
-      <div *ngIf="carrera == null" class="d-flex justify-content-center align-items-center w-100">
-        <img loading="lazy" class="w-25 h-25" src="../../../assets/gif/electron.svg" alt="" />
-      </div>
 
       <!-- Catalogo de asignaturas -->
-      <div class="col-md-3 mb-3" *ngFor="let documento of documentos">
-        <div class="card ingr-egr" (click)="verDocumento(documento.id!)">
-          <i class="fa-regular fa-file-pdf fa-3x mt-3"></i>
-          <div class="card-body">
-            <h5 class="card-title">{{ documento.nombreArchivo }}</h5>
-            <p class="card-text"></p>
-          </div>
+      <div *ngIf="documentosNoCargados" class="col-12 mb-3 d-flex justify-content-center align-items-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
+      
+      
+        <div class="col-md-3 mb-3" *ngFor="let documento of documentos">
+          <div class="card ingr-egr" (click)="verDocumento(documento.id!)" *ngIf="!documentosNoCargados">
+            <i class="fa-regular fa-file-pdf fa-3x mt-3"></i>
+            <div class="card-body">
+              <h5 class="card-title">{{ documento.nombreArchivo }}</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      
     </div>
   </div>
 
