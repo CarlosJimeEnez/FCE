@@ -36,6 +36,17 @@ import { Documentos, DocumentosDto } from 'src/app/interfaces/documento';
               scrolling="no"
             ></iframe>
 
+            <div
+              style="
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 40px;
+        background-color: white;
+        z-index: 1000;"
+            ></div>
+
             <ng-template #noDocumento>
               <h1>El documento no se ha cargado.</h1>
             </ng-template>
