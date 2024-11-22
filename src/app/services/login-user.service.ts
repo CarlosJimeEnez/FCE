@@ -23,8 +23,6 @@ export class LoginUserService {
         ),
       );
   }
-  // Método para manejar errores
-
 
     // Método para guardar el token en el localStorage
     setToken(token: string): void {

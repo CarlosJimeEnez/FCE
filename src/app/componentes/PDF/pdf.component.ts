@@ -88,7 +88,7 @@ export class MapasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.getDocumentoPdf(this.id);
+    this.getDocumentoPdf(this.id);
   }
 
   getDocumentoPdf(id: number) {
