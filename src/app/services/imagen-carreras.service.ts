@@ -9,13 +9,13 @@ export class ImagenCarrerasService {
 
   getImagenUrl(carrera: Carrera): string {
     switch (carrera.carreraNombre) {
-      case 'Mecatrónica':
+      case 'Ingeniería Mecatrónica':
         return 'assets/images/Mecatronica.jpg';
 
-      case 'Gestión de Ciudades Inteligente y Trans. Tecno.':
+      case 'Lic en Gestión de Ciudades Inteligente y Trans. Tecno.':
         return 'assets/images/CiudadesInteligentes.jpg';
 
-      case 'Ingeniería en Energías Renovables':
+      case 'Lic Energías Renovables':
         return 'assets/images/renovables.jpg';
 
       case 'Lic en Ingenieria Electrónica':
@@ -23,7 +23,7 @@ export class ImagenCarrerasService {
 
       case 'Ingeniería en Sistemas Automotrices':
         return 'assets/images/Automotriz.jpg';
-        
+      
       default:
         return 'assets/images/electronica.jpg';
     }
