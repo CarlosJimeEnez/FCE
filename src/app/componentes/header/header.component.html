@@ -7,10 +7,8 @@
         <mat-icon class="menu" fontIcon="menu"></mat-icon>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         
-            
-        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
+      </ul>
         
         <!-- Botón de usuario para cerrar sesión -->
       <ul *ngIf="isLogged" class="navbar-nav ms-auto">
@@ -21,6 +19,7 @@
           <button class="btn btn-outline-light" (click)="adminPanel()">Administrar</button>
         </li>
       </ul>
+
       </div>
     </div>
   </nav>

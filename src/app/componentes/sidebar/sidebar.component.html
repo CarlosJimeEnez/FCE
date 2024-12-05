@@ -1,9 +1,17 @@
-<div class="row btn-hover my-2" [routerLink]="['/admin/anuncios']" routerLinkActive="active-link">
+<div class="row btn-hover border rounded" [routerLink]="['/']" >
+    <button class="btn custom-btn">
+        <mat-icon>home</mat-icon>
+        Inicio
+    </button>
+</div>
+
+<div class="row btn-hover my-2 mt-4" [routerLink]="['/admin/anuncios']" routerLinkActive="active-link">
     <button class="btn custom-btn">
         <mat-icon>dashboard</mat-icon>
         Anuncios
     </button>
 </div>
+
 <div class="row btn-hover my-2" [routerLink]="['/admin/inicio']" routerLinkActive="active-link">
     <button class="btn custom-btn">
         <mat-icon>article</mat-icon>

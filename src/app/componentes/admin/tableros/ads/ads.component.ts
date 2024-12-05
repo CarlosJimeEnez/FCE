@@ -69,8 +69,8 @@ export class AdsComponent implements OnInit {
     this.dataSource.filter = inputValue.trim().toLowerCase();
   }
 
-  editarAds(id: number, nombre: string): void{
-    this._router.navigate([`admin/editar-ads/${id}`], { queryParams: {id: id, nombre: nombre} })
+  editarAds(id: number, nombre: string, link: string): void{
+    this._router.navigate([`admin/editar-ads/${id}`], { queryParams: {id: id, nombre: nombre, link: link} })
   }
 
   nuevoAds(){

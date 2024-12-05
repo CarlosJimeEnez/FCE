@@ -32,6 +32,8 @@ export class EditAdsComponent {
     this.id = this._route.snapshot.queryParamMap.get('id');
     
     this.ad.nombreArchivo = this._route.snapshot.queryParamMap.get('nombre')!;
+    this.ad.link = this._route.snapshot.queryParamMap.get('link')!;
+
     this.ad.id = +this.id!;
     this.editForm = this._fb.group({  
       nombre: [this.ad.nombreArchivo, Validators.required],

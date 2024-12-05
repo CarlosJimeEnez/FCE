@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         ],
       ],
     });
+
     const token = this._loginUser.getToken()
     if(token){
       this.isLogged = true
@@ -74,11 +75,15 @@ export class LoginComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.loading = false
         if (error.status === 401) {
-          this.errorMessage = 'Usuario o contraseña incorrectos';
+          this.errorMessage = 'Usuario o contraseña incorrecto';
         } else if (error.status === 400) {
           this.errorMessage = 'Datos de inicio de sesión inválidos';
-        } else {
+        } else if (error.status === 404){
+          this.errorMessage = 'Usuario no encontrado';
+        } 
+        else {
           this.errorMessage = 'Error en el servidor. Por favor, intente más tarde';
+          console.log(error);
         }
       },
       complete: () => {
